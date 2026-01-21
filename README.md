@@ -1,16 +1,104 @@
-# React + Vite
+# My Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal portfolio website showcasing my work, skills, and projects as a developer.
 
-Currently, two official plugins are available:
+**Go Look At It:** https://thegreatportfolio.vercel.app
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Responsive design (mobile-first)  
+- Smooth scrolling and section transitions  
+- Modern, minimal UI with dark theme support  
+- Fast loading thanks to Vite  
+- Easy to customize – add your projects, change colors, etc.  
+- Deployed on Vercel with automatic CI/CD from GitHub
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Framework**: React (with Hooks & Components)  
+- **Build Tool**: Vite  
+- **Styling**: Tailwind CSS  
+- **Deployment**: Vercel  
+- **Language**: JavaScript / JSX  
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js ≥ 18  
+- npm / pnpm / yarn
+
+### Installation
+
+1. Clone the repository
+
+   ```bash
+   git clone https://github.com/alxgraphy/alx-portfolio.git
+   cd alx-portfolio
+
+# 2. Install Dependicies
+
+npm install
+# or
+pnpm install
+# or
+yarn install
+
+
+# 3. Run development server
+
+npm run dev
+# or
+pnpm dev
+# or
+yarn dev
+
+## Project Structure
+
+```
+alx-portfolio/
+├── api/                  # Optional: serverless functions / API routes (Vercel)
+├── public/               # Static assets (favicon, images served as-is)
+├── src/
+│   ├── assets/           # Images, icons, SVGs imported in code
+│   ├── components/       # Reusable UI components (Button, Card, Navbar…)
+│   ├── sections/         # Main page sections (Hero, About, Projects, Contact…)
+│   ├── App.jsx           # Root layout / main component
+│   └── main.jsx          # Entry point – mounts React app
+├── tailwind.config.js    # Tailwind theme customization
+├── vite.config.js        # Vite configuration
+├── vercel.json           # Vercel deployment settings
+├── package.json
+└── README.md
+```
+
+
+
+
+
+## 🎨 Customization Tips
+
+Change colors → edit tailwind.config.js (theme.extend.colors)
+
+Add new project → create component in src/sections/Projects or similar
+
+Update personal info → usually in src/sections/About.jsx or Hero.jsx
+
+Add contact form → use Vercel serverless functions in /api + a service like Formspree/Resend
+
+
+## 📄 License
+MIT License
+Feel free to use this as a base for your own portfolio just give credit.
+
+
+## 👋 Let's Connect
+
+Portfolio: https://thegreatportfolio.vercel.app
+
+GitHub: (@alxgraphy)[github.com/alxgraphy]
+
+Instagram: (@alexedgraphy)[instagram.com/alexedgraphy]
+
+Tiktok: (@alxgraphy0[tiktok.com/alxgraphy]
