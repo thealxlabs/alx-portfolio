@@ -3,6 +3,10 @@
     {
       "source": "/thealx",
       "destination": "/admin.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
