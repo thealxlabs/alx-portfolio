@@ -103,7 +103,7 @@ function App() {
   }, [lastScrollY]);
 
   const aboutMePhoto = '/about me/me.jpeg';
-  const avatarUrl = 'https://avatars.githubusercontent.com/u/140935258?v=4';
+  const avatarUrl = 'https://github.com/user-attachments/assets/e1eb6cb7-1999-43ae-b231-5eab424860b5';
 
   const themes = {
     wireframe: {
