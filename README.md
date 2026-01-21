@@ -1,104 +1,108 @@
-# My Portfolio
+# Alexander's Portfolio
 
-Personal portfolio website showcasing my work, skills, and projects as a developer.
+A modern, minimalist portfolio showcasing photography and code projects. Built with React, featuring a black and white wireframe aesthetic with dual theme support (Wireframe/Aether).
 
-**Go Look At It:** https://thegreatportfolio.vercel.app
+## 🎨 Features
 
-
-## ✨ Features
-
-- Responsive design (mobile-first)  
-- Smooth scrolling and section transitions  
-- Modern, minimal UI with dark theme support  
-- Fast loading thanks to Vite  
-- Easy to customize – add your projects, change colors, etc.  
-- Deployed on Vercel with automatic CI/CD from GitHub
+- **Dual Theme System** - Toggle between clean Wireframe (black/white) and dark Aether modes
+- **Dynamic Photography Gallery** - Random selection of 12 photos from 32+ images hosted on ImgBB
+- **GitHub Integration** - Auto-fetches and displays projects from GitHub API
+- **Responsive Design** - Fully responsive across all devices
+- **Smooth Animations** - Scroll-triggered animations using Framer Motion
+- **Multi-page Navigation** - Home, About, Skills, Code, Photography, Contact pages
+- **Secure Admin Panel** - IP-restricted, password-protected admin interface for easy content updates
 
 ## 🛠️ Tech Stack
 
-- **Framework**: React (with Hooks & Components)  
-- **Build Tool**: Vite  
-- **Styling**: Tailwind CSS  
-- **Deployment**: Vercel  
-- **Language**: JavaScript / JSX  
+- **Frontend:** React 18, Vite
+- **Styling:** Tailwind CSS
+- **Animations:** Framer Motion
+- **Icons:** Lucide React
+- **Hosting:** Vercel
+- **Photos:** ImgBB CDN
+- **Version Control:** Git/GitHub
+
+## 📂 Project Structure
+```
+alx-portfolio/
+├── public/
+│   ├── admin.html          # Secure admin panel
+│   └── me.jpeg            # About me photo
+├── api/
+│   ├── auth.js            # Admin authentication
+│   ├── check-ip.js        # IP whitelist verification
+│   └── push-to-github.js  # GitHub API integration
+├── src/
+│   ├── App.jsx            # Main portfolio component
+│   ├── main.jsx           # React entry point
+│   └── index.css          # Global styles
+├── vercel.json            # Vercel configuration
+└── package.json
+```
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-
-- Node.js ≥ 18  
-- npm / pnpm / yarn
+- Node.js 18+ and npm
+- Git
 
 ### Installation
 
-1. Clone the repository
+1. Clone the repository:
+```bash
+git clone https://github.com/alxgraphy/alx-portfolio.git
+cd alx-portfolio
+```
 
-   ```bash
-   git clone https://github.com/alxgraphy/alx-portfolio.git
-   cd alx-portfolio
-
-# 2. Install Dependicies
-
+2. Install dependencies:
+```bash
 npm install
-# or
-pnpm install
-# or
-yarn install
+```
 
-
-# 3. Run development server
-
+3. Start development server:
+```bash
 npm run dev
-# or
-pnpm dev
-# or
-yarn dev
-
-## Project Structure
-
-```
-alx-portfolio/
-├── api/                  # Optional: serverless functions / API routes (Vercel)
-├── public/               # Static assets (favicon, images served as-is)
-├── src/
-│   ├── assets/           # Images, icons, SVGs imported in code
-│   ├── components/       # Reusable UI components (Button, Card, Navbar…)
-│   ├── sections/         # Main page sections (Hero, About, Projects, Contact…)
-│   ├── App.jsx           # Root layout / main component
-│   └── main.jsx          # Entry point – mounts React app
-├── tailwind.config.js    # Tailwind theme customization
-├── vite.config.js        # Vite configuration
-├── vercel.json           # Vercel deployment settings
-├── package.json
-└── README.md
 ```
 
+4. Open http://localhost:5173 in your browser
 
+## 🔐 Admin Panel Setup
 
+The portfolio includes a secure admin panel for easy content updates.
 
+### Environment Variables (Vercel)
 
-## 🎨 Customization Tips
+Set these in Vercel Dashboard → Settings → Environment Variables:
 
-Change colors → edit tailwind.config.js (theme.extend.colors)
+- `ADMIN_PASSWORD` - Your secure admin password
+- `ALLOWED_IP` - Your home IP address (from whatismyipaddress.com)
+- `GITHUB_TOKEN` - GitHub Personal Access Token with `repo` permissions
 
-Add new project → create component in src/sections/Projects or similar
+### Access Admin Panel
 
-Update personal info → usually in src/sections/About.jsx or Hero.jsx
+- URL: `https://yoursite.com/secret-admin-x9k2m` (change this in vercel.json)
+- Only accessible from whitelisted IP
+- Password protected
 
-Add contact form → use Vercel serverless functions in /api + a service like Formspree/Resend
+## 📸 Photography
 
+32 high-quality photos hosted on ImgBB, randomly displayed 12 at a time. Photos are automatically optimized for web delivery.
 
-## 📄 License
-MIT License
-Feel free to use this as a base for your own portfolio just give credit.
+## 📧 Contact
 
+- **Email:** alxgraphy@icloud.com
+- **GitHub:** [@alxgraphy](https://github.com/alxgraphy)
+- **Instagram:** [@alexedgraphy](https://www.instagram.com/alexedgraphy/)
+- **TikTok:** [@alxgraphy](https://www.tiktok.com/@alxgraphy)
 
-## 👋 Let's Connect
+## 📝 License
 
-Portfolio: https://thegreatportfolio.vercel.app
+MIT License - feel free to use this project as inspiration for your own portfolio.
 
-GitHub: (@alxgraphy)[github.com/alxgraphy]
+## 🏆 Awards & Certifications
 
-Instagram: (@alexedgraphy)[instagram.com/alexedgraphy]
+- **The Field Guide to Human-Centered Design** - Canvas Design Certification
 
-Tiktok: (@alxgraphy0[tiktok.com/alxgraphy]
+---
+
+Made with ❤️ in Toronto, Canada 🇨🇦 by Alexander Wondwossen ([@alxgraphy](https://github.com/alxgraphy))
