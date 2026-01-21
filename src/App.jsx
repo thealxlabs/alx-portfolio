@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Github, Mail, Camera, Moon, Sun, Instagram } from 'lucide-react';
 
-// Your Cloudinary photos (unchanged)
 const allPhotoUrls = [
   "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005836/IMG_0649_jmyszm.jpg",
   "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005835/IMG_0645_b679gp.jpg",
@@ -54,12 +53,11 @@ function App() {
   useEffect(() => {
     const path = window.location.pathname.slice(1) || 'home';
     setCurrentPage(path);
-    const handlePopState = () => {
+    window.addEventListener('popstate', () => {
       const path = window.location.pathname.slice(1) || 'home';
       setCurrentPage(path);
-    };
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
+    });
+    return () => window.removeEventListener('popstate', () => {});
   }, []);
 
   const navigate = (page) => {
@@ -271,7 +269,7 @@ function App() {
           </div>
         )}
 
-        {/* ABOUT (shortened for brevity - insert your full version if needed) */}
+        {/* ABOUT */}
         {currentPage === 'about' && (
           <div className="max-w-6xl w-full py-20">
             <h2 className={`text-5xl md:text-6xl font-black uppercase tracking-tight mb-2 ${t.accent}`}>
@@ -280,14 +278,300 @@ function App() {
             <div className={`text-sm uppercase tracking-widest mb-12 ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>
               Grade 7 • Toronto, Canada
             </div>
-            <p className="text-xl">Your full about content here...</p>
-            {/* Add your full about content */}
+            <div className="space-y-16">
+              <div className={`border-2 ${t.border} ${t.card} p-8`}>
+                <h3 className={`text-2xl font-black uppercase tracking-tight mb-6 ${t.accent}`}>WHO I AM</h3>
+                <div className="space-y-4 text-lg leading-relaxed">
+                  <p>Hello, my name is Alexander, a passionate photographer, student and a coder in grade 7 who enjoys capturing memorable and compelling moments.</p>
+                  <p>I like experimenting with different perspectives, composition and light, turning everyday scenes into visually appealing photographs.</p>
+                  <p>In my spare time, I practice for my next image and try to stay in the moment — in school, real life or through a lens.</p>
+                </div>
+              </div>
+              <div className={`border-2 ${t.border} ${t.card} p-8`}>
+                <h3 className={`text-2xl font-black uppercase tracking-tight mb-6 ${t.accent}`}>INTERESTS</h3>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <h4 className="text-lg font-bold uppercase mb-3">Photography</h4>
+                    <p className={`${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
+                      Street photography, portraits, landscapes, and experimental composition. Always looking for unique perspectives and compelling moments.
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-bold uppercase mb-3">Coding</h4>
+                    <p className={`${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
+                      Building web applications, learning new frameworks, and creating tools that solve real problems. Passionate about clean, minimal design.
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-bold uppercase mb-3">Learning</h4>
+                    <p className={`${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
+                      Currently exploring human-centered design, web development best practices, and advanced photography techniques.
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-bold uppercase mb-3">Creating</h4>
+                    <p className={`${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
+                      Love building projects from scratch — whether it's a portfolio, a photo series, or a new web app. Always making something.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className={`border-2 ${t.border} ${t.card} p-8`}>
+                <h3 className={`text-2xl font-black uppercase tracking-tight mb-6 ${t.accent}`}>AWARDS & ACHIEVEMENTS</h3>
+                <div className="space-y-6">
+                  <div className={`border-l-4 ${t.border} pl-6`}>
+                    <h4 className="text-xl font-bold uppercase mb-2">The Field Guide to Human-Centered Design</h4>
+                    <p className={`text-sm uppercase tracking-wider mb-3 ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>
+                      Canvas • Design Certification
+                    </p>
+                    <p className={`${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
+                      Completed comprehensive training in human-centered design principles, focusing on empathy, ideation, and iteration in the design process.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className={`border-2 ${t.border} ${t.card} p-8`}>
+                <h3 className={`text-2xl font-black uppercase tracking-tight mb-6 ${t.accent}`}>CURRENTLY</h3>
+                <ul className="space-y-3 text-lg">
+                  <li className="flex items-start gap-3">
+                    <span className={`${t.accent} font-bold`}>→</span>
+                    <span>Building this portfolio and learning React</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className={`${t.accent} font-bold`}>→</span>
+                    <span>Practicing street photography in Toronto</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className={`${t.accent} font-bold`}>→</span>
+                    <span>Grade 7 student, balancing school and creative projects</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className={`${t.accent} font-bold`}>→</span>
+                    <span>Open to collaboration on photography or code projects</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         )}
 
-        {/* Skills, Code, Photography, Contact - add your full blocks here if they were cut off */}
+        {/* SKILLS */}
+        {currentPage === 'skills' && (
+          <div className="max-w-6xl w-full py-20">
+            <h2 className={`text-5xl md:text-6xl font-black uppercase tracking-tight mb-2 ${t.accent}`}>
+              SKILLS
+            </h2>
+            <div className={`text-sm uppercase tracking-widest mb-12 ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>
+              Tools & technologies I work with
+            </div>
+            <div className="space-y-12">
+              <div className={`border-2 ${t.border} ${t.card} p-8`}>
+                <h3 className={`text-2xl font-black uppercase tracking-tight mb-6 ${t.accent}`}>DEVELOPMENT</h3>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                  {['HTML/CSS', 'JavaScript', 'React', 'Tailwind', 'Git', 'GitHub', 'Vite', 'VS Code'].map(skill => (
+                    <div key={skill} className={`border-2 ${t.border} p-4 text-center ${t.hoverBg} transition`}>
+                      <div className="text-xl font-bold">{skill}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className={`border-2 ${t.border} ${t.card} p-8`}>
+                <h3 className={`text-2xl font-black uppercase tracking-tight mb-6 ${t.accent}`}>DESIGN</h3>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                  {['Figma', 'Adobe LR', 'UI/UX', 'Typography'].map(skill => (
+                    <div key={skill} className={`border-2 ${t.border} p-4 text-center ${t.hoverBg} transition`}>
+                      <div className="text-xl font-bold">{skill}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className={`border-2 ${t.border} ${t.card} p-8`}>
+                <h3 className={`text-2xl font-black uppercase tracking-tight mb-6 ${t.accent}`}>PHOTOGRAPHY</h3>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                  {['Composition', 'Lighting', 'Editing', 'Street', 'Portraits', 'Landscapes'].map(skill => (
+                    <div key={skill} className={`border-2 ${t.border} p-4 text-center ${t.hoverBg} transition`}>
+                      <div className="text-xl font-bold">{skill}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className={`border-2 ${t.border} ${t.card} p-8`}>
+                <h3 className={`text-2xl font-black uppercase tracking-tight mb-6 ${t.accent}`}>SOFT SKILLS</h3>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className={`border-l-4 ${t.border} pl-6`}>
+                    <h4 className="text-lg font-bold uppercase mb-2">Problem Solving</h4>
+                    <p className={`${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
+                      Breaking down complex problems into manageable pieces and finding creative solutions.
+                    </p>
+                  </div>
+                  <div className={`border-l-4 ${t.border} pl-6`}>
+                    <h4 className="text-lg font-bold uppercase mb-2">Attention to Detail</h4>
+                    <p className={`${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
+                      Obsessed with pixel-perfect designs and clean, readable code.
+                    </p>
+                  </div>
+                  <div className={`border-l-4 ${t.border} pl-6`}>
+                    <h4 className="text-lg font-bold uppercase mb-2">Self-Learning</h4>
+                    <p className={`${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
+                      Constantly exploring new technologies, frameworks, and techniques independently.
+                    </p>
+                  </div>
+                  <div className={`border-l-4 ${t.border} pl-6`}>
+                    <h4 className="text-lg font-bold uppercase mb-2">Human-Centered Design</h4>
+                    <p className={`${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
+                      Trained in empathy-driven design thinking to create user-focused solutions.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
-        {/* KAT */}
+        {/* CODE */}
+        {currentPage === 'code' && (
+          <div className="max-w-7xl w-full py-20">
+            <div className="mb-20">
+              <h2 className={`text-5xl md:text-6xl font-black uppercase tracking-tight mb-2 ${t.accent}`}>
+                PROJECTS
+              </h2>
+              <div className={`text-sm uppercase tracking-widest mb-12 ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>
+                Original repositories auto-updating from GitHub
+              </div>
+              {loading ? (
+                <div className={`text-center text-xl ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>Loading projects...</div>
+              ) : repos.length === 0 ? (
+                <div className={`text-center text-xl ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>No projects yet.</div>
+              ) : (
+                <div className="space-y-8">
+                  {repos.map(repo => (
+                    <div key={repo.id} className={`border-2 ${t.border} ${t.card} p-8 ${t.hoverBg} transition group`}>
+                      <div>
+                        <h3 className={`text-3xl font-black uppercase tracking-tight mb-3 ${t.accent} group-hover:opacity-70 transition`}>
+                          {repo.name}
+                        </h3>
+                        <p className={`text-base mb-4 ${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
+                          {repo.description || 'No description provided.'}
+                        </p>
+                        <div className="flex flex-wrap gap-4 text-sm">
+                          <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-2 underline ${t.accent} hover:opacity-70 transition`}>
+                            <Github size={18} /> View Repo
+                          </a>
+                          {repo.homepage && (
+                            <a href={repo.homepage} target="_blank" rel="noopener noreferrer" className="underline hover:opacity-70 transition">
+                              → Live Demo
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+            {forkRepos.length > 0 && (
+              <div className="mt-32">
+                <h2 className={`text-4xl md:text-5xl font-black uppercase tracking-tight mb-2 ${t.accent}`}>
+                  CONTRIBUTED TO
+                </h2>
+                <div className={`text-sm uppercase tracking-widest mb-12 ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>
+                  Forked repositories
+                </div>
+                <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
+                  {forkRepos.map(repo => (
+                    <a key={repo.id} href={repo.html_url} target="_blank" rel="noopener noreferrer" className={`border-2 ${t.border} ${t.card} p-6 ${t.hoverBg} transition group`}>
+                      <h4 className={`text-xl font-bold uppercase mb-2 ${t.accent} group-hover:opacity-70 transition`}>
+                        {repo.name}
+                      </h4>
+                      <div className={`text-sm uppercase tracking-wider ${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>View →</div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* PHOTOGRAPHY */}
+        {currentPage === 'photography' && (
+          <div className="max-w-7xl w-full py-20">
+            <h2 className={`text-5xl md:text-6xl font-black uppercase tracking-tight mb-2 ${t.accent}`}>
+              PHOTOGRAPHY
+            </h2>
+            <div className={`text-sm uppercase tracking-widest mb-12 ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>
+              Random selection of 12 photos • Refresh to see new ones
+            </div>
+            {randomPhotos.length === 0 ? (
+              <div className={`text-center text-xl ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>
+                No photos found. Add images to /public/photos/
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {randomPhotos.map((photo, i) => (
+                  <div key={i} className={`border-2 ${t.border} overflow-hidden aspect-[4/3] ${theme === 'wireframe' ? 'bg-gray-100' : 'bg-black/50'} group cursor-pointer`}>
+                    <img
+                      src={photo}
+                      alt={`Photo ${i + 1}`}
+                      loading="lazy"
+                      className="w-full h-full object-cover group-hover:scale-105 transition duration-700"
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* CONTACT */}
+        {currentPage === 'contact' && (
+          <div className="max-w-4xl w-full">
+            <h2 className={`text-5xl md:text-6xl font-black uppercase tracking-tight mb-2 ${t.accent}`}>
+              LET'S CONNECT
+            </h2>
+            <div className={`text-sm uppercase tracking-widest mb-12 ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>
+              Reach out for collaboration
+            </div>
+            <div className={`border-2 ${t.border} ${t.card} p-12`}>
+              <div className="space-y-8">
+                <div>
+                  <h3 className={`text-sm uppercase tracking-widest mb-4 ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>EMAIL</h3>
+                  <a href="mailto:alxgraphy@icloud.com" className={`flex items-center gap-3 text-2xl ${t.accent} hover:opacity-70 transition group`}>
+                    <Mail size={28} />
+                    <span className="group-hover:translate-x-2 transition">alxgraphy@icloud.com</span>
+                  </a>
+                </div>
+                <div>
+                  <h3 className={`text-sm uppercase tracking-widest mb-4 ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>GITHUB</h3>
+                  <a href="https://github.com/alxgraphy" target="_blank" rel="noopener noreferrer" className={`flex items-center gap-3 text-2xl ${t.accent} hover:opacity-70 transition group`}>
+                    <Github size={28} />
+                    <span className="group-hover:translate-x-2 transition">@alxgraphy</span>
+                  </a>
+                </div>
+                <div>
+                  <h3 className={`text-sm uppercase tracking-widest mb-4 ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>INSTAGRAM</h3>
+                  <a href="https://www.instagram.com/alexedgraphy/" target="_blank" rel="noopener noreferrer" className={`flex items-center gap-3 text-2xl ${t.accent} hover:opacity-70 transition group`}>
+                    <Instagram size={28} />
+                    <span className="group-hover:translate-x-2 transition">@alexedgraphy</span>
+                  </a>
+                </div>
+                <div>
+                  <h3 className={`text-sm uppercase tracking-widest mb-4 ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>TIKTOK</h3>
+                  <a href="https://www.tiktok.com/@alxgraphy" target="_blank" rel="noopener noreferrer" className={`flex items-center gap-3 text-2xl ${t.accent} hover:opacity-70 transition group`}>
+                    <Camera size={28} />
+                    <span className="group-hover:translate-x-2 transition">@alxgraphy</span>
+                  </a>
+                </div>
+                <div className={`pt-8 border-t-2 ${theme === 'wireframe' ? 'border-black/20' : 'border-white/20'}`}>
+                  <p className={`text-lg ${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
+                    Interested in collaboration on photography or code? Reach out anytime.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* KAT MEMES */}
         {currentPage === 'kat' && (
           <div className="max-w-7xl w-full py-20">
             <h2 className={`text-5xl md:text-6xl font-black uppercase tracking-tight mb-2 ${t.accent}`}>
@@ -296,15 +580,28 @@ function App() {
             <div className={`text-sm uppercase tracking-widest mb-12 ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>
               Fresh trending cat memes • Pulled live from Reddit r/catmemes • Refresh to update
             </div>
+
             {katLoading ? (
-              <p className="text-center text-xl">Fetching maximum cuteness...</p>
+              <div className={`text-center text-xl ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>
+                Fetching maximum cuteness...
+              </div>
             ) : katMemes.length === 0 ? (
-              <p className="text-center text-xl">No kat memes right now... Try refreshing!</p>
+              <div className={`text-center text-xl ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>
+                No kat memes right now... the cats are on strike. Try refreshing!
+              </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {katMemes.map((post, i) => (
-                  <div key={i} className={`border-2 ${t.border} overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition group`}>
-                    <img src={post.url} alt={post.title} className="w-full h-auto object-cover" loading="lazy" />
+                  <div
+                    key={i}
+                    className={`border-2 ${t.border} ${t.card} overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition group`}
+                  >
+                    <img
+                      src={post.url}
+                      alt={post.title}
+                      className="w-full h-auto object-cover group-hover:scale-105 transition duration-300"
+                      loading="lazy"
+                    />
                     <div className="p-4">
                       <p className={`text-lg font-bold ${t.accent}`}>{post.title}</p>
                       <p className="text-sm mt-2 opacity-70">
@@ -332,7 +629,10 @@ function App() {
               Imaginary high-five ✋<br/>
               You win at guessing secret URLs.
             </p>
-            <button onClick={() => navigate('home')} className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
               Back to normal life
             </button>
           </div>
@@ -350,7 +650,10 @@ function App() {
               This isn't the admin panel.<br/>
               Go back to guessing /login or /wp-admin.
             </p>
-            <button onClick={() => navigate('home')} className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
               Leave quietly
             </button>
           </div>
@@ -365,7 +668,7 @@ function App() {
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
               allowFullScreen
-            />
+            ></iframe>
           </div>
         )}
 
@@ -381,7 +684,10 @@ function App() {
               Respect. But there's nothing interesting here.<br/>
               Just some messy React and regrets.
             </p>
-            <button onClick={() => navigate('home')} className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
               Close inspector
             </button>
           </div>
@@ -399,7 +705,10 @@ function App() {
               My code runs on caffeine and bad decisions.<br/>
               One Tim Hortons coffee = one happy dev.
             </p>
-            <button onClick={() => navigate('home')} className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
               No coffee for you
             </button>
           </div>
@@ -419,7 +728,10 @@ function App() {
               Geocities energy.<br/>
               We don't talk about it.
             </p>
-            <button onClick={() => navigate('home')} className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
               Never again
             </button>
           </div>
@@ -437,7 +749,10 @@ function App() {
             <p className={`text-3xl mb-16 ${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
               Been "coming soon" since day one.
             </p>
-            <button onClick={() => navigate('home')} className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
               Leave the construction zone
             </button>
           </div>
@@ -461,7 +776,10 @@ You're stuck here now.`}
             <p className="text-4xl mt-16 animate-pulse">
               Type anything... nothing happens
             </p>
-            <button onClick={() => navigate('home')} className="mt-12 px-10 py-5 bg-green-900 text-green-200 border-2 border-green-500 text-xl font-bold hover:bg-green-800 transition">
+            <button
+              onClick={() => navigate('home')}
+              className="mt-12 px-10 py-5 bg-green-900 text-green-200 border-2 border-green-500 text-xl font-bold hover:bg-green-800 transition"
+            >
               Escape terminal
             </button>
           </div>
@@ -480,7 +798,10 @@ You're stuck here now.`}
               Now: semi-working React and photos<br/>
               Big improvement? Debatable.
             </p>
-            <button onClick={() => navigate('home')} className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
               Back to reality
             </button>
           </div>
@@ -499,7 +820,10 @@ You're stuck here now.`}
               You did. You're sus.<br/>
               Ejected.
             </p>
-            <button onClick={() => navigate('home')} className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
               Self-eject
             </button>
           </div>
@@ -527,7 +851,10 @@ You're stuck here now.`}
               Your prize: nothing.<br/>
               But you can brag about it.
             </p>
-            <button onClick={() => navigate('home')} className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
               Claim fake victory
             </button>
           </div>
@@ -543,7 +870,10 @@ You're stuck here now.`}
                 <p className="text-4xl md:text-6xl font-bold mb-8">
                   {captchaChallenges[Math.floor(Math.random() * captchaChallenges.length)]}
                 </p>
-                <button onClick={() => setCaptchaClicks(c => c + 1)} className={`px-16 py-8 border-4 ${t.border} ${t.button} text-3xl uppercase tracking-widest font-black transition hover:scale-110 mb-8`}>
+                <button
+                  onClick={() => setCaptchaClicks(c => c + 1)}
+                  className={`px-16 py-8 border-4 ${t.border} ${t.button} text-3xl uppercase tracking-widest font-black transition hover:scale-110 mb-8`}
+                >
                   CLICK TO PROVE
                 </button>
                 <p className={`text-2xl ${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
@@ -562,7 +892,13 @@ You're stuck here now.`}
                   You clicked {captchaTarget.toLocaleString()} times.<br/>
                   You need help. Or a life.
                 </p>
-                <button onClick={() => { navigate('home'); setCaptchaClicks(0); }} className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}>
+                <button
+                  onClick={() => {
+                    navigate('home');
+                    setCaptchaClicks(0);
+                  }}
+                  className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+                >
                   I'm done
                 </button>
               </>
@@ -582,7 +918,10 @@ You're stuck here now.`}
               Old selfies, bad captions, thirst traps from 2019.<br/>
               Why did I post that? Why are you here?
             </p>
-            <button onClick={() => navigate('home')} className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
               Erase from memory
             </button>
           </div>
@@ -600,7 +939,10 @@ You're stuck here now.`}
               No Timbits = no motivation.<br/>
               Send box or site stays broken.
             </p>
-            <button onClick={() => navigate('home')} className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
               I ate them all
             </button>
           </div>
@@ -619,7 +961,10 @@ YOU HAVE BEEN HACKERMAN'D
 > enjoy your rickroll`}
             </pre>
             <p className="text-5xl mt-12 animate-pulse text-red-500">HACKED</p>
-            <button onClick={() => navigate('home')} className="mt-12 px-10 py-5 bg-green-900 text-green-200 border-2 border-green-500 text-xl font-bold hover:bg-green-800 transition">
+            <button
+              onClick={() => navigate('home')}
+              className="mt-12 px-10 py-5 bg-green-900 text-green-200 border-2 border-green-500 text-xl font-bold hover:bg-green-800 transition"
+            >
               REBOOT
             </button>
           </div>
@@ -638,7 +983,10 @@ YOU HAVE BEEN HACKERMAN'D
               Not ping. Not teammates.<br/>
               Git gud.
             </p>
-            <button onClick={() => navigate('home')} className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
               Uninstall
             </button>
           </div>
@@ -657,7 +1005,10 @@ YOU HAVE BEEN HACKERMAN'D
               Nothing happens.<br/>
               You're trapped here forever.
             </p>
-            <button onClick={() => navigate('home')} className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
               Panic button
             </button>
           </div>
@@ -677,7 +1028,10 @@ YOU HAVE BEEN HACKERMAN'D
               Ratio'd by the internet.<br/>
               Touch grass.
             </p>
-            <button onClick={() => navigate('home')} className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
               Accept defeat
             </button>
           </div>
@@ -697,7 +1051,10 @@ YOU HAVE BEEN HACKERMAN'D
               Everything: mid<br/><br/>
               Welcome to average town.
             </p>
-            <button onClick={() => navigate('home')} className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
               Stay mid
             </button>
           </div>
@@ -716,7 +1073,10 @@ YOU HAVE BEEN HACKERMAN'D
               Get vitamin D.<br/>
               Stop staring at this screen.
             </p>
-            <button onClick={() => navigate('home')} className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
               Still inside
             </button>
           </div>
@@ -738,7 +1098,10 @@ YOU HAVE BEEN HACKERMAN'D
               It's not you... wait, yes it is.<br/>
               Fix that haircut. Get a personality. Touch grass.
             </p>
-            <button onClick={() => navigate('home')} className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
               Stay single king
             </button>
           </div>
@@ -757,7 +1120,10 @@ YOU HAVE BEEN HACKERMAN'D
               Sad violin music in background.<br/>
               Why are we here?
             </p>
-            <button onClick={() => navigate('home')} className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
               End the pain
             </button>
           </div>
@@ -776,7 +1142,10 @@ YOU HAVE BEEN HACKERMAN'D
               No notifications.<br/>
               Just you and existential dread.
             </p>
-            <button onClick={() => navigate('home')} className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
               Back to solitude
             </button>
           </div>
@@ -795,13 +1164,16 @@ YOU HAVE BEEN HACKERMAN'D
               No one notices.<br/>
               You're basically a ghost.
             </p>
-            <button onClick={() => navigate('home')} className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
               Stay invisible
             </button>
           </div>
         )}
 
-        {/* 404 fallback */}
+        {/* 404 */}
         {is404 && (
           <div className="max-w-4xl w-full text-center">
             <h2 className={`text-7xl md:text-9xl font-black uppercase tracking-tight mb-8 ${t.accent}`}>
@@ -813,7 +1185,10 @@ YOU HAVE BEEN HACKERMAN'D
             <p className={`text-xl mb-12 ${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
               Either you typed the wrong URL, or I forgot to build this page.
             </p>
-            <button onClick={() => navigate('home')} className={`px-8 py-4 border-2 ${t.border} ${t.button} text-sm uppercase tracking-widest font-bold transition`}>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-8 py-4 border-2 ${t.border} ${t.button} text-sm uppercase tracking-widest font-bold transition`}
+            >
               Take me home
             </button>
           </div>
