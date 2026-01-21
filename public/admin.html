@@ -3,312 +3,357 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Panel Pro</title>
+  <title>Admin Panel</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { 
-      font-family: 'Courier New', monospace; 
-      background: #0a0a0a; 
-      color: #e0e0e0; 
-      min-height: 100vh; 
-    }
-    .login-screen { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
-    .login-box { 
-      background: #111; 
-      border: 1px solid #444; 
-      padding: 50px; 
-      border-radius: 20px; 
-      min-width: 400px; 
-      box-shadow: 0 20px 60px rgba(0,0,0,0.9); 
-    }
-    .admin-panel { display: none; padding: 20px; }
-    .container { max-width: 1400px; margin: 0 auto; }
-    .header { 
-      background: #111; 
-      padding: 30px; 
-      border-radius: 20px; 
-      margin-bottom: 30px; 
-      box-shadow: 0 10px 40px rgba(0,0,0,0.7); 
-      border: 1px solid #333; 
-    }
-    h1 { 
-      font-size: 3rem; 
-      font-weight: 900; 
-      text-transform: uppercase; 
-      letter-spacing: 0.3em; 
-      margin-bottom: 10px; 
-      color: #ffffff; 
-    }
-    h2 { font-size: 2rem; font-weight: 900; text-transform: uppercase; margin-bottom: 20px; color: #ddd; }
-    h3 { font-size: 1.3rem; font-weight: 900; text-transform: uppercase; margin: 20px 0 10px; color: #ccc; }
-    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
-    .stat-card { 
-      background: #1a1a1a; 
-      padding: 30px; 
-      border-radius: 15px; 
-      text-align: center; 
-      border: 1px solid #444; 
-      transition: all 0.3s; 
-    }
-    .stat-card:hover { 
-      transform: translateY(-5px); 
-      border-color: #777; 
-      background: #222; 
-    }
-    .stat-number { font-size: 3rem; font-weight: 900; display: block; margin-bottom: 10px; color: #fff; }
-    .stat-label { text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.9rem; opacity: 0.7; color: #aaa; }
-    .tabs { display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
-    .tab { 
-      background: #1a1a1a; 
-      border: 1px solid #444; 
-      padding: 15px 30px; 
-      border-radius: 10px; 
-      cursor: pointer; 
-      text-transform: uppercase; 
-      font-weight: bold; 
-      transition: all 0.3s; 
-      font-family: 'Courier New', monospace; 
-      color: #ddd; 
-    }
-    .tab:hover { background: #333; transform: translateY(-2px); }
-    .tab.active { 
-      background: #444; 
-      color: #fff; 
-      border-color: #777; 
-    }
+    body { font-family: 'Courier New', monospace; background: #fff; color: #000; padding: 20px; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .login-screen { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    .login-box { border: 4px solid #000; padding: 40px; background: #fff; min-width: 400px; }
+    .admin-panel { display: none; }
+    h1 { font-size: 3rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.2em; font-weight: 900; }
+    h2 { font-size: 2rem; margin: 40px 0 20px; text-transform: uppercase; letter-spacing: 0.15em; border-bottom: 4px solid #000; padding-bottom: 10px; font-weight: 900; }
+    h3 { font-size: 1.2rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 900; margin-top: 20px; }
+    .section { border: 4px solid #000; padding: 30px; margin-bottom: 30px; background: #fff; }
+    .tabs { display: flex; gap: 0; margin-bottom: 30px; border: 4px solid #000; }
+    .tab { flex: 1; padding: 20px; background: #fff; border: none; border-right: 4px solid #000; font-family: 'Courier New', monospace; font-size: 1rem; font-weight: bold; cursor: pointer; text-transform: uppercase; letter-spacing: 0.1em; transition: all 0.3s; }
+    .tab:last-child { border-right: none; }
+    .tab.active { background: #000; color: #fff; }
+    .tab:hover { background: #000; color: #fff; }
     .tab-content { display: none; }
     .tab-content.active { display: block; }
-    .section { 
-      background: #111; 
-      padding: 30px; 
-      border-radius: 15px; 
-      margin-bottom: 20px; 
-      border: 1px solid #333; 
-    }
-    label { 
-      display: block; 
-      margin-bottom: 8px; 
-      text-transform: uppercase; 
-      letter-spacing: 0.1em; 
-      font-weight: bold; 
-      font-size: 0.9rem; 
-      color: #aaa; 
-    }
-    input, textarea, select { 
-      width: 100%; 
-      padding: 15px; 
-      margin-bottom: 20px; 
-      background: #0d0d0d; 
-      border: 1px solid #444; 
-      color: #e0e0e0; 
-      font-family: 'Courier New', monospace; 
-      font-size: 1rem; 
-      border-radius: 8px; 
-      transition: all 0.3s; 
-    }
-    input:focus, textarea:focus { 
-      outline: none; 
-      border-color: #777; 
-      background: #1a1a1a; 
-    }
+    label { display: block; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: bold; }
+    input, textarea { width: 100%; padding: 12px; margin-bottom: 20px; background: #fff; border: 2px solid #000; color: #000; font-family: 'Courier New', monospace; font-size: 1rem; }
     textarea { min-height: 120px; resize: vertical; }
-    button { 
-      background: #333; 
-      color: #eee; 
-      border: 1px solid #555; 
-      padding: 15px 35px; 
-      font-family: 'Courier New', monospace; 
-      font-size: 1rem; 
-      font-weight: bold; 
-      cursor: pointer; 
-      text-transform: uppercase; 
-      letter-spacing: 0.15em; 
-      margin-right: 10px; 
-      margin-bottom: 10px; 
-      border-radius: 10px; 
-      transition: all 0.3s; 
-    }
-    button:hover { 
-      background: #444; 
-      transform: translateY(-3px); 
-      border-color: #777; 
-    }
-    button.danger { 
-      background: #3a0000; 
-      border-color: #600; 
-      color: #ffaaaa; 
-    }
-    button.danger:hover { background: #500; }
-    button.secondary { 
-      background: #222; 
-      border-color: #444; 
-      color: #ccc; 
-    }
-    .btn-group { display: flex; gap: 10px; flex-wrap: wrap; }
-    .preview { 
-      background: #0d0d0d; 
-      padding: 20px; 
-      border-radius: 10px; 
-      margin-top: 20px; 
-      white-space: pre-wrap; 
-      overflow-x: auto; 
-      max-height: 400px; 
-      overflow-y: auto; 
-      border: 1px solid #333; 
-      color: #ccc; 
-    }
-    .status { 
-      margin-top: 20px; 
-      padding: 20px; 
-      border-radius: 10px; 
-      display: none; 
-      font-weight: bold; 
-      animation: slideIn 0.3s; 
-      color: #fff; 
-    }
-    @keyframes slideIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-    .status.success { background: #1a3a1a; border: 1px solid #2a5a2a; }
-    .status.error   { background: #3a1a1a; border: 1px solid #5a2a2a; }
-    .list { list-style: none; margin-bottom: 20px; }
-    .list li { 
-      padding: 15px; 
-      border: 1px solid #333; 
-      margin-bottom: 10px; 
-      display: flex; 
-      justify-content: space-between; 
-      align-items: center; 
-      background: #0f0f0f; 
-      border-radius: 8px; 
-      transition: all 0.3s; 
-      color: #ddd; 
-    }
-    .list li:hover { background: #222; }
-    .list button { padding: 8px 15px; font-size: 0.85rem; margin: 0; }
-    .input-group { display: flex; gap: 10px; margin-bottom: 15px; align-items: flex-start; }
-    .input-group input, .input-group textarea { margin-bottom: 0; flex: 1; }
-    .input-group button { flex-shrink: 0; }
+    button { background: #000; color: #fff; border: 2px solid #000; padding: 15px 30px; font-family: 'Courier New', monospace; font-size: 1rem; font-weight: bold; cursor: pointer; text-transform: uppercase; letter-spacing: 0.15em; margin-right: 10px; transition: all 0.3s; }
+    button:hover { background: #fff; color: #000; }
+    button.secondary { background: #fff; color: #000; }
+    button.secondary:hover { background: #000; color: #fff; }
+    .preview { background: #f5f5f5; padding: 20px; border: 2px solid #000; margin-top: 20px; white-space: pre-wrap; overflow-x: auto; max-height: 400px; overflow-y: auto; }
+    .status { margin-top: 20px; padding: 15px; border: 2px solid #000; display: none; }
+    .status.success { background: #f0f0f0; }
+    .logout { float: right; margin-top: 10px; }
+    .skill-input, .item-input { display: flex; gap: 10px; margin-bottom: 10px; }
+    .skill-input input, .item-input input, .item-input textarea { margin-bottom: 0; }
+    .skill-input button, .item-input button { padding: 12px 20px; flex-shrink: 0; }
+    .skill-list, .item-list { list-style: none; margin-bottom: 20px; }
+    .skill-list li, .item-list li { padding: 10px; border: 2px solid #000; margin-bottom: 5px; display: flex; justify-content: space-between; align-items: center; background: #fff; }
+    .skill-list button, .item-list button { padding: 5px 15px; font-size: 0.8rem; }
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-    .badge { 
-      display: inline-block; 
-      padding: 5px 15px; 
-      background: #222; 
-      border-radius: 20px; 
-      font-size: 0.85rem; 
-      margin: 5px; 
-      border: 1px solid #444; 
-    }
-    .progress-bar { 
-      width: 100%; 
-      height: 30px; 
-      background: #222; 
-      border-radius: 15px; 
-      overflow: hidden; 
-      margin: 20px 0; 
-      border: 1px solid #444; 
-    }
-    .progress-fill { 
-      height: 100%; 
-      background: #555; 
-      transition: width 0.5s; 
-      display: flex; 
-      align-items: center; 
-      justify-content: center; 
-      font-weight: bold; 
-      color: #fff; 
-    }
-    .quick-actions { position: fixed; bottom: 30px; right: 30px; display: flex; gap: 10px; z-index: 1000; }
-    .fab { 
-      width: 60px; 
-      height: 60px; 
-      border-radius: 50%; 
-      background: #333; 
-      display: flex; 
-      align-items: center; 
-      justify-content: center; 
-      cursor: pointer; 
-      box-shadow: 0 5px 20px rgba(0,0,0,0.7); 
-      transition: all 0.3s; 
-      border: 1px solid #555; 
-      color: #eee; 
-    }
-    .fab:hover { transform: scale(1.1); background: #444; }
-    .color-picker { width: 60px; height: 40px; border: none; border-radius: 8px; cursor: pointer; }
-    .toggle-switch { position: relative; display: inline-block; width: 60px; height: 34px; }
-    .toggle-switch input { opacity: 0; width: 0; height: 0; }
-    .slider { 
-      position: absolute; 
-      cursor: pointer; 
-      top: 0; left: 0; right: 0; bottom: 0; 
-      background-color: #333; 
-      transition: .4s; 
-      border-radius: 34px; 
-      border: 1px solid #555; 
-    }
-    .slider:before { 
-      position: absolute; 
-      content: ""; 
-      height: 26px; 
-      width: 26px; 
-      left: 4px; 
-      bottom: 4px; 
-      background-color: #ddd; 
-      transition: .4s; 
-      border-radius: 50%; 
-    }
-    input:checked + .slider { background: #555; }
-    input:checked + .slider:before { transform: translateX(26px); background: #fff; }
-    .feature-card { background: #0f0f0f; padding: 20px; border-radius: 10px; border: 1px solid #333; }
-    .logout-btn { position: absolute; top: 30px; right: 30px; }
-    .search-box { 
-      width: 100%; 
-      padding: 15px; 
-      background: #0d0d0d; 
-      border: 1px solid #444; 
-      color: #e0e0e0; 
-      border-radius: 10px; 
-      margin-bottom: 20px; 
-      font-family: 'Courier New', monospace; 
-    }
+    .stat-box { border: 2px solid #000; padding: 20px; text-align: center; background: #fff; }
+    .stat-number { font-size: 3rem; font-weight: 900; display: block; }
+    .stat-label { text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.9rem; opacity: 0.7; }
+    .contact-item { display: grid; grid-template-columns: 150px 1fr; gap: 10px; margin-bottom: 10px; }
   </style>
 </head>
 <body>
-  <!-- The rest of your HTML remains 100% unchanged -->
-  <!-- Login -->
   <div id="loginScreen" class="login-screen">
     <div class="login-box">
-      <h1 style="font-size: 2rem;">🔐 ADMIN</h1>
-      <p style="margin-bottom: 30px; opacity: 0.7; text-transform: uppercase;">Secure Access Required</p>
+      <h1>ADMIN</h1>
+      <p style="margin-bottom: 30px; opacity: 0.7; text-transform: uppercase;">Enter master password</p>
       <form id="loginForm">
         <label>Password</label>
-        <input type="password" id="password" required autocomplete="off" placeholder="Enter master password">
-        <button type="submit" style="width: 100%; margin: 0;">🚀 ACCESS PANEL</button>
+        <input type="password" id="password" required autocomplete="off">
+        <button type="submit">ACCESS PANEL</button>
       </form>
       <div id="loginError" class="status error" style="margin-top: 20px;"></div>
     </div>
   </div>
 
-  <!-- Admin Panel -->
   <div id="adminPanel" class="admin-panel">
-    <!-- ... all the rest of your original HTML content stays exactly the same ... -->
+    <div class="container">
+      <h1>ADMIN PANEL</h1>
+      <button class="logout secondary" onclick="logout()">Logout</button>
+      
+      <div class="section">
+        <h2>Dashboard</h2>
+        <div class="grid-2">
+          <div class="stat-box"><span class="stat-number" id="projectCount">0</span><span class="stat-label">GitHub Projects</span></div>
+          <div class="stat-box"><span class="stat-number" id="photoCount">0</span><span class="stat-label">Photos</span></div>
+          <div class="stat-box"><span class="stat-number" id="skillCount">0</span><span class="stat-label">Skills</span></div>
+          <div class="stat-box"><span class="stat-number">LIVE</span><span class="stat-label">Site Status</span></div>
+        </div>
+      </div>
+
+      <div class="tabs">
+        <button class="tab active" onclick="switchTab('about')">About</button>
+        <button class="tab" onclick="switchTab('skills')">Skills</button>
+        <button class="tab" onclick="switchTab('awards')">Awards</button>
+        <button class="tab" onclick="switchTab('contact')">Contact</button>
+      </div>
+
+      <div id="aboutTab" class="tab-content active">
+        <div class="section">
+          <h2>About Me</h2>
+          <label>Bio 1</label>
+          <textarea id="bio1">Hello, my name is Alexander, a passionate photographer, student and a coder in grade 7 who enjoys capturing memorable and compelling moments.</textarea>
+          <label>Bio 2</label>
+          <textarea id="bio2">I like experimenting with different perspectives, composition and light, turning everyday scenes into visually appealing photographs.</textarea>
+          <label>Bio 3</label>
+          <textarea id="bio3">In my spare time, I practice for my next image and try to stay in the moment — in school, real life or through a lens.</textarea>
+          <h3>Currently Doing</h3>
+          <div class="item-input">
+            <input type="text" id="newCurrently" placeholder="Add activity...">
+            <button onclick="addItem('currently')">Add</button>
+          </div>
+          <ul id="currentlyList" class="item-list"></ul>
+        </div>
+      </div>
+
+      <div id="skillsTab" class="tab-content">
+        <div class="section">
+          <h2>Development</h2>
+          <div class="skill-input">
+            <input type="text" id="newDevSkill" placeholder="Add skill...">
+            <button onclick="addSkill('dev')">Add</button>
+          </div>
+          <ul id="devSkills" class="skill-list"></ul>
+        </div>
+        <div class="section">
+          <h2>Design</h2>
+          <div class="skill-input">
+            <input type="text" id="newDesignSkill" placeholder="Add skill...">
+            <button onclick="addSkill('design')">Add</button>
+          </div>
+          <ul id="designSkills" class="skill-list"></ul>
+        </div>
+        <div class="section">
+          <h2>Photography</h2>
+          <div class="skill-input">
+            <input type="text" id="newPhotoSkill" placeholder="Add skill...">
+            <button onclick="addSkill('photo')">Add</button>
+          </div>
+          <ul id="photoSkills" class="skill-list"></ul>
+        </div>
+      </div>
+
+      <div id="awardsTab" class="tab-content">
+        <div class="section">
+          <h2>Add Award</h2>
+          <label>Title</label>
+          <input type="text" id="newAwardTitle" placeholder="Award title...">
+          <label>Organization</label>
+          <input type="text" id="newAwardOrg" placeholder="e.g., Canvas • Design">
+          <label>Description</label>
+          <textarea id="newAwardDesc" placeholder="Description..."></textarea>
+          <button onclick="addItem('award')">Add Award</button>
+        </div>
+        <div class="section">
+          <h2>Current Awards</h2>
+          <ul id="awardList" class="item-list"></ul>
+        </div>
+      </div>
+
+      <div id="contactTab" class="tab-content">
+        <div class="section">
+          <h2>Contact Info</h2>
+          <div class="contact-item">
+            <label>Email</label>
+            <input type="email" id="contactEmail" value="alxgraphy@icloud.com">
+          </div>
+          <div class="contact-item">
+            <label>GitHub</label>
+            <input type="text" id="contactGithub" value="@alxgraphy">
+          </div>
+          <div class="contact-item">
+            <label>Instagram</label>
+            <input type="text" id="contactInstagram" value="@alexedgraphy">
+          </div>
+          <div class="contact-item">
+            <label>TikTok</label>
+            <input type="text" id="contactTiktok" value="@alxgraphy">
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <button onclick="saveLocal()">SAVE LOCALLY</button>
+        <button onclick="generateCode()">PREVIEW</button>
+        <button onclick="saveToGitHub()">PUSH TO GITHUB</button>
+        <div id="status" class="status"></div>
+      </div>
+
+      <div class="section">
+        <h2>Preview</h2>
+        <div id="codePreview" class="preview">Click PREVIEW to see changes...</div>
+      </div>
+    </div>
   </div>
 
   <script>
-    // Your original JavaScript code remains completely unchanged
     let data = {
       devSkills: ['HTML/CSS', 'JavaScript', 'React', 'Tailwind', 'Git', 'GitHub', 'Vite', 'VS Code'],
       designSkills: ['Figma', 'Adobe LR', 'UI/UX', 'Typography'],
       photoSkills: ['Composition', 'Lighting', 'Editing', 'Street', 'Portraits', 'Landscapes'],
-      softSkills: [
-        { title: 'Problem Solving', desc: 'Breaking down complex problems into manageable pieces.' },
-        { title: 'Attention to Detail', desc: 'Obsessed with pixel-perfect designs and clean code.' },
-        { title: 'Self-Learning', desc: 'Constantly exploring new technologies independently.' },
-        { title: 'Human-Centered Design', desc: 'Trained in empathy-driven design thinking.' }
-      ],
       currently: ['Building this portfolio', 'Practicing photography', 'Grade 7 student', 'Open to collaboration'],
-      awards: [{ title: 'Human-Centered Design', org: 'Canvas • Design Certification', desc: 'Design certification', date: '2024-01-01' }]
+      awards: [{ title: 'Human-Centered Design', org: 'Canvas', desc: 'Design certification' }]
     };
-    // ... rest of your script ...
+
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const password = document.getElementById('password').value;
+      
+      try {
+        const ipCheck = await fetch('/api/check-ip');
+        if (!ipCheck.ok) {
+          document.getElementById('loginError').textContent = 'Access denied - IP not authorized';
+          document.getElementById('loginError').style.display = 'block';
+          return;
+        }
+
+        const response = await fetch('/api/auth', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password })
+        });
+
+        if (response.ok) {
+          document.getElementById('loginScreen').style.display = 'none';
+          document.getElementById('adminPanel').style.display = 'block';
+          loadData();
+          updateStats();
+        } else {
+          document.getElementById('loginError').textContent = 'Invalid password';
+          document.getElementById('loginError').style.display = 'block';
+        }
+      } catch (error) {
+        document.getElementById('loginError').textContent = 'Connection error';
+        document.getElementById('loginError').style.display = 'block';
+      }
+    });
+
+    function logout() {
+      document.getElementById('loginScreen').style.display = 'flex';
+      document.getElementById('adminPanel').style.display = 'none';
+      document.getElementById('password').value = '';
+    }
+
+    function switchTab(tab) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById(tab + 'Tab').classList.add('active');
+    }
+
+    function loadData() {
+      const saved = localStorage.getItem('adminData');
+      if (saved) data = JSON.parse(saved);
+      renderSkills('devSkills', data.devSkills);
+      renderSkills('designSkills', data.designSkills);
+      renderSkills('photoSkills', data.photoSkills);
+      renderItems('currentlyList', data.currently);
+      renderItems('awardList', data.awards, 'award');
+    }
+
+    function updateStats() {
+      document.getElementById('skillCount').textContent = data.devSkills.length + data.designSkills.length + data.photoSkills.length;
+    }
+
+    function renderSkills(listId, skills) {
+      document.getElementById(listId).innerHTML = skills.map((skill, i) => 
+        `<li><span>${skill}</span><button onclick="removeSkill('${listId}', ${i})">Remove</button></li>`
+      ).join('');
+    }
+
+    function renderItems(listId, items, type = 'text') {
+      document.getElementById(listId).innerHTML = items.map((item, i) => {
+        if (type === 'award') {
+          return `<li><div><strong>${item.title}</strong><br><small>${item.org}</small><br>${item.desc}</div><button onclick="removeItem('${listId}', ${i})">Remove</button></li>`;
+        }
+        return `<li><span>${item}</span><button onclick="removeItem('${listId}', ${i})">Remove</button></li>`;
+      }).join('');
+    }
+
+    function addSkill(type) {
+      const inputMap = { dev: 'newDevSkill', design: 'newDesignSkill', photo: 'newPhotoSkill' };
+      const listMap = { dev: { key: 'devSkills', list: 'devSkills' }, design: { key: 'designSkills', list: 'designSkills' }, photo: { key: 'photoSkills', list: 'photoSkills' } };
+      const input = document.getElementById(inputMap[type]);
+      const value = input.value.trim();
+      if (value) {
+        const { key, list } = listMap[type];
+        data[key].push(value);
+        renderSkills(list, data[key]);
+        input.value = '';
+        updateStats();
+      }
+    }
+
+    function addItem(type) {
+      if (type === 'currently') {
+        const input = document.getElementById('newCurrently');
+        const value = input.value.trim();
+        if (value) {
+          data.currently.push(value);
+          renderItems('currentlyList', data.currently);
+          input.value = '';
+        }
+      } else if (type === 'award') {
+        const title = document.getElementById('newAwardTitle').value.trim();
+        const org = document.getElementById('newAwardOrg').value.trim();
+        const desc = document.getElementById('newAwardDesc').value.trim();
+        if (title && org && desc) {
+          data.awards.push({ title, org, desc });
+          renderItems('awardList', data.awards, 'award');
+          document.getElementById('newAwardTitle').value = '';
+          document.getElementById('newAwardOrg').value = '';
+          document.getElementById('newAwardDesc').value = '';
+        }
+      }
+    }
+
+    function removeSkill(listId, index) {
+      const keyMap = { devSkills: 'devSkills', designSkills: 'designSkills', photoSkills: 'photoSkills' };
+      data[keyMap[listId]].splice(index, 1);
+      renderSkills(listId, data[keyMap[listId]]);
+      updateStats();
+    }
+
+    function removeItem(listId, index) {
+      const keyMap = { currentlyList: 'currently', awardList: 'awards' };
+      data[keyMap[listId]].splice(index, 1);
+      renderItems(listId, data[keyMap[listId]], keyMap[listId] === 'awards' ? 'award' : 'text');
+    }
+
+    function saveLocal() {
+      localStorage.setItem('adminData', JSON.stringify(data));
+      showStatus('Saved locally!', 'success');
+    }
+
+    function generateCode() {
+      const preview = document.getElementById('codePreview');
+      preview.innerHTML = `
+CHANGES:
+- Bio: ${document.getElementById('bio1').value.substring(0, 50)}...
+- Skills: ${data.devSkills.length + data.designSkills.length + data.photoSkills.length} total
+- Awards: ${data.awards.length}
+- Currently: ${data.currently.length} items
+
+Ready to push!`;
+      showStatus('Preview generated!', 'success');
+    }
+
+    async function saveToGitHub() {
+      showStatus('Pushing to GitHub...', 'success');
+      try {
+        const response = await fetch('/api/push-to-github', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ data, bio1: document.getElementById('bio1').value, bio2: document.getElementById('bio2').value, bio3: document.getElementById('bio3').value })
+        });
+        if (response.ok) showStatus('Pushed to GitHub!', 'success');
+        else showStatus('Error pushing', 'error');
+      } catch (error) {
+        showStatus('Connection error', 'error');
+      }
+    }
+
+    function showStatus(message, type) {
+      const status = document.getElementById('status');
+      status.textContent = message;
+      status.className = `status ${type}`;
+      status.style.display = 'block';
+      setTimeout(() => status.style.display = 'none', 5000);
+    }
   </script>
 </body>
 </html>
