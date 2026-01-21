@@ -32,6 +32,7 @@
     .preview { background: #f5f5f5; padding: 20px; border: 2px solid #000; margin-top: 20px; white-space: pre-wrap; overflow-x: auto; max-height: 400px; overflow-y: auto; }
     .status { margin-top: 20px; padding: 15px; border: 2px solid #000; display: none; }
     .status.success { background: #f0f0f0; }
+    .status.error { background: #ffebee; border-color: #c62828; color: #c62828; }
     .logout { float: right; margin-top: 10px; }
     .skill-input, .item-input { display: flex; gap: 10px; margin-bottom: 10px; }
     .skill-input input, .item-input input, .item-input textarea { margin-bottom: 0; }
@@ -69,7 +70,7 @@
         <h2>Dashboard</h2>
         <div class="grid-2">
           <div class="stat-box"><span class="stat-number" id="projectCount">0</span><span class="stat-label">GitHub Projects</span></div>
-          <div class="stat-box"><span class="stat-number" id="photoCount">0</span><span class="stat-label">Photos</span></div>
+          <div class="stat-box"><span class="stat-number" id="photoCount">32</span><span class="stat-label">Photos</span></div>
           <div class="stat-box"><span class="stat-number" id="skillCount">0</span><span class="stat-label">Skills</span></div>
           <div class="stat-box"><span class="stat-number">LIVE</span><span class="stat-label">Site Status</span></div>
         </div>
@@ -90,7 +91,7 @@
           <label>Bio 2</label>
           <textarea id="bio2">I like experimenting with different perspectives, composition and light, turning everyday scenes into visually appealing photographs.</textarea>
           <label>Bio 3</label>
-          <textarea id="bio3">In my spare time, I practice for my next image and try to stay in the moment — in school, real life or through a lens.</textarea>
+          <textarea id="bio3">In my spare time, I practice for my next image and try to stay in the moment - in school, real life or through a lens.</textarea>
           <h3>Currently Doing</h3>
           <div class="item-input">
             <input type="text" id="newCurrently" placeholder="Add activity...">
@@ -124,6 +125,15 @@
             <button onclick="addSkill('photo')">Add</button>
           </div>
           <ul id="photoSkills" class="skill-list"></ul>
+        </div>
+        <div class="section">
+          <h2>Soft Skills</h2>
+          <div class="item-input">
+            <input type="text" id="newSoftSkillTitle" placeholder="Skill title...">
+            <textarea id="newSoftSkillDesc" placeholder="Description..."></textarea>
+            <button onclick="addItem('softSkill')">Add</button>
+          </div>
+          <ul id="softSkillList" class="item-list"></ul>
         </div>
       </div>
 
@@ -185,8 +195,14 @@
       devSkills: ['HTML/CSS', 'JavaScript', 'React', 'Tailwind', 'Git', 'GitHub', 'Vite', 'VS Code'],
       designSkills: ['Figma', 'Adobe LR', 'UI/UX', 'Typography'],
       photoSkills: ['Composition', 'Lighting', 'Editing', 'Street', 'Portraits', 'Landscapes'],
+      softSkills: [
+        { title: 'Problem Solving', desc: 'Breaking down complex problems into manageable pieces and finding creative solutions.' },
+        { title: 'Attention to Detail', desc: 'Obsessed with pixel-perfect designs and clean, readable code.' },
+        { title: 'Self-Learning', desc: 'Constantly exploring new technologies, frameworks, and techniques independently.' },
+        { title: 'Human-Centered Design', desc: 'Trained in empathy-driven design thinking to create user-focused solutions.' }
+      ],
       currently: ['Building this portfolio', 'Practicing photography', 'Grade 7 student', 'Open to collaboration'],
-      awards: [{ title: 'Human-Centered Design', org: 'Canvas', desc: 'Design certification' }]
+      awards: [{ title: 'Human-Centered Design', org: 'Canvas • Design Certification', desc: 'Design certification' }]
     };
 
     document.getElementById('loginForm').addEventListener('submit', async function(e) {
@@ -243,6 +259,7 @@
       renderSkills('photoSkills', data.photoSkills);
       renderItems('currentlyList', data.currently);
       renderItems('awardList', data.awards, 'award');
+      renderItems('softSkillList', data.softSkills, 'softSkill');
     }
 
     function updateStats() {
@@ -259,6 +276,8 @@
       document.getElementById(listId).innerHTML = items.map((item, i) => {
         if (type === 'award') {
           return `<li><div><strong>${item.title}</strong><br><small>${item.org}</small><br>${item.desc}</div><button onclick="removeItem('${listId}', ${i})">Remove</button></li>`;
+        } else if (type === 'softSkill') {
+          return `<li><div><strong>${item.title}</strong><br>${item.desc}</div><button onclick="removeItem('${listId}', ${i})">Remove</button></li>`;
         }
         return `<li><span>${item}</span><button onclick="removeItem('${listId}', ${i})">Remove</button></li>`;
       }).join('');
@@ -298,6 +317,15 @@
           document.getElementById('newAwardOrg').value = '';
           document.getElementById('newAwardDesc').value = '';
         }
+      } else if (type === 'softSkill') {
+        const title = document.getElementById('newSoftSkillTitle').value.trim();
+        const desc = document.getElementById('newSoftSkillDesc').value.trim();
+        if (title && desc) {
+          data.softSkills.push({ title, desc });
+          renderItems('softSkillList', data.softSkills, 'softSkill');
+          document.getElementById('newSoftSkillTitle').value = '';
+          document.getElementById('newSoftSkillDesc').value = '';
+        }
       }
     }
 
@@ -309,9 +337,10 @@
     }
 
     function removeItem(listId, index) {
-      const keyMap = { currentlyList: 'currently', awardList: 'awards' };
+      const keyMap = { currentlyList: 'currently', awardList: 'awards', softSkillList: 'softSkills' };
       data[keyMap[listId]].splice(index, 1);
-      renderItems(listId, data[keyMap[listId]], keyMap[listId] === 'awards' ? 'award' : 'text');
+      const key = keyMap[listId];
+      renderItems(listId, data[key], key === 'awards' ? 'award' : key === 'softSkills' ? 'softSkill' : 'text');
     }
 
     function saveLocal() {
@@ -322,11 +351,16 @@
     function generateCode() {
       const preview = document.getElementById('codePreview');
       preview.innerHTML = `
-CHANGES:
-- Bio: ${document.getElementById('bio1').value.substring(0, 50)}...
-- Skills: ${data.devSkills.length + data.designSkills.length + data.photoSkills.length} total
-- Awards: ${data.awards.length}
-- Currently: ${data.currently.length} items
+CHANGES TO BE PUSHED:
+
+Bio 1: ${document.getElementById('bio1').value.substring(0, 60)}...
+Bio 2: ${document.getElementById('bio2').value.substring(0, 60)}...
+Bio 3: ${document.getElementById('bio3').value.substring(0, 60)}...
+
+Skills: ${data.devSkills.length + data.designSkills.length + data.photoSkills.length} total
+Awards: ${data.awards.length}
+Currently: ${data.currently.length} items
+Contact: ${document.getElementById('contactEmail').value}
 
 Ready to push!`;
       showStatus('Preview generated!', 'success');
@@ -334,16 +368,47 @@ Ready to push!`;
 
     async function saveToGitHub() {
       showStatus('Pushing to GitHub...', 'success');
+      
       try {
+        const configData = {
+          bio: {
+            paragraph1: document.getElementById('bio1').value,
+            paragraph2: document.getElementById('bio2').value,
+            paragraph3: document.getElementById('bio3').value
+          },
+          skills: {
+            development: data.devSkills,
+            design: data.designSkills,
+            photography: data.photoSkills,
+            softSkills: data.softSkills
+          },
+          interests: [],
+          currently: data.currently,
+          awards: data.awards,
+          contact: {
+            email: document.getElementById('contactEmail').value,
+            github: document.getElementById('contactGithub').value,
+            instagram: document.getElementById('contactInstagram').value,
+            tiktok: document.getElementById('contactTiktok').value,
+            message: 'Interested in collaboration on photography or code? Reach out anytime.'
+          }
+        };
+
         const response = await fetch('/api/push-to-github', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ data, bio1: document.getElementById('bio1').value, bio2: document.getElementById('bio2').value, bio3: document.getElementById('bio3').value })
+          body: JSON.stringify({ configData })
         });
-        if (response.ok) showStatus('Pushed to GitHub!', 'success');
-        else showStatus('Error pushing', 'error');
+
+        const result = await response.json();
+
+        if (response.ok) {
+          showStatus('✓ ' + result.message, 'success');
+        } else {
+          showStatus('Error: ' + (result.error || result.details), 'error');
+        }
       } catch (error) {
-        showStatus('Connection error', 'error');
+        showStatus('Connection error: ' + error.message, 'error');
       }
     }
 
