@@ -1,8 +1,41 @@
 import { useState, useEffect } from 'react';
 import { Github, Mail, Camera, ExternalLink, Moon, Sun, Instagram } from 'lucide-react';
 
-const photoModules = import.meta.glob('/public/photos/**/*.{jpg,jpeg,png,gif,webp}', { eager: true, as: 'url' });
-const allPhotoUrls = Object.values(photoModules);
+// All photos hosted on ImgBB
+const allPhotoUrls = [
+  'https://i.ibb.co/WNsB3Lz9/IMG-0643.jpg',
+  'https://i.ibb.co/G30nS362/DSC-8615.jpg',
+  'https://i.ibb.co/svWsfwt7/DSC00029.jpg',
+  'https://i.ibb.co/b5N5DxLq/DSC-8612.jpg',
+  'https://i.ibb.co/b5vQ4yd3/DSC-8608.jpg',
+  'https://i.ibb.co/Pv8S6TC0/DSC-8605.jpg',
+  'https://i.ibb.co/84Xdjn80/DSC-8580.jpg',
+  'https://i.ibb.co/FbLgPdD5/DSC-8511.jpg',
+  'https://i.ibb.co/21Q4DZk5/DSC-8514.jpg',
+  'https://i.ibb.co/FQGZbjk/DSC-8510.jpg',
+  'https://i.ibb.co/N6MWfZLH/DSC-8455.jpg',
+  'https://i.ibb.co/Kc8pnvYC/DSC-8273.jpg',
+  'https://i.ibb.co/4R7TgWbZ/DSC-8438.jpg',
+  'https://i.ibb.co/bRKtPpwn/DSC-8259.jpg',
+  'https://i.ibb.co/RTVYKck8/DSC-8171.jpg',
+  'https://i.ibb.co/nMgN469P/DSC-8148.jpg',
+  'https://i.ibb.co/QvkXKM73/IMG-0649.jpg',
+  'https://i.ibb.co/Nk2bb8k/IMG-0645.jpg',
+  'https://i.ibb.co/xqpyY01Y/DSC00063.jpg',
+  'https://i.ibb.co/DHnTtg54/DSC00059.jpg',
+  'https://i.ibb.co/QvJjDx5v/DSC00057.jpg',
+  'https://i.ibb.co/ZRvhs3pL/DSC00052.jpg',
+  'https://i.ibb.co/F1J9kF6/DSC00048.jpg',
+  'https://i.ibb.co/1tc6hrHY/DSC00047.jpg',
+  'https://i.ibb.co/5g2cZHM9/DSC00046.jpg',
+  'https://i.ibb.co/H8fxMbC/DSC00042.jpg',
+  'https://i.ibb.co/CpqfLF1X/DSC00041.jpg',
+  'https://i.ibb.co/k68ndLgf/DSC00037.jpg',
+  'https://i.ibb.co/hxXxhZ66/DSC00022.jpg',
+  'https://i.ibb.co/gF9vT12Z/DSC00031.jpg',
+  'https://i.ibb.co/pjB4LSBx/DSC-8614.jpg',
+  'https://i.ibb.co/4wVmRMLZ/DSC-8617.jpg'
+];
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
