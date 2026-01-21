@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Github, Mail, Camera, Moon, Sun, Instagram } from 'lucide-react';
 
-// ──────────────────────────────────────────────
-// YOUR CLOUDINARY PHOTOS (unchanged)
-// ──────────────────────────────────────────────
+// Your Cloudinary photos
 const allPhotoUrls = [
   "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005836/IMG_0649_jmyszm.jpg",
   "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005835/IMG_0645_b679gp.jpg",
@@ -241,8 +239,7 @@ function App() {
       )}
 
       <div className="min-h-screen flex items-center justify-center px-6 pb-24">
-        {/* ─── MAIN PAGES ────────────────────────────────────────── */}
-
+        {/* HOME */}
         {currentPage === 'home' && (
           <div className="max-w-6xl w-full grid md:grid-cols-2 gap-12 items-center">
             <div className={`border-4 ${t.border} overflow-hidden shadow-2xl`}>
@@ -273,6 +270,7 @@ function App() {
           </div>
         )}
 
+        {/* ABOUT */}
         {currentPage === 'about' && (
           <div className="max-w-6xl w-full py-20">
             <h2 className={`text-5xl md:text-6xl font-black uppercase tracking-tight mb-2 ${t.accent}`}>
@@ -290,14 +288,291 @@ function App() {
                   <p>In my spare time, I practice for my next image and try to stay in the moment — in school, real life or through a lens.</p>
                 </div>
               </div>
-              {/* ... rest of about page unchanged ... */}
+              <div className={`border-2 ${t.border} ${t.card} p-8`}>
+                <h3 className={`text-2xl font-black uppercase tracking-tight mb-6 ${t.accent}`}>INTERESTS</h3>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <h4 className="text-lg font-bold uppercase mb-3">Photography</h4>
+                    <p className={`${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
+                      Street photography, portraits, landscapes, and experimental composition. Always looking for unique perspectives and compelling moments.
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-bold uppercase mb-3">Coding</h4>
+                    <p className={`${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
+                      Building web applications, learning new frameworks, and creating tools that solve real problems. Passionate about clean, minimal design.
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-bold uppercase mb-3">Learning</h4>
+                    <p className={`${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
+                      Currently exploring human-centered design, web development best practices, and advanced photography techniques.
+                    </p>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-bold uppercase mb-3">Creating</h4>
+                    <p className={`${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
+                      Love building projects from scratch — whether it's a portfolio, a photo series, or a new web app. Always making something.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className={`border-2 ${t.border} ${t.card} p-8`}>
+                <h3 className={`text-2xl font-black uppercase tracking-tight mb-6 ${t.accent}`}>AWARDS & ACHIEVEMENTS</h3>
+                <div className="space-y-6">
+                  <div className={`border-l-4 ${t.border} pl-6`}>
+                    <h4 className="text-xl font-bold uppercase mb-2">The Field Guide to Human-Centered Design</h4>
+                    <p className={`text-sm uppercase tracking-wider mb-3 ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>
+                      Canvas • Design Certification
+                    </p>
+                    <p className={`${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
+                      Completed comprehensive training in human-centered design principles, focusing on empathy, ideation, and iteration in the design process.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className={`border-2 ${t.border} ${t.card} p-8`}>
+                <h3 className={`text-2xl font-black uppercase tracking-tight mb-6 ${t.accent}`}>CURRENTLY</h3>
+                <ul className="space-y-3 text-lg">
+                  <li className="flex items-start gap-3">
+                    <span className={`${t.accent} font-bold`}>→</span>
+                    <span>Building this portfolio and learning React</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className={`${t.accent} font-bold`}>→</span>
+                    <span>Practicing street photography in Toronto</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className={`${t.accent} font-bold`}>→</span>
+                    <span>Grade 7 student, balancing school and creative projects</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className={`${t.accent} font-bold`}>→</span>
+                    <span>Open to collaboration on photography or code projects</span>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         )}
 
-        {/* Skills, Code, Photography, Contact blocks remain unchanged — insert your full original code here if needed */}
+        {/* SKILLS */}
+        {currentPage === 'skills' && (
+          <div className="max-w-6xl w-full py-20">
+            <h2 className={`text-5xl md:text-6xl font-black uppercase tracking-tight mb-2 ${t.accent}`}>
+              SKILLS
+            </h2>
+            <div className={`text-sm uppercase tracking-widest mb-12 ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>
+              Tools & technologies I work with
+            </div>
+            <div className="space-y-12">
+              <div className={`border-2 ${t.border} ${t.card} p-8`}>
+                <h3 className={`text-2xl font-black uppercase tracking-tight mb-6 ${t.accent}`}>DEVELOPMENT</h3>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                  {['HTML/CSS', 'JavaScript', 'React', 'Tailwind', 'Git', 'GitHub', 'Vite', 'VS Code'].map(skill => (
+                    <div key={skill} className={`border-2 ${t.border} p-4 text-center ${t.hoverBg} transition`}>
+                      <div className="text-xl font-bold">{skill}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className={`border-2 ${t.border} ${t.card} p-8`}>
+                <h3 className={`text-2xl font-black uppercase tracking-tight mb-6 ${t.accent}`}>DESIGN</h3>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                  {['Figma', 'Adobe LR', 'UI/UX', 'Typography'].map(skill => (
+                    <div key={skill} className={`border-2 ${t.border} p-4 text-center ${t.hoverBg} transition`}>
+                      <div className="text-xl font-bold">{skill}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className={`border-2 ${t.border} ${t.card} p-8`}>
+                <h3 className={`text-2xl font-black uppercase tracking-tight mb-6 ${t.accent}`}>PHOTOGRAPHY</h3>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                  {['Composition', 'Lighting', 'Editing', 'Street', 'Portraits', 'Landscapes'].map(skill => (
+                    <div key={skill} className={`border-2 ${t.border} p-4 text-center ${t.hoverBg} transition`}>
+                      <div className="text-xl font-bold">{skill}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className={`border-2 ${t.border} ${t.card} p-8`}>
+                <h3 className={`text-2xl font-black uppercase tracking-tight mb-6 ${t.accent}`}>SOFT SKILLS</h3>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className={`border-l-4 ${t.border} pl-6`}>
+                    <h4 className="text-lg font-bold uppercase mb-2">Problem Solving</h4>
+                    <p className={`${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
+                      Breaking down complex problems into manageable pieces and finding creative solutions.
+                    </p>
+                  </div>
+                  <div className={`border-l-4 ${t.border} pl-6`}>
+                    <h4 className="text-lg font-bold uppercase mb-2">Attention to Detail</h4>
+                    <p className={`${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
+                      Obsessed with pixel-perfect designs and clean, readable code.
+                    </p>
+                  </div>
+                  <div className={`border-l-4 ${t.border} pl-6`}>
+                    <h4 className="text-lg font-bold uppercase mb-2">Self-Learning</h4>
+                    <p className={`${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
+                      Constantly exploring new technologies, frameworks, and techniques independently.
+                    </p>
+                  </div>
+                  <div className={`border-l-4 ${t.border} pl-6`}>
+                    <h4 className="text-lg font-bold uppercase mb-2">Human-Centered Design</h4>
+                    <p className={`${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
+                      Trained in empathy-driven design thinking to create user-focused solutions.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
-        {/* KAT */}
+        {/* CODE */}
+        {currentPage === 'code' && (
+          <div className="max-w-7xl w-full py-20">
+            <div className="mb-20">
+              <h2 className={`text-5xl md:text-6xl font-black uppercase tracking-tight mb-2 ${t.accent}`}>
+                PROJECTS
+              </h2>
+              <div className={`text-sm uppercase tracking-widest mb-12 ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>
+                Original repositories auto-updating from GitHub
+              </div>
+              {loading ? (
+                <div className={`text-center text-xl ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>Loading projects...</div>
+              ) : repos.length === 0 ? (
+                <div className={`text-center text-xl ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>No projects yet.</div>
+              ) : (
+                <div className="space-y-8">
+                  {repos.map(repo => (
+                    <div key={repo.id} className={`border-2 ${t.border} ${t.card} p-8 ${t.hoverBg} transition group`}>
+                      <div>
+                        <h3 className={`text-3xl font-black uppercase tracking-tight mb-3 ${t.accent} group-hover:opacity-70 transition`}>
+                          {repo.name}
+                        </h3>
+                        <p className={`text-base mb-4 ${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
+                          {repo.description || 'No description provided.'}
+                        </p>
+                        <div className="flex flex-wrap gap-4 text-sm">
+                          <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-2 underline ${t.accent} hover:opacity-70 transition`}>
+                            <Github size={18} /> View Repo
+                          </a>
+                          {repo.homepage && (
+                            <a href={repo.homepage} target="_blank" rel="noopener noreferrer" className="underline hover:opacity-70 transition">
+                              → Live Demo
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+            {forkRepos.length > 0 && (
+              <div className="mt-32">
+                <h2 className={`text-4xl md:text-5xl font-black uppercase tracking-tight mb-2 ${t.accent}`}>
+                  CONTRIBUTED TO
+                </h2>
+                <div className={`text-sm uppercase tracking-widest mb-12 ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>
+                  Forked repositories
+                </div>
+                <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
+                  {forkRepos.map(repo => (
+                    <a key={repo.id} href={repo.html_url} target="_blank" rel="noopener noreferrer" className={`border-2 ${t.border} ${t.card} p-6 ${t.hoverBg} transition group`}>
+                      <h4 className={`text-xl font-bold uppercase mb-2 ${t.accent} group-hover:opacity-70 transition`}>
+                        {repo.name}
+                      </h4>
+                      <div className={`text-sm uppercase tracking-wider ${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>View →</div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* PHOTOGRAPHY */}
+        {currentPage === 'photography' && (
+          <div className="max-w-7xl w-full py-20">
+            <h2 className={`text-5xl md:text-6xl font-black uppercase tracking-tight mb-2 ${t.accent}`}>
+              PHOTOGRAPHY
+            </h2>
+            <div className={`text-sm uppercase tracking-widest mb-12 ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>
+              Random selection of 12 photos • Refresh to see new ones
+            </div>
+            {randomPhotos.length === 0 ? (
+              <div className={`text-center text-xl ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>
+                No photos found. Add images to /public/photos/
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {randomPhotos.map((photo, i) => (
+                  <div key={i} className={`border-2 ${t.border} overflow-hidden aspect-[4/3] ${theme === 'wireframe' ? 'bg-gray-100' : 'bg-black/50'} group cursor-pointer`}>
+                    <img
+                      src={photo}
+                      alt={`Photo ${i + 1}`}
+                      loading="lazy"
+                      className="w-full h-full object-cover group-hover:scale-105 transition duration-700"
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* CONTACT */}
+        {currentPage === 'contact' && (
+          <div className="max-w-4xl w-full">
+            <h2 className={`text-5xl md:text-6xl font-black uppercase tracking-tight mb-2 ${t.accent}`}>
+              LET'S CONNECT
+            </h2>
+            <div className={`text-sm uppercase tracking-widest mb-12 ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>
+              Reach out for collaboration
+            </div>
+            <div className={`border-2 ${t.border} ${t.card} p-12`}>
+              <div className="space-y-8">
+                <div>
+                  <h3 className={`text-sm uppercase tracking-widest mb-4 ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>EMAIL</h3>
+                  <a href="mailto:alxgraphy@icloud.com" className={`flex items-center gap-3 text-2xl ${t.accent} hover:opacity-70 transition group`}>
+                    <Mail size={28} />
+                    <span className="group-hover:translate-x-2 transition">alxgraphy@icloud.com</span>
+                  </a>
+                </div>
+                <div>
+                  <h3 className={`text-sm uppercase tracking-widest mb-4 ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>GITHUB</h3>
+                  <a href="https://github.com/alxgraphy" target="_blank" rel="noopener noreferrer" className={`flex items-center gap-3 text-2xl ${t.accent} hover:opacity-70 transition group`}>
+                    <Github size={28} />
+                    <span className="group-hover:translate-x-2 transition">@alxgraphy</span>
+                  </a>
+                </div>
+                <div>
+                  <h3 className={`text-sm uppercase tracking-widest mb-4 ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>INSTAGRAM</h3>
+                  <a href="https://www.instagram.com/alexedgraphy/" target="_blank" rel="noopener noreferrer" className={`flex items-center gap-3 text-2xl ${t.accent} hover:opacity-70 transition group`}>
+                    <Instagram size={28} />
+                    <span className="group-hover:translate-x-2 transition">@alexedgraphy</span>
+                  </a>
+                </div>
+                <div>
+                  <h3 className={`text-sm uppercase tracking-widest mb-4 ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>TIKTOK</h3>
+                  <a href="https://www.tiktok.com/@alxgraphy" target="_blank" rel="noopener noreferrer" className={`flex items-center gap-3 text-2xl ${t.accent} hover:opacity-70 transition group`}>
+                    <Camera size={28} />
+                    <span className="group-hover:translate-x-2 transition">@alxgraphy</span>
+                  </a>
+                </div>
+                <div className={`pt-8 border-t-2 ${theme === 'wireframe' ? 'border-black/20' : 'border-white/20'}`}>
+                  <p className={`text-lg ${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
+                    Interested in collaboration on photography or code? Reach out anytime.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* KAT MEMES */}
         {currentPage === 'kat' && (
           <div className="max-w-7xl w-full py-20">
             <h2 className={`text-5xl md:text-6xl font-black uppercase tracking-tight mb-2 ${t.accent}`}>
@@ -318,7 +593,10 @@ function App() {
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {katMemes.map((post, i) => (
-                  <div key={i} className={`border-2 ${t.border} ${t.card} overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition group`}>
+                  <div
+                    key={i}
+                    className={`border-2 ${t.border} ${t.card} overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition group`}
+                  >
                     <img
                       src={post.url}
                       alt={post.title}
@@ -338,7 +616,7 @@ function App() {
           </div>
         )}
 
-        {/* ─── 25 SECRET PAGES ──────────────────────────────────────── */}
+        {/* ─── THE 25 SECRET PAGES ──────────────────────────────────────── */}
 
         {currentPage === 'secret' && (
           <div className="max-w-4xl mx-auto py-32 text-center">
@@ -738,173 +1016,4 @@ YOU HAVE BEEN HACKERMAN'D
         )}
 
         {currentPage === 'ratio' && (
-          <div className="max-w-4xl mx-auto py-32 text-center">
-            <h1 className={`text-8xl md:text-10xl font-black uppercase tracking-tighter mb-8 ${t.accent} animate-pulse`}>
-              RATIO'D
-            </h1>
-            <p className="text-6xl md:text-8xl font-bold mb-12 text-red-500">
-              L + RATIO
-            </p>
-            <p className={`text-3xl mb-16 ${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
-              Your post: 2 likes<br/>
-              Random comment: 420k likes<br/><br/>
-              Ratio'd by the internet.<br/>
-              Touch grass.
-            </p>
-            <button
-              onClick={() => navigate('home')}
-              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
-            >
-              Accept defeat
-            </button>
-          </div>
-        )}
-
-        {currentPage === 'mid' && (
-          <div className="max-w-4xl mx-auto py-32 text-center">
-            <h1 className={`text-8xl md:text-10xl font-black uppercase tracking-tighter mb-8 ${t.accent}`}>
-              MID
-            </h1>
-            <p className="text-6xl md:text-8xl font-bold mb-12 text-yellow-500">
-              OFFICIALLY MID
-            </p>
-            <p className={`text-3xl mb-16 ${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
-              Code: mid<br/>
-              Photos: mid<br/>
-              Everything: mid<br/><br/>
-              Welcome to average town.
-            </p>
-            <button
-              onClick={() => navigate('home')}
-              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
-            >
-              Stay mid
-            </button>
-          </div>
-        )}
-
-        {currentPage === 'touchgrass' && (
-          <div className="max-w-4xl mx-auto py-32 text-center">
-            <h1 className={`text-8xl md:text-10xl font-black uppercase tracking-tighter mb-8 ${t.accent}`}>
-              TOUCH GRASS
-            </h1>
-            <p className="text-6xl md:text-8xl font-bold mb-12 text-green-500">
-              CHALLENGE ACTIVE
-            </p>
-            <p className={`text-3xl mb-16 ${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
-              Go outside.<br/>
-              Get vitamin D.<br/>
-              Stop staring at this screen.
-            </p>
-            <button
-              onClick={() => navigate('home')}
-              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
-            >
-              Still inside
-            </button>
-          </div>
-        )}
-
-        {currentPage === 'pain' && (
-          <div className="max-w-4xl mx-auto py-32 text-center">
-            <h1 className={`text-8xl md:text-10xl font-black uppercase tracking-tighter mb-8 ${t.accent} animate-pulse`}>
-              P A I N
-            </h1>
-            <p className="text-6xl md:text-8xl font-bold mb-12 text-gray-500">
-              GROWING
-            </p>
-            <p className={`text-3xl mb-16 ${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
-              Existential dread loading...<br/>
-              Sad violin music in background.<br/>
-              Why are we here?
-            </p>
-            <button
-              onClick={() => navigate('home')}
-              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
-            >
-              End the pain
-            </button>
-          </div>
-        )}
-
-        {currentPage === 'foreveralone' && (
-          <div className="max-w-4xl mx-auto py-32 text-center">
-            <h1 className={`text-8xl md:text-10xl font-black uppercase tracking-tighter mb-8 ${t.accent}`}>
-              FOREVER ALONE
-            </h1>
-            <p className="text-6xl md:text-8xl font-bold mb-12 text-blue-500">
-              MODE
-            </p>
-            <p className={`text-3xl mb-16 ${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
-              No friends.<br/>
-              No notifications.<br/>
-              Just you and existential dread.
-            </p>
-            <button
-              onClick={() => navigate('home')}
-              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
-            >
-              Back to solitude
-            </button>
-          </div>
-        )}
-
-        {currentPage === 'invisible' && (
-          <div className="max-w-4xl mx-auto py-32 text-center">
-            <h1 className={`text-8xl md:text-10xl font-black uppercase tracking-tighter mb-8 ${t.accent}`}>
-              INVISIBLE
-            </h1>
-            <p className="text-6xl md:text-8xl font-bold mb-12 text-gray-500">
-              STATUS
-            </p>
-            <p className={`text-3xl mb-16 ${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
-              No one sees you.<br/>
-              No one notices.<br/>
-              You're basically a ghost.
-            </p>
-            <button
-              onClick={() => navigate('home')}
-              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
-            >
-              Stay invisible
-            </button>
-          </div>
-        )}
-
-        {/* 404 */}
-        {is404 && (
-          <div className="max-w-4xl w-full text-center">
-            <h2 className={`text-7xl md:text-9xl font-black uppercase tracking-tight mb-8 ${t.accent}`}>
-              404
-            </h2>
-            <p className="text-3xl md:text-4xl font-bold uppercase tracking-wide mb-6">
-              {random404}
-            </p>
-            <p className={`text-xl mb-12 ${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
-              Either wrong URL or I forgot to build it.
-            </p>
-            <button
-              onClick={() => navigate('home')}
-              className={`px-8 py-4 border-2 ${t.border} ${t.button} text-sm uppercase tracking-widest font-bold transition`}
-            >
-              Home
-            </button>
-          </div>
-        )}
-      </div>
-
-      {!hideUIpages.includes(currentPage) && (
-        <footer className={`fixed bottom-0 left-0 right-0 ${t.footerBg} border-t-2 ${t.border} py-4 z-40`}>
-          <div className="max-w-7xl mx-auto px-6 flex justify-center items-center text-sm uppercase tracking-widest">
-            Made with ❤️ in Toronto, Canada 🇨🇦 by Alexander Wondwossen (
-            <a href="https://github.com/alxgraphy" target="_blank" rel="noopener noreferrer" className={`${t.accent} hover:opacity-70 transition`}>
-              @alxgraphy
-            </a>)
-          </div>
-        </footer>
-      )}
-    </div>
-  );
-}
-
-export default App;
+          <div className="max-w-4xl
