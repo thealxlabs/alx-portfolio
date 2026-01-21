@@ -45,6 +45,7 @@ function App() {
   const [randomPhotos, setRandomPhotos] = useState([]);
   const [showNav, setShowNav] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [captchaClicks, setCaptchaClicks] = useState(0); // For /captcha page
 
   // Handle URL routing
   useEffect(() => {
@@ -129,7 +130,7 @@ function App() {
   const validPages = [
     'home', 'about', 'skills', 'code', 'photography', 'contact',
     'secret', 'admin', 'rickroll', 'source', 'coffee', 'old', 'test', 'terminal',
-    'glowup', 'sus', 'void', 'winner'
+    'glowup', 'sus', 'void', 'winner', 'captcha' // NEW
   ];
 
   const is404 = !validPages.includes(currentPage);
@@ -167,6 +168,23 @@ function App() {
 
   // Pages where nav + footer should be completely hidden
   const hideUIpages = ['rickroll', 'terminal', 'void'];
+
+  // Fake CAPTCHA messages (randomly picked for /captcha page)
+  const captchaChallenges = [
+    "Select all squares with traffic lights (there are none, click anyway)",
+    "Are you human? Prove it by clicking this button 47 times",
+    "I'm not a robot... are YOU a robot? 🤖",
+    "Click if you're not a time-traveling toaster",
+    "Verify you're not Canadian spam (eh?)",
+    "Solve: 1+1=? (trick question, it's 11 in binary)",
+    "Pick the image of a sad developer (spoiler: it's you right now)",
+    "Confirm you're not here to steal my Timbits",
+    "Click to prove you're not a 404 in disguise",
+    "Are you worthy of seeing my code? (Answer: no)",
+    "Select all images of existential dread",
+    "I'm watching you... click faster",
+    "CAPTCHA level: over 9000. Good luck."
+  ];
 
   return (
     <div className={`min-h-screen ${t.bg} ${t.text} font-mono transition-all duration-500`}>
@@ -551,7 +569,7 @@ function App() {
           </div>
         )}
 
-        {/* 2. /admin (changed from /thealx) */}
+        {/* 2. /admin */}
         {currentPage === 'admin' && (
           <div className="max-w-4xl mx-auto py-32 text-center">
             <h1 className={`text-8xl md:text-10xl font-black uppercase tracking-tighter mb-8 ${t.accent}`}>
@@ -710,7 +728,7 @@ alxgraphy@portfolio:~$ exit
           </div>
         )}
 
-        {/* Extra: /glowup */}
+        {/* /glowup */}
         {currentPage === 'glowup' && (
           <div className="max-w-4xl mx-auto py-32 text-center">
             <h1 className={`text-7xl md:text-9xl font-black uppercase tracking-tighter mb-8 ${t.accent}`}>
@@ -733,7 +751,7 @@ alxgraphy@portfolio:~$ exit
           </div>
         )}
 
-        {/* Extra: /sus */}
+        {/* /sus */}
         {currentPage === 'sus' && (
           <div className="max-w-4xl mx-auto py-32 text-center">
             <h1 className={`text-8xl md:text-10xl font-black uppercase tracking-tighter mb-8 ${t.accent} animate-pulse`}>
@@ -756,7 +774,7 @@ alxgraphy@portfolio:~$ exit
           </div>
         )}
 
-        {/* Extra: /void */}
+        {/* /void */}
         {currentPage === 'void' && (
           <div className="fixed inset-0 bg-black flex items-center justify-center z-50">
             <p className="text-4xl md:text-6xl font-mono text-gray-600 animate-pulse">
@@ -766,7 +784,7 @@ alxgraphy@portfolio:~$ exit
           </div>
         )}
 
-        {/* Extra: /winner */}
+        {/* /winner */}
         {currentPage === 'winner' && (
           <div className="max-w-4xl mx-auto py-32 text-center">
             <h1 className={`text-8xl md:text-10xl font-black uppercase tracking-tighter mb-8 ${t.accent} animate-bounce`}>
@@ -786,6 +804,54 @@ alxgraphy@portfolio:~$ exit
             >
               Claim victory and leave
             </button>
+          </div>
+        )}
+
+        {/* NEW: /captcha — endless fake robot check with sarcastic end */}
+        {currentPage === 'captcha' && (
+          <div className="max-w-4xl mx-auto py-32 text-center">
+            {captchaClicks < 8 + Math.floor(Math.random() * 5) ? ( // Random 8–12 clicks to "pass"
+              <>
+                <h1 className={`text-6xl md:text-8xl font-black uppercase tracking-tighter mb-8 ${t.accent} animate-pulse`}>
+                  ARE YOU A ROBOT?
+                </h1>
+                <p className="text-3xl md:text-5xl font-bold mb-12">
+                  {captchaChallenges[Math.floor(Math.random() * captchaChallenges.length)]}
+                </p>
+                <button
+                  onClick={() => setCaptchaClicks(c => c + 1)}
+                  className={`px-16 py-8 border-4 ${t.border} ${t.button} text-3xl uppercase tracking-widest font-black transition hover:scale-110 mb-8`}
+                >
+                  I'M NOT A ROBOT
+                </button>
+                <p className={`text-xl ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>
+                  Click count: {captchaClicks} (keep going, human... or whatever you are)
+                </p>
+              </>
+            ) : (
+              <>
+                <h1 className={`text-7xl md:text-9xl font-black uppercase tracking-tighter mb-8 ${t.accent}`}>
+                  CONGRATULATIONS...?
+                </h1>
+                <p className="text-4xl md:text-6xl font-bold mb-12 text-green-500">
+                  You passed... I guess?
+                </p>
+                <p className={`text-2xl mb-16 leading-relaxed ${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
+                  After all that clicking, you're either human... or a very dedicated bot.<br/>
+                  Either way, go touch grass. You earned it. Or didn't. Who cares.<br/>
+                  (Now leave before I make you do it again)
+                </p>
+                <button
+                  onClick={() => {
+                    navigate('home');
+                    setCaptchaClicks(0); // Reset for next visit
+                  }}
+                  className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+                >
+                  I'm free... right?
+                </button>
+              </>
+            )}
           </div>
         )}
 
