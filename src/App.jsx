@@ -470,7 +470,7 @@ function App() {
               PHOTOGRAPHY
             </h2>
             <div className={`text-sm uppercase tracking-widest mb-12 ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>
-              Random selection of 12 photos • Refresh to see new ones
+              Random selection of 12 photos • Refresh to see new ones (may be a little slow I am fixing that at the moment srry)
             </div>
 
             {randomPhotos.length === 0 ? (
