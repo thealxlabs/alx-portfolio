@@ -311,9 +311,6 @@ if (!hasEntered && (currentPage === 'home' || currentPage === '')) {
             <button onClick={() => navigate('code')} className={`px-4 py-2 border-2 ${t.border} ${t.hoverBg} transition text-sm uppercase tracking-wider font-bold`}>Code</button>
             <button onClick={() => navigate('photography')} className={`px-4 py-2 border-2 ${t.border} ${t.hoverBg} transition text-sm uppercase tracking-wider font-bold`}>Photography</button>
             <button onClick={() => navigate('contact')} className={`px-4 py-2 border-2 ${t.border} ${t.hoverBg} transition text-sm uppercase tracking-wider font-bold`}>Contact</button>
-           <button onClick={() => navigate('kat')}className={`px-4 py-2 border-2 ${t.border} ${t.hoverBg} transition text-sm uppercase tracking-wider font-bold`}>KAT</button>
-
-
             <button onClick={() => setTheme(theme === 'wireframe' ? 'aether' : 'wireframe')} className={`px-4 py-2 border-2 ${t.border} ${t.hoverBg} transition`}>
               {theme === 'wireframe' ? <Moon size={18} /> : <Sun size={18} />}
             </button>
@@ -373,9 +370,9 @@ if (!hasEntered && (currentPage === 'home' || currentPage === '')) {
               <div className={`border-2 ${t.border} ${t.card} p-8`}>
                 <h3 className={`text-2xl font-black uppercase tracking-tight mb-6 ${t.accent}`}>WHO I AM</h3>
                 <div className="space-y-4 text-lg leading-relaxed">
-                  <p>Hello, my name is Alexander, a passionate photographer, student and a coder in grade 7 who enjoys capturing memorable and compelling moments.</p>
-                  <p>I like experimenting with different perspectives, composition and light, turning everyday scenes into visually appealing photographs.</p>
-                  <p>In my spare time, I practice for my next image and try to stay in the moment — in school, real life or through a lens.</p>
+                 <p>Hello, my name is Alexander. I’m a Grade 7 student, coder, and passionate photographer who enjoys turning ideas into projects and capturing memorable moments.</p>
+                  <p>I like experimenting with different perspectives, composition, and light, whether through photography or in building creative tech solutions.</p>
+                  <p>In my spare time, I work on coding projects, practice photography, and focus on staying present — whether at school, in daily life, or behind the lens.</p>
                 </div>
               </div>
               <div className={`border-2 ${t.border} ${t.card} p-8`}>
