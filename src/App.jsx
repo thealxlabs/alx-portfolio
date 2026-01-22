@@ -516,99 +516,82 @@ if (!hasEntered && (currentPage === 'home' || currentPage === '')) {
           </div>
         )}
 
-        {/* CODE */}
-        {currentPage === 'code' && (
-          <div className="max-w-7xl w-full py-20">
-            <div className="mb-20">
-              <h2 className={`text-5xl md:text-6xl font-black uppercase tracking-tight mb-2 ${t.accent}`}>
-                PROJECTS
-              </h2>
-              <div className={`text-sm uppercase tracking-widest mb-12 ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>
-                Original repositories auto-updating from GitHub
+{/* CODE */}
+{currentPage === 'code' && (
+  <div className="max-w-7xl w-full py-20">
+
+    {/* MAIN PROJECTS */}
+    <div className="mb-20">
+      <h2 className={`text-5xl md:text-6xl font-black uppercase tracking-tight mb-2 ${t.accent}`}>
+        PROJECTS
+      </h2>
+      <div className={`text-sm uppercase tracking-widest mb-12 ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>
+        Original repositories auto-updating from GitHub
+      </div>
+
+      {loading ? (
+        <div className={`text-center text-xl ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>Loading projects...</div>
+      ) : repos.length === 0 ? (
+        <div className={`text-center text-xl ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>No projects yet.</div>
+      ) : (
+        <div className="space-y-8">
+          {repos.map(repo => (
+            <div key={repo.id} className={`border-2 ${t.border} ${t.card} p-8 transition-all duration-300 group hover:bg-black hover:text-white hover:border-white`}>
+              <h3 className={`text-3xl font-black uppercase tracking-tight mb-3 ${t.accent} group-hover:text-white transition-colors duration-300`}>
+                {repo.name}
+              </h3>
+              <p className={`text-base mb-4 ${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'} group-hover:text-white transition-colors duration-300`}>
+                {repo.description || 'No description provided.'}
+              </p>
+              <div className="flex flex-wrap gap-4 text-sm">
+                <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-2 underline ${t.accent} group-hover:text-white transition-colors duration-300`}>
+                  <Github size={18} /> View Repo
+                </a>
+                {repo.homepage && (
+                  <a href={repo.homepage} target="_blank" rel="noopener noreferrer" className={`underline group-hover:text-white transition-colors duration-300`}>
+                    → Live Demo
+                  </a>
+                )}
               </div>
-              {loading ? (
-                <div className={`text-center text-xl ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>Loading projects...</div>
-              ) : repos.length === 0 ? (
-                <div className={`text-center text-xl ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>No projects yet.</div>
-              ) : (
-                <div className="space-y-8">
-                 {repos.map(repo => (
-  <div key={repo.id} className={`border-2 ${t.border} ${t.card} p-8 transition-all duration-300 group`}>
-    <h3 className={`text-3xl font-black uppercase tracking-tight mb-3 ${t.accent} group-hover:text-white transition-colors duration-300`}>
-      {repo.name}
-    </h3>
-    <p className={`text-base mb-4 ${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'} group-hover:text-white transition-colors duration-300`}>
-      {repo.description || 'No description provided.'}
-    </p>
-    <div className="flex flex-wrap gap-4 text-sm">
-      <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-2 underline ${t.accent} group-hover:text-white transition-colors duration-300`}>
-        <Github size={18} /> View Repo
-      </a>
-      {repo.homepage && (
-        <a href={repo.homepage} target="_blank" rel="noopener noreferrer" className={`underline group-hover:text-white transition-colors duration-300`}>
-          → Live Demo
-        </a>
+            </div>
+          ))}
+        </div>
       )}
     </div>
+
+    {/* FORKED PROJECTS */}
+    {forkRepos.length > 0 && (
+      <div className="mt-32">
+        <h2 className={`text-4xl md:text-5xl font-black uppercase tracking-tight mb-2 ${t.accent}`}>
+          CONTRIBUTED TO
+        </h2>
+        <div className={`text-sm uppercase tracking-widest mb-12 ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>
+          Forked repositories
+        </div>
+        <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {forkRepos.map(repo => (
+            <a
+              key={repo.id}
+              href={repo.html_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`border-2 ${t.border} ${t.card} p-6 transition-all duration-300 group`}
+            >
+              <h4 className={`text-xl font-bold uppercase mb-2 ${t.accent} group-hover:text-white transition-colors duration-300`}>
+                {repo.name}
+              </h4>
+              <div className={`text-sm uppercase tracking-wider ${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'} group-hover:text-white transition-colors duration-300`}>
+                View →
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
   </div>
-))}
+)}
 
-            </div>
-            {forkRepos.length > 0 && (
-              <div className="mt-32">
-                <h2 className={`text-4xl md:text-5xl font-black uppercase tracking-tight mb-2 ${t.accent}`}>
-                  CONTRIBUTED TO
-                </h2>
-                <div className={`text-sm uppercase tracking-widest mb-12 ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>
-                  Forked repositories
-                </div>
-                <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {forkRepos.map(repo => (
-  <a
-    key={repo.id}
-    href={repo.html_url}
-    target="_blank"
-    rel="noopener noreferrer"
-    className={`border-2 ${t.border} ${t.card} p-6 transition-all duration-300 group`}
-  >
-    <h4 className={`text-xl font-bold uppercase mb-2 ${t.accent} group-hover:text-white transition-colors duration-300`}>
-      {repo.name}
-    </h4>
-    <div className={`text-sm uppercase tracking-wider ${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'} group-hover:text-white transition-colors duration-300`}>
-      View →
-    </div>
-  </a>
-))}
-
-        {/* PHOTOGRAPHY */}
-        {currentPage === 'photography' && (
-          <div className="max-w-7xl w-full py-20">
-            <h2 className={`text-5xl md:text-6xl font-black uppercase tracking-tight mb-2 ${t.accent}`}>
-              PHOTOGRAPHY
-            </h2>
-            <div className={`text-sm uppercase tracking-widest mb-12 ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>
-              Random selection of 12 photos • Refresh to see new ones
-            </div>
-            {randomPhotos.length === 0 ? (
-              <div className={`text-center text-xl ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>
-                No photos found. Add images to /public/photos/
-              </div>
-            ) : (
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {randomPhotos.map((photo, i) => (
-                  <div key={i} className={`border-2 ${t.border} overflow-hidden aspect-[4/3] ${theme === 'wireframe' ? 'bg-gray-100' : 'bg-black/50'} group cursor-pointer`}>
-                    <img
-                      src={photo}
-                      alt={`Photo ${i + 1}`}
-                      loading="lazy"
-                      className="w-full h-full object-cover group-hover:scale-105 transition duration-700"
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
 
         {/* CONTACT */}
         {currentPage === 'contact' && (
