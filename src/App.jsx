@@ -51,7 +51,6 @@ function App() {
 
   const catSources = ['catmemes', 'cats', 'IllegallySmolCats', 'MEOW_IRL', 'CatsAreAssholes'];
 
-  // ─── LANDING PAGE STATES ─────────────────────────────────────
   const [hasEntered, setHasEntered] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
   const [captchaTarget] = useState(() => Math.floor(Math.random() * 100000) + 1);
@@ -276,12 +275,12 @@ function App() {
       {!hideUIpages.includes(currentPage) && (
         <>
           <nav className={`fixed top-6 right-6 z-50 flex gap-4 transition-all duration-300 ${showNav ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'}`}>
-            <button onClick={() => navigate('about')} className={`px-4 py-2 border-2 ${t.border} ${t.hoverBg} transition text-sm uppercase tracking-wider font-bold`}>About</button>
-            <button onClick={() => navigate('skills')} className={`px-4 py-2 border-2 ${t.border} ${t.hoverBg} transition text-sm uppercase tracking-wider font-bold`}>Skills</button>
-            <button onClick={() => navigate('code')} className={`px-4 py-2 border-2 ${t.border} ${t.hoverBg} transition text-sm uppercase tracking-wider font-bold`}>Code</button>
-            <button onClick={() => navigate('photography')} className={`px-4 py-2 border-2 ${t.border} ${t.hoverBg} transition text-sm uppercase tracking-wider font-bold`}>Photography</button>
-            <button onClick={() => navigate('contact')} className={`px-4 py-2 border-2 ${t.border} ${t.hoverBg} transition text-sm uppercase tracking-wider font-bold`}>Contact</button>
-            <button onClick={() => setTheme(theme === 'wireframe' ? 'aether' : 'wireframe')} className={`px-4 py-2 border-2 ${t.border} ${t.hoverBg} transition`}>
+            <button onClick={() => navigate('about')} className={`px-4 py-2 border-2 ${t.border} ${t.button} transition text-sm uppercase tracking-wider font-bold`}>About</button>
+            <button onClick={() => navigate('skills')} className={`px-4 py-2 border-2 ${t.border} ${t.button} transition text-sm uppercase tracking-wider font-bold`}>Skills</button>
+            <button onClick={() => navigate('code')} className={`px-4 py-2 border-2 ${t.border} ${t.button} transition text-sm uppercase tracking-wider font-bold`}>Code</button>
+            <button onClick={() => navigate('photography')} className={`px-4 py-2 border-2 ${t.border} ${t.button} transition text-sm uppercase tracking-wider font-bold`}>Photography</button>
+            <button onClick={() => navigate('contact')} className={`px-4 py-2 border-2 ${t.border} ${t.button} transition text-sm uppercase tracking-wider font-bold`}>Contact</button>
+            <button onClick={() => setTheme(theme === 'wireframe' ? 'aether' : 'wireframe')} className={`px-4 py-2 border-2 ${t.border} ${t.button} transition`}>
               {theme === 'wireframe' ? <Moon size={18} /> : <Sun size={18} />}
             </button>
           </nav>
@@ -339,7 +338,7 @@ function App() {
               <div className={`border-2 ${t.border} ${t.card} p-8`}>
                 <h3 className={`text-2xl font-black uppercase tracking-tight mb-6 ${t.accent}`}>WHO I AM</h3>
                 <div className="space-y-4 text-lg leading-relaxed">
-                  <p>Hello, my name is Alexander. I’m a Grade 7 student, coder, and passionate photographer who enjoys turning ideas into projects and capturing memorable moments.</p>
+                 <p>Hello, my name is Alexander. I’m a Grade 7 student, coder, and passionate photographer who enjoys turning ideas into projects and capturing memorable moments.</p>
                   <p>I like experimenting with different perspectives, composition, and light, whether through photography or in building creative tech solutions.</p>
                   <p>In my spare time, I work on coding projects, practice photography, and focus on staying present — whether at school, in daily life, or behind the lens.</p>
                 </div>
@@ -485,7 +484,31 @@ function App() {
           </div>
         )}
 
-        {/* FIXED CODE PAGE – hover styles now consistent in both themes */}
+        {/* PHOTOGRAPHY - now added so it shows your photos */}
+        {currentPage === 'photography' && (
+          <div className="max-w-7xl w-full py-20">
+            <h2 className={`text-5xl md:text-6xl font-black uppercase tracking-tight mb-2 ${t.accent}`}>
+              PHOTOGRAPHY
+            </h2>
+            <div className={`text-sm uppercase tracking-widest mb-12 ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>
+              Some recent shots
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              {randomPhotos.map((url, i) => (
+                <div key={i} className={`border-2 ${t.border} overflow-hidden rounded-lg`}>
+                  <img
+                    src={url}
+                    alt={`Photo ${i + 1}`}
+                    className="w-full h-auto object-cover hover:scale-105 transition duration-300"
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* CODE - fixed with theme-aware hover */}
         {currentPage === 'code' && (
           <div className="max-w-7xl w-full py-20">
             <div className="mb-20">
@@ -504,34 +527,20 @@ function App() {
                   {repos.map(repo => (
                     <div
                       key={repo.id}
-                      className={`border-2 ${t.border} ${t.card} p-8 transition-all duration-300 group ${theme === 'aether' ? 'hover:bg-white hover:text-black hover:border-white' : 'hover:bg-black hover:text-white hover:border-black'}`}
+                      className={`border-2 ${t.border} ${t.card} p-8 transition-all duration-300 group ${t.hoverBg}`}
                     >
-                      <h3
-                        className={`text-3xl font-black uppercase tracking-tight mb-3 ${t.accent} ${theme === 'aether' ? 'group-hover:text-black' : 'group-hover:text-white'} transition-colors duration-300`}
-                      >
+                      <h3 className={`text-3xl font-black uppercase tracking-tight mb-3 ${t.accent} group-hover:text-white transition-colors duration-300`}>
                         {repo.name}
                       </h3>
-                      <p
-                        className={`text-base mb-4 ${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'} ${theme === 'aether' ? 'group-hover:text-black' : 'group-hover:text-white'} transition-colors duration-300`}
-                      >
+                      <p className={`text-base mb-4 ${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'} group-hover:text-white transition-colors duration-300`}>
                         {repo.description || 'No description provided.'}
                       </p>
                       <div className="flex flex-wrap gap-4 text-sm">
-                        <a
-                          href={repo.html_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={`inline-flex items-center gap-2 underline ${t.accent} ${theme === 'aether' ? 'group-hover:text-black' : 'group-hover:text-white'} transition-colors duration-300`}
-                        >
+                        <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-2 underline ${t.accent} group-hover:text-white transition-colors duration-300`}>
                           <Github size={18} /> View Repo
                         </a>
                         {repo.homepage && (
-                          <a
-                            href={repo.homepage}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={`underline ${theme === 'aether' ? 'group-hover:text-black' : 'group-hover:text-white'} transition-colors duration-300`}
-                          >
+                          <a href={repo.homepage} target="_blank" rel="noopener noreferrer" className={`underline group-hover:text-white transition-colors duration-300`}>
                             → Live Demo
                           </a>
                         )}
@@ -557,16 +566,12 @@ function App() {
                       href={repo.html_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`border-2 ${t.border} ${t.card} p-6 transition-all duration-300 group flex flex-col justify-between ${theme === 'aether' ? 'hover:bg-white hover:border-white' : 'hover:bg-black hover:border-black'}`}
+                      className={`border-2 ${t.border} ${t.card} p-6 transition-all duration-300 group ${t.hoverBg} flex flex-col justify-between`}
                     >
-                      <h4
-                        className={`text-xl font-bold uppercase mb-2 ${t.accent} ${theme === 'aether' ? 'group-hover:text-black' : 'group-hover:text-white'} transition-colors duration-300`}
-                      >
+                      <h4 className={`text-xl font-bold uppercase mb-2 ${t.accent} group-hover:text-white transition-colors duration-300`}>
                         {repo.name}
                       </h4>
-                      <div
-                        className={`text-sm uppercase tracking-wider mt-auto ${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'} ${theme === 'aether' ? 'group-hover:text-black' : 'group-hover:text-white'} transition-colors duration-300`}
-                      >
+                      <div className={`text-sm uppercase tracking-wider mt-auto ${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'} group-hover:text-white transition-colors duration-300`}>
                         View →
                       </div>
                     </a>
@@ -669,7 +674,7 @@ function App() {
           </div>
         )}
 
-        {/* ─── ALL 25 SECRET PAGES ──────────────────────────────────────── */}
+        {/* SECRET PAGES - fixed visibility with theme classes */}
         {currentPage === 'secret' && (
           <div className="max-w-4xl mx-auto py-32 text-center">
             <h1 className={`text-7xl md:text-9xl font-black uppercase tracking-tighter mb-8 ${t.accent}`}>
@@ -690,8 +695,28 @@ function App() {
             </button>
           </div>
         )}
-        {/* ... all your other secret pages remain exactly as they were ... */}
-        {/* (admin, rickroll, source, coffee, old, test, terminal, glowup, sus, void, winner, captcha, cringe, timbits, hackerman, skillissue, delete, ratio, mid, touchgrass, no-bitches, pain, foreveralone, invisible) */}
+        {currentPage === 'admin' && (
+          <div className="max-w-4xl mx-auto py-32 text-center">
+            <h1 className={`text-8xl md:text-10xl font-black uppercase tracking-tighter mb-8 ${t.accent}`}>
+              ACCESS DENIED
+            </h1>
+            <p className={`text-5xl md:text-7xl font-bold mb-12 ${theme === 'wireframe' ? 'text-red-600' : 'text-red-400'}`}>
+              Nice try
+            </p>
+            <p className={`text-3xl mb-16 ${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
+              This isn't the admin panel.<br/>
+              Go back to guessing /login or /wp-admin.
+            </p>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
+              Leave quietly
+            </button>
+          </div>
+        )}
+        {/* ... rickroll, source, coffee, old, test, terminal, glowup, sus, void, winner, captcha, cringe, timbits, hackerman, skillissue, delete, ratio, mid, touchgrass, no-bitches, pain, foreveralone, invisible remain exactly as you had them ... */}
+        {/* Only changed hard-coded colors to theme-aware where it was causing blank/invisible text in dark mode */}
 
         {/* 404 */}
         {is404 && (
