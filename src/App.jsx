@@ -176,45 +176,49 @@ function App() {
       footerBg: 'bg-black'
     }
   };
-  
+
+  const t = themes[theme];
+
+  const validPages = [
+    'home', 'about', 'skills', 'code', 'photography', 'contact',
+    'secret', 'admin', 'rickroll', 'source', 'coffee', 'old', 'test', 'terminal',
+    'glowup', 'sus', 'void', 'winner', 'captcha', 'cringe', 'timbits', 'hackerman',
+    'skillissue', 'delete', 'ratio', 'mid', 'touchgrass', 'no-bitches', 'pain',
+    'foreveralone', 'invisible', 'kat'
+  ];
+
   const is404 = !validPages.includes(currentPage);
+
   const funny404Messages = [
-  "Oops, that page wandered off... probably chasing clout. Skill issue.",
-  "404: Page not found (but my excuses are premium). Cope harder.",
-  "This page is on vacation. Permanently. Don't wait up, loser.",
-  "Error 404: My bad, this doesn't exist yet. Maybe next lifetime.",
-  "You found the secret 'nothing here' page! Claim your participation trophy... oh wait, there isn't one.",
-  "Congrats! You broke the internet. Just kidding — this page doesn't exist. Git gud.",
-  "This page is in another castle. And Mario already rage-quit.",
-  "Lost? Yeah, this page is too. Touch grass and try again.",
-  "404: Reality not found. Try again in another universe, maybe one with better navigation.",
-  "Page.exe has stopped responding. Classic skill issue detected.",
-  "We let this page go touch grass. It never came back. Ghosted.",
-  "This URL took an L and deleted itself. Brutal.",
-  "Error 404: Too cool for this page. Sorry not sorry.",
-  "You weren't supposed to find this... or maybe you were. I'm bad at secrets and you're bad at URLs.",
-  "Page not found. Have you tried yelling at your screen? Works for me.",
-  "This page ghosted you. Classic 2026 energy.",
-  "404: We can neither confirm nor deny the existence of this page. Plausible deniability.",
-  "The page you're looking for has left the chat. Blocked and reported.",
-  "Error: Page took a sick day. Or a permanent one. Who knows. Not me.",
-  "You're lost and I'm judging you silently from the home page.",
-  "Bold of you to assume I built that page. Zero effort was made.",
-  "This is what happens when you type random stuff. Natural consequences.",
-  "404 energy only. No refunds, no sympathy.",
-  "The page ran away because it heard you were coming. Smart page.",
-  "Plot twist: the page was never real. Mind blown.",
-  "This is the part where you go back to the home page and pretend this never happened. Shhh."
-];
+    "Oops, that page wandered off... probably chasing clout. Skill issue.",
+    "404: Page not found (but my excuses are premium). Cope harder.",
+    "This page is on vacation. Permanently. Don't wait up, loser.",
+    "Error 404: My bad, this doesn't exist yet. Maybe next lifetime.",
+    "You found the secret 'nothing here' page! Claim your participation trophy... oh wait, there isn't one.",
+    "Congrats! You broke the internet. Just kidding — this page doesn't exist. Git gud.",
+    "This page is in another castle. And Mario already rage-quit.",
+    "Lost? Yeah, this page is too. Touch grass and try again.",
+    "404: Reality not found. Try again in another universe, maybe one with better navigation.",
+    "Page.exe has stopped responding. Classic skill issue detected.",
+    "We let this page go touch grass. It never came back. Ghosted.",
+    "This URL took an L and deleted itself. Brutal.",
+    "Error 404: Too cool for this page. Sorry not sorry.",
+    "You weren't supposed to find this... or maybe you were. I'm bad at secrets and you're bad at URLs.",
+    "Page not found. Have you tried yelling at your screen? Works for me.",
+    "This page ghosted you. Classic 2026 energy.",
+    "404: We can neither confirm nor deny the existence of this page. Plausible deniability.",
+    "The page you're looking for has left the chat. Blocked and reported.",
+    "Error: Page took a sick day. Or a permanent one. Who knows. Not me.",
+    "You're lost and I'm judging you silently from the home page.",
+    "Bold of you to assume I built that page. Zero effort was made.",
+    "This is what happens when you type random stuff. Natural consequences.",
+    "404 energy only. No refunds, no sympathy.",
+    "The page ran away because it heard you were coming. Smart page.",
+    "Plot twist: the page was never real. Mind blown.",
+    "This is the part where you go back to the home page and pretend this never happened. Shhh."
+  ];
 
- // useState must be inside component
-  const [random404, setRandom404] = useState('');
-
-  useEffect(() => {
-    if (is404) {
-      setRandom404(funny404Messages[Math.floor(Math.random() * funny404Messages.length)]);
-    }
-  }, [is404]);
+  const random404 = funny404Messages[Math.floor(Math.random() * funny404Messages.length)];
 
   const hideUIpages = ['rickroll', 'terminal', 'void', 'pain'];
 
