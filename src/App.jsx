@@ -276,12 +276,12 @@ function App() {
       {!hideUIpages.includes(currentPage) && (
         <>
           <nav className={`fixed top-6 right-6 z-50 flex gap-4 transition-all duration-300 ${showNav ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'}`}>
-            <button onClick={() => navigate('about')} className={`px-4 py-2 border-2 ${t.border} transition text-sm uppercase tracking-wider font-bold ${t.hoverBg}`}>About</button>
-            <button onClick={() => navigate('skills')} className={`px-4 py-2 border-2 ${t.border} transition text-sm uppercase tracking-wider font-bold ${t.hoverBg}`}>Skills</button>
-            <button onClick={() => navigate('code')} className={`px-4 py-2 border-2 ${t.border} transition text-sm uppercase tracking-wider font-bold ${t.hoverBg}`}>Code</button>
-            <button onClick={() => navigate('photography')} className={`px-4 py-2 border-2 ${t.border} transition text-sm uppercase tracking-wider font-bold ${t.hoverBg}`}>Photography</button>
-            <button onClick={() => navigate('contact')} className={`px-4 py-2 border-2 ${t.border} transition text-sm uppercase tracking-wider font-bold ${t.hoverBg}`}>Contact</button>
-            <button onClick={() => setTheme(theme === 'wireframe' ? 'aether' : 'wireframe')} className={`px-4 py-2 border-2 ${t.border} ${t.hoverBg} transition`}>
+            <button onClick={() => navigate('about')} className={`px-4 py-2 border-2 ${t.border} transition text-sm uppercase tracking-wider font-bold hover:${t.hoverBg}`}>About</button>
+            <button onClick={() => navigate('skills')} className={`px-4 py-2 border-2 ${t.border} transition text-sm uppercase tracking-wider font-bold hover:${t.hoverBg}`}>Skills</button>
+            <button onClick={() => navigate('code')} className={`px-4 py-2 border-2 ${t.border} transition text-sm uppercase tracking-wider font-bold hover:${t.hoverBg}`}>Code</button>
+            <button onClick={() => navigate('photography')} className={`px-4 py-2 border-2 ${t.border} transition text-sm uppercase tracking-wider font-bold hover:${t.hoverBg}`}>Photography</button>
+            <button onClick={() => navigate('contact')} className={`px-4 py-2 border-2 ${t.border} transition text-sm uppercase tracking-wider font-bold hover:${t.hoverBg}`}>Contact</button>
+            <button onClick={() => setTheme(theme === 'wireframe' ? 'aether' : 'wireframe')} className={`px-4 py-2 border-2 ${t.border} transition hover:${t.hoverBg}`}>
               {theme === 'wireframe' ? <Moon size={18} /> : <Sun size={18} />}
             </button>
           </nav>
@@ -339,7 +339,7 @@ function App() {
               <div className={`border-2 ${t.border} ${t.card} p-8`}>
                 <h3 className={`text-2xl font-black uppercase tracking-tight mb-6 ${t.accent}`}>WHO I AM</h3>
                 <div className="space-y-4 text-lg leading-relaxed">
-                 <p>Hello, my name is Alexander. I’m a Grade 7 student, coder, and passionate photographer who enjoys turning ideas into projects and capturing memorable moments.</p>
+                  <p>Hello, my name is Alexander. I’m a Grade 7 student, coder, and passionate photographer who enjoys turning ideas into projects and capturing memorable moments.</p>
                   <p>I like experimenting with different perspectives, composition, and light, whether through photography or in building creative tech solutions.</p>
                   <p>In my spare time, I work on coding projects, practice photography, and focus on staying present — whether at school, in daily life, or behind the lens.</p>
                 </div>
@@ -349,25 +349,25 @@ function App() {
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <h4 className="text-lg font-bold uppercase mb-3">Photography</h4>
-                    <p className={`${t.text} opacity-90`}>
+                    <p className={`${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
                       Street photography, portraits, landscapes, and experimental composition. Always looking for unique perspectives and compelling moments.
                     </p>
                   </div>
                   <div>
                     <h4 className="text-lg font-bold uppercase mb-3">Coding</h4>
-                    <p className={`${t.text} opacity-90`}>
+                    <p className={`${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
                       Building web applications, learning new frameworks, and creating tools that solve real problems. Passionate about clean, minimal design.
                     </p>
                   </div>
                   <div>
                     <h4 className="text-lg font-bold uppercase mb-3">Learning</h4>
-                    <p className={`${t.text} opacity-90`}>
+                    <p className={`${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
                       Currently exploring human-centered design, web development best practices, and advanced photography techniques.
                     </p>
                   </div>
                   <div>
                     <h4 className="text-lg font-bold uppercase mb-3">Creating</h4>
-                    <p className={`${t.text} opacity-90`}>
+                    <p className={`${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
                       Love building projects from scratch — whether it's a portfolio, a photo series, or a new web app. Always making something.
                     </p>
                   </div>
@@ -381,7 +381,7 @@ function App() {
                     <p className={`text-sm uppercase tracking-wider mb-3 ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>
                       Canvas • Design Certification
                     </p>
-                    <p className={`${t.text} opacity-90`}>
+                    <p className={`${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
                       Completed comprehensive training in human-centered design principles, focusing on empathy, ideation, and iteration in the design process.
                     </p>
                   </div>
@@ -392,19 +392,19 @@ function App() {
                 <ul className="space-y-3 text-lg">
                   <li className="flex items-start gap-3">
                     <span className={`${t.accent} font-bold`}>→</span>
-                    <span className={`${t.text}`}>Building this portfolio and learning React</span>
+                    <span>Building this portfolio and learning React</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <span className={`${t.accent} font-bold`}>→</span>
-                    <span className={`${t.text}`}>Practicing street photography in Toronto</span>
+                    <span>Practicing street photography in Toronto</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <span className={`${t.accent} font-bold`}>→</span>
-                    <span className={`${t.text}`}>Grade 7 student, balancing school and creative projects</span>
+                    <span>Grade 7 student, balancing school and creative projects</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <span className={`${t.accent} font-bold`}>→</span>
-                    <span className={`${t.text}`}>Open to collaboration on photography or code projects</span>
+                    <span>Open to collaboration on photography or code projects</span>
                   </li>
                 </ul>
               </div>
@@ -427,7 +427,7 @@ function App() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                   {['HTML/CSS', 'JavaScript', 'React', 'Tailwind', 'Git', 'GitHub', 'Vite', 'VS Code'].map(skill => (
                     <div key={skill} className={`border-2 ${t.border} p-4 text-center ${t.hoverBg} transition`}>
-                      <div className={`text-xl font-bold ${t.text}`}>{skill}</div>
+                      <div className="text-xl font-bold">{skill}</div>
                     </div>
                   ))}
                 </div>
@@ -437,7 +437,7 @@ function App() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                   {['Figma', 'Adobe LR', 'UI/UX', 'Typography'].map(skill => (
                     <div key={skill} className={`border-2 ${t.border} p-4 text-center ${t.hoverBg} transition`}>
-                      <div className={`text-xl font-bold ${t.text}`}>{skill}</div>
+                      <div className="text-xl font-bold">{skill}</div>
                     </div>
                   ))}
                 </div>
@@ -447,7 +447,7 @@ function App() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                   {['Composition', 'Lighting', 'Editing', 'Street', 'Portraits', 'Landscapes'].map(skill => (
                     <div key={skill} className={`border-2 ${t.border} p-4 text-center ${t.hoverBg} transition`}>
-                      <div className={`text-xl font-bold ${t.text}`}>{skill}</div>
+                      <div className="text-xl font-bold">{skill}</div>
                     </div>
                   ))}
                 </div>
@@ -457,25 +457,25 @@ function App() {
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className={`border-l-4 ${t.border} pl-6`}>
                     <h4 className="text-lg font-bold uppercase mb-2">Problem Solving</h4>
-                    <p className={`${t.text} opacity-90`}>
+                    <p className={`${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
                       Breaking down complex problems into manageable pieces and finding creative solutions.
                     </p>
                   </div>
                   <div className={`border-l-4 ${t.border} pl-6`}>
                     <h4 className="text-lg font-bold uppercase mb-2">Attention to Detail</h4>
-                    <p className={`${t.text} opacity-90`}>
+                    <p className={`${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
                       Obsessed with pixel-perfect designs and clean, readable code.
                     </p>
                   </div>
                   <div className={`border-l-4 ${t.border} pl-6`}>
                     <h4 className="text-lg font-bold uppercase mb-2">Self-Learning</h4>
-                    <p className={`${t.text} opacity-90`}>
+                    <p className={`${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
                       Constantly exploring new technologies, frameworks, and techniques independently.
                     </p>
                   </div>
                   <div className={`border-l-4 ${t.border} pl-6`}>
                     <h4 className="text-lg font-bold uppercase mb-2">Human-Centered Design</h4>
-                    <p className={`${t.text} opacity-90`}>
+                    <p className={`${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
                       Trained in empathy-driven design thinking to create user-focused solutions.
                     </p>
                   </div>
@@ -485,7 +485,7 @@ function App() {
           </div>
         )}
 
-        {/* PHOTOGRAPHY - fixed to respect original aspect ratio */}
+        {/* PHOTOGRAPHY - natural aspect ratio */}
         {currentPage === 'photography' && (
           <div className="max-w-7xl w-full py-20">
             <h2 className={`text-5xl md:text-6xl font-black uppercase tracking-tight mb-2 ${t.accent}`}>
@@ -500,7 +500,7 @@ function App() {
                   <img
                     src={url}
                     alt={`Photo ${i + 1}`}
-                    className="w-full h-auto object-contain"  // ← key fix: object-contain keeps natural aspect ratio
+                    className="w-full h-auto object-contain" // keeps portrait/landscape natural shape
                     loading="lazy"
                   />
                 </div>
@@ -509,7 +509,7 @@ function App() {
           </div>
         )}
 
-        {/* CODE - fixed hover/text visibility in both themes */}
+        {/* CODE */}
         {currentPage === 'code' && (
           <div className="max-w-7xl w-full py-20">
             <div className="mb-20">
@@ -526,10 +526,7 @@ function App() {
               ) : (
                 <div className="space-y-8">
                   {repos.map(repo => (
-                    <div
-                      key={repo.id}
-                      className={`border-2 ${t.border} ${t.card} p-8 transition-all duration-300 group ${t.hoverBg}`}
-                    >
+                    <div key={repo.id} className={`border-2 ${t.border} ${t.card} p-8 transition-all duration-300 group ${t.hoverBg}`}>
                       <h3 className={`text-3xl font-black uppercase tracking-tight mb-3 ${t.accent} group-hover:text-white transition-colors duration-300`}>
                         {repo.name}
                       </h3>
@@ -675,7 +672,7 @@ function App() {
           </div>
         )}
 
-        {/* SECRET PAGES - added t.text to ensure visibility in both themes */}
+        {/* SECRET PAGES - all fixed for visibility */}
         {currentPage === 'secret' && (
           <div className="max-w-4xl mx-auto py-32 text-center">
             <h1 className={`text-7xl md:text-9xl font-black uppercase tracking-tighter mb-8 ${t.accent}`}>
@@ -728,9 +725,483 @@ function App() {
             ></iframe>
           </div>
         )}
-        {/* All other secret pages follow the same pattern: added ${t.text} opacity-90 where text was invisible */}
-        {/* ... keep all your original secret page blocks here ... */}
-        {/* Only example change shown above - apply similar ${t.text} to any page that looks blank in dark mode */}
+        {currentPage === 'source' && (
+          <div className="max-w-4xl mx-auto py-32 text-center">
+            <h1 className={`text-7xl md:text-9xl font-black uppercase tracking-tighter mb-8 ${t.accent}`}>
+              CTRL+SHIFT+I ENJOYER
+            </h1>
+            <p className="text-4xl md:text-6xl font-bold mb-12">
+              You opened dev tools
+            </p>
+            <p className={`text-3xl mb-16 ${t.text} opacity-90`}>
+              Respect. But there's nothing interesting here.<br/>
+              Just some messy React and regrets.
+            </p>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
+              Close inspector
+            </button>
+          </div>
+        )}
+        {currentPage === 'coffee' && (
+          <div className="max-w-4xl mx-auto py-32 text-center">
+            <h1 className={`text-7xl md:text-9xl font-black uppercase tracking-tighter mb-8 ${t.accent}`}>
+              BUY ME A COFFEE?
+            </h1>
+            <p className={`text-5xl md:text-7xl font-bold mb-12 ${theme === 'wireframe' ? 'text-amber-600' : 'text-amber-400'}`}>
+              Or a double-double
+            </p>
+            <p className={`text-3xl mb-16 ${t.text} opacity-90`}>
+              My code runs on caffeine and bad decisions.<br/>
+              One Tim Hortons coffee = one happy dev.
+            </p>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
+              No coffee for you
+            </button>
+          </div>
+        )}
+        {currentPage === 'old' && (
+          <div className="max-w-4xl mx-auto py-32 text-center">
+            <h1 className={`text-7xl md:text-9xl font-black uppercase tracking-tighter mb-8 ${t.accent}`}>
+              THE DARK TIMES
+            </h1>
+            <p className="text-5xl md:text-7xl font-bold mb-12">
+              V1.0 Era
+            </p>
+            <p className={`text-3xl mb-16 ${t.text} opacity-90`}>
+              Comic Sans everywhere.<br/>
+              Center-aligned divs.<br/>
+              Geocities energy.<br/>
+              We don't talk about it.
+            </p>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
+              Never again
+            </button>
+          </div>
+        )}
+        {currentPage === 'test' && (
+          <div className="max-w-4xl mx-auto py-32 text-center">
+            <h1 className={`text-8xl md:text-10xl font-black uppercase tracking-tighter mb-8 ${t.accent} animate-pulse`}>
+              UNDER CONSTRUCTION
+            </h1>
+            <p className="text-5xl md:text-7xl font-bold mb-12">
+              Forever
+            </p>
+            <div className="text-6xl mb-8">🚧👷‍♂️💀</div>
+            <p className={`text-3xl mb-16 ${t.text} opacity-90`}>
+              Been "coming soon" since day one.
+            </p>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
+              Leave the construction zone
+            </button>
+          </div>
+        )}
+        {currentPage === 'terminal' && (
+          <div className={`fixed inset-0 ${t.bg} ${t.text} font-mono p-8 overflow-auto z-50`}>
+            <pre className="text-xl md:text-2xl leading-relaxed">
+{`alxgraphy@portfolio:~$ whoami
+Alexander — 7th grader with too much React knowledge
+alxgraphy@portfolio:~$ ls
+procrastination.txt talent.exe (corrupted) timbits.jpg regrets/
+alxgraphy@portfolio:~$ sudo make me rich
+sudo: make: command not found
+alxgraphy@portfolio:~$ exit
+You're stuck here now.`}
+            </pre>
+            <p className="text-4xl mt-16 animate-pulse">
+              Type anything... nothing happens
+            </p>
+            <button
+              onClick={() => navigate('home')}
+              className={`mt-12 px-10 py-5 border-2 ${t.border} ${t.button} text-xl font-bold transition`}
+            >
+              Escape terminal
+            </button>
+          </div>
+        )}
+        {currentPage === 'glowup' && (
+          <div className="max-w-4xl mx-auto py-32 text-center">
+            <h1 className={`text-7xl md:text-9xl font-black uppercase tracking-tighter mb-8 ${t.accent}`}>
+              GLOW UP
+            </h1>
+            <p className="text-5xl md:text-7xl font-bold mb-12">
+              Grade 5 vs Now
+            </p>
+            <p className={`text-3xl mb-16 ${t.text} opacity-90`}>
+              Then: stick figures and dreams<br/>
+              Now: semi-working React and photos<br/>
+              Big improvement? Debatable.
+            </p>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
+              Back to reality
+            </button>
+          </div>
+        )}
+        {currentPage === 'sus' && (
+          <div className="max-w-4xl mx-auto py-32 text-center">
+            <h1 className={`text-8xl md:text-10xl font-black uppercase tracking-tighter mb-8 ${t.accent} animate-pulse`}>
+              SUS
+            </h1>
+            <p className={`text-6xl md:text-8xl font-bold mb-12 ${theme === 'wireframe' ? 'text-red-600' : 'text-red-400'}`}>
+              EMERGENCY MEETING
+            </p>
+            <p className={`text-3xl mb-16 ${t.text} opacity-90`}>
+              Who typed /sus?<br/>
+              You did. You're sus.<br/>
+              Ejected.
+            </p>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
+              Self-eject
+            </button>
+          </div>
+        )}
+        {currentPage === 'void' && (
+          <div className="fixed inset-0 bg-black flex items-center justify-center z-50">
+            <p className={`text-5xl md:text-7xl font-mono ${theme === 'wireframe' ? 'text-gray-800' : 'text-gray-300'} animate-pulse text-center px-6`}>
+              nothing here...<br/>
+              just like my motivation
+            </p>
+          </div>
+        )}
+        {currentPage === 'winner' && (
+          <div className="max-w-4xl mx-auto py-32 text-center">
+            <h1 className={`text-8xl md:text-10xl font-black uppercase tracking-tighter mb-8 ${t.accent} animate-bounce`}>
+              WINNER WINNER
+            </h1>
+            <p className={`text-6xl md:text-8xl font-bold mb-12 ${theme === 'wireframe' ? 'text-yellow-600' : 'text-yellow-400'}`}>
+              CHICKEN DINNER
+            </p>
+            <p className={`text-3xl mb-16 ${t.text} opacity-90`}>
+              You found a secret page.<br/>
+              Your prize: nothing.<br/>
+              But you can brag about it.
+            </p>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
+              Claim fake victory
+            </button>
+          </div>
+        )}
+        {currentPage === 'captcha' && (
+          <div className="max-w-4xl mx-auto py-32 text-center">
+            {captchaClicks < captchaTarget ? (
+              <>
+                <h1 className={`text-7xl md:text-9xl font-black uppercase tracking-tighter mb-8 ${t.accent} animate-pulse`}>
+                  ARE YOU A ROBOT?
+                </h1>
+                <p className={`text-4xl md:text-6xl font-bold mb-8 ${t.text}`}>
+                  {captchaChallenges[Math.floor(Math.random() * captchaChallenges.length)]}
+                </p>
+                <button
+                  onClick={() => setCaptchaClicks(c => c + 1)}
+                  className={`px-16 py-8 border-4 ${t.border} ${t.button} text-3xl uppercase tracking-widest font-black transition hover:scale-110 mb-8`}
+                >
+                  CLICK TO PROVE
+                </button>
+                <p className={`text-2xl ${t.text} opacity-90`}>
+                  {captchaClicks} / {captchaTarget.toLocaleString()} clicks
+                </p>
+              </>
+            ) : (
+              <>
+                <h1 className={`text-7xl md:text-9xl font-black uppercase tracking-tighter mb-8 ${t.accent}`}>
+                  CAPTCHA PASSED
+                </h1>
+                <p className={`text-5xl md:text-7xl font-bold mb-12 ${theme === 'wireframe' ? 'text-green-600' : 'text-green-400'}`}>
+                  (Somehow)
+                </p>
+                <p className={`text-3xl mb-16 ${t.text} opacity-90`}>
+                  You clicked {captchaTarget.toLocaleString()} times.<br/>
+                  You need help. Or a life.
+                </p>
+                <button
+                  onClick={() => {
+                    navigate('home');
+                    setCaptchaClicks(0);
+                  }}
+                  className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+                >
+                  I'm done
+                </button>
+              </>
+            )}
+          </div>
+        )}
+        {currentPage === 'cringe' && (
+          <div className="max-w-4xl mx-auto py-32 text-center">
+            <h1 className={`text-7xl md:text-9xl font-black uppercase tracking-tighter mb-8 ${t.accent}`}>
+              CRINGE ZONE
+            </h1>
+            <p className={`text-5xl md:text-7xl font-bold mb-12 ${theme === 'wireframe' ? 'text-red-600' : 'text-red-400'}`}>
+              ENTER AT OWN RISK
+            </p>
+            <p className={`text-3xl mb-16 ${t.text} opacity-90`}>
+              Old selfies, bad captions, thirst traps from 2019.<br/>
+              Why did I post that? Why are you here?
+            </p>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
+              Erase from memory
+            </button>
+          </div>
+        )}
+        {currentPage === 'timbits' && (
+          <div className="max-w-4xl mx-auto py-32 text-center">
+            <h1 className={`text-7xl md:text-9xl font-black uppercase tracking-tighter mb-8 ${t.accent}`}>
+              TIMBITS REQUIRED
+            </h1>
+            <p className={`text-5xl md:text-7xl font-bold mb-12 ${theme === 'wireframe' ? 'text-orange-600' : 'text-orange-400'}`}>
+              EMERGENCY LEVEL: CRITICAL
+            </p>
+            <p className={`text-3xl mb-16 ${t.text} opacity-90`}>
+              No Timbits = no motivation.<br/>
+              Send box or site stays broken.
+            </p>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
+              I ate them all
+            </button>
+          </div>
+        )}
+        {currentPage === 'hackerman' && (
+          <div className={`fixed inset-0 ${t.bg} ${t.text} font-mono p-8 overflow-auto z-50`}>
+            <pre className="text-xl md:text-2xl leading-relaxed">
+{`HACKERMAN ONLINE
+> scanning your soul... 420% complete
+> password: timbits123
+> downloading cringe folder... done
+YOU HAVE BEEN HACKERMAN'D
+> no escape
+> enjoy your rickroll`}
+            </pre>
+            <p className="text-5xl mt-12 animate-pulse">
+              HACKED
+            </p>
+            <button
+              onClick={() => navigate('home')}
+              className={`mt-12 px-10 py-5 border-2 ${t.border} ${t.button} text-xl font-bold transition`}
+            >
+              REBOOT
+            </button>
+          </div>
+        )}
+        {currentPage === 'skillissue' && (
+          <div className="max-w-4xl mx-auto py-32 text-center">
+            <h1 className={`text-8xl md:text-10xl font-black uppercase tracking-tighter mb-8 ${t.accent}`}>
+              SKILL ISSUE
+            </h1>
+            <p className={`text-6xl md:text-8xl font-bold mb-12 ${theme === 'wireframe' ? 'text-red-600' : 'text-red-400'}`}>
+              CONFIRMED
+            </p>
+            <p className={`text-3xl mb-16 ${t.text} opacity-90`}>
+              You lost because skill issue.<br/>
+              Not ping. Not teammates.<br/>
+              Git gud.
+            </p>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
+              Uninstall
+            </button>
+          </div>
+        )}
+        {currentPage === 'delete' && (
+          <div className="max-w-4xl mx-auto py-32 text-center">
+            <h1 className={`text-8xl md:text-10xl font-black uppercase tracking-tighter mb-8 ${t.accent} animate-pulse`}>
+              SELF DESTRUCT
+            </h1>
+            <p className={`text-6xl md:text-8xl font-bold mb-12 ${theme === 'wireframe' ? 'text-red-600' : 'text-red-400'}`}>
+              10... 9... 8...
+            </p>
+            <p className={`text-3xl mb-16 ${t.text} opacity-90`}>
+              Just kidding.<br/>
+              Nothing happens.<br/>
+              You're trapped here forever.
+            </p>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
+              Panic button
+            </button>
+          </div>
+        )}
+        {currentPage === 'ratio' && (
+          <div className="max-w-4xl mx-auto py-32 text-center">
+            <h1 className={`text-8xl md:text-10xl font-black uppercase tracking-tighter mb-8 ${t.accent} animate-pulse`}>
+              RATIO'D
+            </h1>
+            <p className={`text-6xl md:text-8xl font-bold mb-12 ${theme === 'wireframe' ? 'text-red-600' : 'text-red-400'}`}>
+              L + RATIO
+            </p>
+            <p className={`text-3xl mb-16 ${t.text} opacity-90`}>
+              Your post: 2 likes<br/>
+              Random comment: 420k likes<br/><br/>
+              Ratio'd by the internet.<br/>
+              Touch grass.
+            </p>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
+              Accept defeat
+            </button>
+          </div>
+        )}
+        {currentPage === 'mid' && (
+          <div className="max-w-4xl mx-auto py-32 text-center">
+            <h1 className={`text-8xl md:text-10xl font-black uppercase tracking-tighter mb-8 ${t.accent}`}>
+              MID
+            </h1>
+            <p className={`text-6xl md:text-8xl font-bold mb-12 ${theme === 'wireframe' ? 'text-yellow-600' : 'text-yellow-400'}`}>
+              OFFICIALLY MID
+            </p>
+            <p className={`text-3xl mb-16 ${t.text} opacity-90`}>
+              Code: mid<br/>
+              Photos: mid<br/>
+              Everything: mid<br/><br/>
+              Welcome to average town.
+            </p>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
+              Stay mid
+            </button>
+          </div>
+        )}
+        {currentPage === 'touchgrass' && (
+          <div className="max-w-4xl mx-auto py-32 text-center">
+            <h1 className={`text-8xl md:text-10xl font-black uppercase tracking-tighter mb-8 ${t.accent}`}>
+              TOUCH GRASS
+            </h1>
+            <p className={`text-6xl md:text-8xl font-bold mb-12 ${theme === 'wireframe' ? 'text-green-600' : 'text-green-400'}`}>
+              CHALLENGE ACTIVE
+            </p>
+            <p className={`text-3xl mb-16 ${t.text} opacity-90`}>
+              Go outside.<br/>
+              Get vitamin D.<br/>
+              Stop staring at this screen.
+            </p>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
+              Still inside
+            </button>
+          </div>
+        )}
+        {currentPage === 'no-bitches' && (
+          <div className="max-w-4xl mx-auto py-32 text-center">
+            <h1 className={`text-8xl md:text-10xl font-black uppercase tracking-tighter mb-8 ${t.accent}`}>
+              NO BI*CHES?
+            </h1>
+            <p className={`text-6xl md:text-8xl font-bold mb-12 ${theme === 'wireframe' ? 'text-purple-600' : 'text-purple-400'}`}>
+              SKILL ISSUE
+            </p>
+            <p className={`text-3xl mb-16 ${t.text} opacity-90 leading-relaxed`}>
+              Your dating profile:<br/>
+              Likes: 0<br/>
+              Matches: 0<br/>
+              Rizz: negative<br/><br/>
+              It's not you... wait, yes it is.<br/>
+              Fix that haircut. Get a personality. Touch grass.
+            </p>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
+              Stay single king
+            </button>
+          </div>
+        )}
+        {currentPage === 'pain' && (
+          <div className="max-w-4xl mx-auto py-32 text-center">
+            <h1 className={`text-8xl md:text-10xl font-black uppercase tracking-tighter mb-8 ${t.accent} animate-pulse`}>
+              P A I N
+            </h1>
+            <p className={`text-6xl md:text-8xl font-bold mb-12 ${theme === 'wireframe' ? 'text-gray-600' : 'text-gray-400'}`}>
+              GROWING
+            </p>
+            <p className={`text-3xl mb-16 ${t.text} opacity-90`}>
+              Existential dread loading...<br/>
+              Sad violin music in background.<br/>
+              Why are we here?
+            </p>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
+              End the pain
+            </button>
+          </div>
+        )}
+        {currentPage === 'foreveralone' && (
+          <div className="max-w-4xl mx-auto py-32 text-center">
+            <h1 className={`text-8xl md:text-10xl font-black uppercase tracking-tighter mb-8 ${t.accent}`}>
+              FOREVER ALONE
+            </h1>
+            <p className={`text-6xl md:text-8xl font-bold mb-12 ${theme === 'wireframe' ? 'text-blue-600' : 'text-blue-400'}`}>
+              MODE
+            </p>
+            <p className={`text-3xl mb-16 ${t.text} opacity-90`}>
+              No friends.<br/>
+              No notifications.<br/>
+              Just you and existential dread.
+            </p>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
+              Back to solitude
+            </button>
+          </div>
+        )}
+        {currentPage === 'invisible' && (
+          <div className="max-w-4xl mx-auto py-32 text-center">
+            <h1 className={`text-8xl md:text-10xl font-black uppercase tracking-tighter mb-8 ${t.accent}`}>
+              INVISIBLE
+            </h1>
+            <p className={`text-6xl md:text-8xl font-bold mb-12 ${theme === 'wireframe' ? 'text-gray-600' : 'text-gray-400'}`}>
+              STATUS
+            </p>
+            <p className={`text-3xl mb-16 ${t.text} opacity-90`}>
+              No one sees you.<br/>
+              No one notices.<br/>
+              You're basically a ghost.
+            </p>
+            <button
+              onClick={() => navigate('home')}
+              className={`px-12 py-6 border-4 ${t.border} ${t.button} text-2xl uppercase tracking-widest font-black transition hover:scale-110`}
+            >
+              Stay invisible
+            </button>
+          </div>
+        )}
 
         {/* 404 */}
         {is404 && (
