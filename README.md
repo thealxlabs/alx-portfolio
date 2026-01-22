@@ -86,22 +86,18 @@ Set these in Vercel Dashboard → Settings → Environment Variables:
 
 ## 📸 Photography
 
-32 high-quality photos hosted on ImgBB, randomly displayed 12 at a time. Photos are automatically optimized for web delivery.
+32 high-quality photos hosted on Cloudinary, randomly displayed 12 at a time. Photos are automatically optimized for web delivery.
 
 ## 📧 Contact
 
 - **Email:** alxgraphy@icloud.com
-- **GitHub:** [@alxgraphy](https://github.com/alxgraphy)
-- **Instagram:** [@alexedgraphy](https://www.instagram.com/alexedgraphy/)
-- **TikTok:** [@alxgraphy](https://www.tiktok.com/@alxgraphy)
+- **GitHub:** (@alxgraphy)[github.com/alxgraphy]
+- **Instagram:** (@alexedgraphy)[instagram.com/alexedgraphy]
+- **TikTok:** (@alxgraphy)[tiktok.com/alxgraphy]
 
 ## 📝 License
 
 MIT License - feel free to use this project as inspiration for your own portfolio.
-
-## 🏆 Awards & Certifications
-
-- **The Field Guide to Human-Centered Design** - Canvas Design Certification
 
 ---
 
