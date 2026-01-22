@@ -48,18 +48,20 @@ function App() {
   const [captchaClicks, setCaptchaClicks] = useState(0);
   const [katMemes, setKatMemes] = useState([]);
   const [katLoading, setKatLoading] = useState(true);
-  useEffect(() => {
+useEffect(() => {
   if (currentPage === 'kat') {
     setKatLoading(true);
-    fetch('https://meme-api.com/gimme/catmemes/15')
+
+    fetch(`https://meme-api.com/gimme/catmemes/15?cb=${Date.now()}`)
       .then(res => res.json())
       .then(data => {
-        setKatMemes(data.memes); // data.memes is an array
+        setKatMemes(data.memes || []);
         setKatLoading(false);
       })
       .catch(() => setKatLoading(false));
   }
 }, [currentPage]);
+
 
 
   // ─── LANDING PAGE STATES ─────────────────────────────────────
