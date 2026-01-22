@@ -532,30 +532,27 @@ if (!hasEntered && (currentPage === 'home' || currentPage === '')) {
                 <div className={`text-center text-xl ${theme === 'wireframe' ? 'opacity-70' : 'opacity-80'}`}>No projects yet.</div>
               ) : (
                 <div className="space-y-8">
-                  {repos.map(repo => (
-                    <div key={repo.id} className={`border-2 ${t.border} ${t.card} p-8 ${t.hoverBg} transition group`}>
-                      <div>
-                        <h3 className={`text-3xl font-black uppercase tracking-tight mb-3 ${t.accent} group-hover:opacity-70 transition`}>
-                          {repo.name}
-                        </h3>
-                        <p className={`text-base mb-4 ${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>
-                          {repo.description || 'No description provided.'}
-                        </p>
-                        <div className="flex flex-wrap gap-4 text-sm">
-                          <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-2 underline ${t.accent} hover:opacity-70 transition`}>
-                            <Github size={18} /> View Repo
-                          </a>
-                          {repo.homepage && (
-                            <a href={repo.homepage} target="_blank" rel="noopener noreferrer" className="underline hover:opacity-70 transition">
-                              → Live Demo
-                            </a>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
+                 {repos.map(repo => (
+  <div key={repo.id} className={`border-2 ${t.border} ${t.card} p-8 transition-all duration-300 group`}>
+    <h3 className={`text-3xl font-black uppercase tracking-tight mb-3 ${t.accent} group-hover:text-white transition-colors duration-300`}>
+      {repo.name}
+    </h3>
+    <p className={`text-base mb-4 ${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'} group-hover:text-white transition-colors duration-300`}>
+      {repo.description || 'No description provided.'}
+    </p>
+    <div className="flex flex-wrap gap-4 text-sm">
+      <a href={repo.html_url} target="_blank" rel="noopener noreferrer" className={`inline-flex items-center gap-2 underline ${t.accent} group-hover:text-white transition-colors duration-300`}>
+        <Github size={18} /> View Repo
+      </a>
+      {repo.homepage && (
+        <a href={repo.homepage} target="_blank" rel="noopener noreferrer" className={`underline group-hover:text-white transition-colors duration-300`}>
+          → Live Demo
+        </a>
+      )}
+    </div>
+  </div>
+))}
+
             </div>
             {forkRepos.length > 0 && (
               <div className="mt-32">
@@ -566,19 +563,22 @@ if (!hasEntered && (currentPage === 'home' || currentPage === '')) {
                   Forked repositories
                 </div>
                 <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
-                  {forkRepos.map(repo => (
-                    <a key={repo.id} href={repo.html_url} target="_blank" rel="noopener noreferrer" className={`border-2 ${t.border} ${t.card} p-6 ${t.hoverBg} transition group`}>
-                      <h4 className={`text-xl font-bold uppercase mb-2 ${t.accent} group-hover:opacity-70 transition`}>
-                        {repo.name}
-                      </h4>
-                      <div className={`text-sm uppercase tracking-wider ${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'}`}>View →</div>
-                    </a>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        )}
+              {forkRepos.map(repo => (
+  <a
+    key={repo.id}
+    href={repo.html_url}
+    target="_blank"
+    rel="noopener noreferrer"
+    className={`border-2 ${t.border} ${t.card} p-6 transition-all duration-300 group`}
+  >
+    <h4 className={`text-xl font-bold uppercase mb-2 ${t.accent} group-hover:text-white transition-colors duration-300`}>
+      {repo.name}
+    </h4>
+    <div className={`text-sm uppercase tracking-wider ${theme === 'wireframe' ? 'opacity-80' : 'opacity-90'} group-hover:text-white transition-colors duration-300`}>
+      View →
+    </div>
+  </a>
+))}
 
         {/* PHOTOGRAPHY */}
         {currentPage === 'photography' && (
