@@ -14,7 +14,6 @@ export default function App() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [time, setTime] = useState(new Date());
 
-  // --- SYSTEM CLOCK ---
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(timer);
@@ -27,7 +26,6 @@ export default function App() {
     return "Good_Evening";
   };
 
-  // --- ROUTING ENGINE ---
   useEffect(() => {
     const handleHash = () => {
       const hash = window.location.hash.replace('#/', '') || 'home';
@@ -41,7 +39,6 @@ export default function App() {
 
   const navigate = (path) => { window.location.hash = `#/${path}`; };
 
-  // --- DATA UPLINK (GITHUB) ---
   useEffect(() => {
     fetch('https://api.github.com/users/alxgraphy/repos?sort=updated&per_page=10')
       .then(res => res.json())
@@ -61,14 +58,12 @@ export default function App() {
       });
   }, []);
 
-  // --- KINETIC TRACKING ---
   useEffect(() => {
     const handleMouseMove = (e) => setMousePos({ x: e.clientX, y: e.clientY });
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // --- UI PRIMITIVES ---
   const Corners = () => (
     <>
       <div className="absolute -top-1 -left-1 w-4 h-4 border-t border-l border-white/40" />
@@ -93,7 +88,6 @@ export default function App() {
     />
   );
 
-  // --- INITIAL BOOT ---
   if (!hasEntered) {
     return (
       <div className="min-h-screen bg-[#050505] text-white font-mono flex items-center justify-center p-6 cursor-none overflow-hidden">
@@ -175,7 +169,7 @@ export default function App() {
               />
             </div>
             <div className="space-y-6 relative">
-              <Label text="CORE_IDENT_v5" className="left-1/2 -translate-x-1/2" />
+              <Label text="CORE_IDENT_v19" className="left-1/2 -translate-x-1/2" />
               <div className="flex items-center justify-center gap-3 text-[10px] font-bold text-white/40 uppercase tracking-[0.4em]">
                 <Activity size={14} className="text-white" /> {getGreeting()} // {time.toLocaleTimeString()}
               </div>
@@ -302,7 +296,7 @@ export default function App() {
                 { label: 'Mail', value: 'alxgraphy@icloud.com', url: 'mailto:alxgraphy@icloud.com' },
                 { label: 'GitHub', value: 'alxgraphy', url: 'https://github.com/alxgraphy' },
                 { label: 'Instagram', value: 'alexedgraphy', url: 'https://instagram.com/alexedgraphy' },
-                { label: 'TikTok', value: 'alxedits', url: 'https://tiktok.com/@alxedits' }
+                { label: 'TikTok', value: 'alxgraphy', url: 'https://tiktok.com/@alxgraphy' }
               ].map((item, i) => (
                 <a key={i} href={item.url} target="_blank" rel="noreferrer" 
                    className="group p-10 border border-white/10 flex justify-between items-center hover:bg-white hover:text-black transition-all duration-500">
@@ -327,7 +321,7 @@ export default function App() {
             <div className="space-y-8">
               <Label text="NODE_INSPECT" />
               <h2 className="text-5xl font-black italic uppercase tracking-tighter">{selectedProject.name}</h2>
-              <p className="text-xl font-light italic text-white/60">{selectedProject.description || "Detailed metadata for this component is restricted."}</p>
+              <p className="text-xl font-light italic text-white/60">{selectedProject.description || "Metadata restricted."}</p>
               <a href={selectedProject.html_url} target="_blank" rel="noreferrer" className="flex items-center justify-between border border-white/20 px-8 py-5 hover:bg-white hover:text-black transition-all group">
                 <span className="font-bold uppercase text-[10px] tracking-widest">Access_Module</span>
                 <ExternalLink size={16} />
