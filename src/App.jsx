@@ -14,7 +14,6 @@ export default function App() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [time, setTime] = useState(new Date());
 
-  // CLOCK LOGIC
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(timer);
@@ -27,7 +26,6 @@ export default function App() {
     return "Good_Evening";
   };
 
-  // ROUTING
   useEffect(() => {
     const handleHash = () => {
       const hash = window.location.hash.replace('#/', '') || 'home';
@@ -40,7 +38,6 @@ export default function App() {
 
   const navigate = (path) => { window.location.hash = `#/${path}`; };
 
-  // DATA FETCHING
   useEffect(() => {
     fetch('https://api.github.com/users/alxgraphy/repos?sort=updated&per_page=10')
       .then(res => res.json())
@@ -84,7 +81,6 @@ export default function App() {
     />
   );
 
-  // LANDING SCREEN
   if (!hasEntered) {
     return (
       <div className="min-h-screen bg-[#050505] text-white font-mono flex items-center justify-center p-6 cursor-none overflow-hidden">
@@ -95,7 +91,7 @@ export default function App() {
             <p className="text-3xl font-black italic tracking-tighter uppercase">{time.toLocaleTimeString()}</p>
           </div>
           <div className="space-y-4">
-            <p className="text-[10px] tracking-[0.5em] text-white/40 uppercase">Initial_Boot_Sequence_v16.5</p>
+            <p className="text-[10px] tracking-[0.5em] text-white/40 uppercase">Initial_Boot_Sequence_v17.0</p>
             <h1 className="text-8xl font-black italic tracking-tighter uppercase leading-[0.8]">ALX.<br/><span className="text-outline text-transparent" style={{ WebkitTextStroke: '1px white' }}>CORE</span></h1>
           </div>
           <button 
@@ -138,7 +134,6 @@ export default function App() {
         </div>
       </div>
 
-      {/* NAV SIDEBAR STYLE */}
       <header className="fixed top-10 w-full z-50 flex justify-between items-end px-6 md:px-12 py-8 pointer-events-none">
         <button onClick={() => navigate('home')} className="text-4xl font-black italic tracking-tighter pointer-events-auto">ALX.</button>
         <nav className="flex flex-col items-end gap-2 pointer-events-auto">
@@ -155,63 +150,76 @@ export default function App() {
 
       <main className="relative z-10 pt-48 pb-32 px-6 md:px-12 max-w-7xl mx-auto">
         
-        {/* PAGE: HOME */}
         {page === 'home' && (
-          <div className="space-y-32 animate-in fade-in slide-in-from-bottom-8 duration-1000">
+          <div className="space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 flex flex-col items-center text-center">
+            {/* PHOTO TOP CENTER WITH KINETIC HOVER */}
+            <div className="relative w-64 h-64 border border-white/10 p-2 overflow-hidden group">
+              <Corners />
+              <img 
+                src="https://avatars.githubusercontent.com/u/198081098?v=4" 
+                className="w-full h-full object-cover grayscale brightness-75 transition-all duration-700 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-110 group-hover:rotate-1" 
+                alt="Alex" 
+              />
+              <div className="absolute inset-0 border-2 border-transparent group-hover:border-white/20 transition-all pointer-events-none" />
+            </div>
+
             <div className="space-y-6">
-              <div className="flex items-center gap-3 text-[10px] font-bold text-white/40 uppercase tracking-[0.4em]">
+              <div className="flex items-center justify-center gap-3 text-[10px] font-bold text-white/40 uppercase tracking-[0.4em]">
                 <Activity size={14} className="text-white" /> Status: System_Core_Online
               </div>
-              <h1 className="text-7xl md:text-[12vw] font-black leading-[0.8] tracking-tighter uppercase italic">
+              <h1 className="text-6xl md:text-[10vw] font-black leading-[0.8] tracking-tighter uppercase italic">
                 ALEXANDER<br/>
                 <span className="text-outline text-transparent">WONDWOSSEN</span>
               </h1>
             </div>
-            <div className="grid md:grid-cols-2 gap-16 items-start">
-              <div className="space-y-8 border-l border-white/20 pl-8">
-                <p className="text-2xl font-light italic text-white/70 leading-relaxed">
-                  Building modular design systems and high-fidelity interfaces.
+            
+            <div className="max-w-2xl border-t border-white/10 pt-8 space-y-8">
+               <p className="text-xl md:text-2xl font-light italic text-white/70 leading-relaxed">
+                  Structural Logic // Digital Optics. <br/> Building the future of modular interfaces.
                 </p>
-                <div className="flex gap-4">
+                <div className="flex justify-center gap-4">
                   <div className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-[9px] font-bold tracking-widest uppercase">Variable-Based</div>
-                  <div className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-[9px] font-bold tracking-widest uppercase">Brutalist-UX</div>
+                  <div className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-[9px] font-bold tracking-widest uppercase">Tokenized-UI</div>
                 </div>
-              </div>
-              <div className="relative aspect-square border border-white/10 p-4">
-                <Corners />
-                <img src="https://avatars.githubusercontent.com/u/198081098?v=4" className="w-full h-full object-cover grayscale contrast-125" alt="Alex" />
-              </div>
             </div>
           </div>
         )}
 
-        {/* PAGE: ABOUT */}
         {page === 'about' && (
           <div className="max-w-4xl space-y-16 animate-in slide-in-from-left duration-700">
             <h2 className="text-7xl font-black italic uppercase tracking-tighter">Profile</h2>
-            <div className="space-y-12 text-3xl font-light italic opacity-80 leading-snug border-l-[10px] border-white/10 pl-10">
-              <p>I operate at the intersection of Structural Logic and Digital Optics.</p>
-              <p>Based in Toronto, I use React to build interfaces that feel like physical machinery, and a Nikon D3200 to document the architecture that inspires them.</p>
+            <div className="grid md:grid-cols-2 gap-12">
+              <div className="space-y-8 text-xl font-light italic opacity-80 leading-snug border-l-2 border-white/10 pl-10">
+                <p>I operate at the intersection of structural logic and digital photography. My work is defined by a brutalist approach to code—prioritizing raw performance, modularity, and high-fidelity aesthetics.</p>
+                <p>Based in Toronto, I document architectural geometry through a 55mm prime lens and translate those physical patterns into scalable design systems.</p>
+              </div>
+              <div className="p-8 border border-white/10 bg-white/[0.02]">
+                <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] mb-6 opacity-30">Current_Coordinates</h4>
+                <ul className="space-y-4 text-xs uppercase tracking-widest font-bold">
+                  <li className="flex justify-between"><span>Location</span><span className="text-white/40">Toronto, CA</span></li>
+                  <li className="flex justify-between"><span>Focus</span><span className="text-white/40">Frontend Arch</span></li>
+                  <li className="flex justify-between"><span>Lens</span><span className="text-white/40">Nikon D3200</span></li>
+                </ul>
+              </div>
             </div>
           </div>
         )}
 
-        {/* PAGE: SKILLS */}
         {page === 'skills' && (
           <div className="space-y-16 animate-in fade-in duration-500">
             <h2 className="text-7xl font-black italic uppercase tracking-tighter">Capability</h2>
             <div className="grid md:grid-cols-3 gap-0 border border-white/10">
               {[
-                { title: 'Code', items: ['React.js', 'Tailwind', 'Vite', 'Node.js'], icon: <Terminal /> },
-                { title: 'Optics', items: ['Nikon D3200', '55mm Prime', 'Manual Controls'], icon: <Camera /> },
-                { title: 'Systems', items: ['Brutalism', 'Figma Tokens', 'Architecture'], icon: <Cpu /> }
+                { title: 'Development', items: ['React / Next.js', 'Tailwind CSS', 'TypeScript', 'Node.js / Express', 'Git Workflow'], icon: <Terminal /> },
+                { title: 'Optical_Kit', items: ['Nikon D3200', '55mm f/1.8 Prime', 'Adobe Lightroom', 'Architectural Shot', 'Manual Exposure'], icon: <Camera /> },
+                { title: 'Design_System', items: ['Figma Variables', 'Brutalist Theory', 'UI Component Arch', 'Prototyping', 'Tokenization'], icon: <Cpu /> }
               ].map((s, i) => (
-                <div key={i} className="p-16 border-r border-white/10 last:border-r-0 group hover:bg-white transition-all duration-500">
-                  <div className="mb-10 text-white/40 group-hover:text-black transition-colors">{s.icon}</div>
-                  <h3 className="text-3xl font-black uppercase mb-10 italic group-hover:text-black">{s.title}</h3>
-                  <div className="space-y-4">
+                <div key={i} className="p-12 border-r border-white/10 last:border-r-0 group hover:bg-white transition-all duration-500">
+                  <div className="mb-8 text-white/40 group-hover:text-black transition-colors">{s.icon}</div>
+                  <h3 className="text-2xl font-black uppercase mb-8 italic group-hover:text-black">{s.title}</h3>
+                  <div className="space-y-3">
                     {s.items.map(item => (
-                      <div key={item} className="text-xs font-bold uppercase tracking-widest opacity-40 group-hover:opacity-100 group-hover:text-black/60">{item}</div>
+                      <div key={item} className="text-[10px] font-bold uppercase tracking-widest opacity-40 group-hover:opacity-100 group-hover:text-black/60">{item}</div>
                     ))}
                   </div>
                 </div>
@@ -220,7 +228,7 @@ export default function App() {
           </div>
         )}
 
-        {/* PAGE: CODE */}
+        {/* ... CODE, PHOTOGRAPHY, CONTACT pages stay identical to previous version ... */}
         {page === 'code' && (
           <div className="space-y-16 animate-in slide-in-from-bottom duration-700">
             <h2 className="text-7xl font-black italic uppercase tracking-tighter">Library</h2>
@@ -241,7 +249,6 @@ export default function App() {
           </div>
         )}
 
-        {/* PAGE: PHOTOGRAPHY */}
         {page === 'photography' && (
           <div className="space-y-16 animate-in zoom-in-95 duration-700">
             <h2 className="text-7xl font-black italic uppercase tracking-tighter">Optics</h2>
@@ -262,25 +269,17 @@ export default function App() {
           </div>
         )}
 
-        {/* PAGE: CONTACT */}
         {page === 'contact' && (
-          <div className="max-w-4xl mx-auto space-y-20 py-10 animate-in slide-in-from-bottom duration-500">
-            <h2 className="text-[15vw] font-black italic uppercase tracking-tighter leading-none text-center underline decoration-8">Sync</h2>
+          <div className="max-w-4xl mx-auto space-y-20 py-10 animate-in slide-in-from-bottom duration-500 text-center">
+            <h2 className="text-[15vw] font-black italic uppercase tracking-tighter leading-none underline decoration-8 decoration-white/10">Sync</h2>
             <div className="grid gap-6">
-              {[
-                { platform: 'Email', handle: 'alxgraphy@icloud.com', url: 'mailto:alxgraphy@icloud.com', icon: <Mail /> },
-                { platform: 'GitHub', handle: '@alxgraphy', url: 'https://github.com/alxgraphy', icon: <Github /> },
-                { platform: 'Instagram', handle: '@alexedgraphy', url: 'https://instagram.com/alexedgraphy', icon: <Instagram /> }
-              ].map((item, i) => (
-                <a key={i} href={item.url} target="_blank" rel="noreferrer" className="p-14 border border-white/10 flex justify-between items-center group hover:bg-white hover:text-black transition-all">
-                  <p className="text-4xl md:text-5xl font-black italic tracking-tighter">{item.handle}</p>
-                  <ArrowRight size={48} className="group-hover:rotate-45 transition-transform" />
-                </a>
-              ))}
+              <a href="mailto:alxgraphy@icloud.com" className="p-14 border border-white/10 flex justify-between items-center group hover:bg-white hover:text-black transition-all">
+                <p className="text-4xl md:text-5xl font-black italic tracking-tighter">alxgraphy@icloud.com</p>
+                <ArrowRight size={48} className="group-hover:rotate-45 transition-transform" />
+              </a>
             </div>
           </div>
         )}
-
       </main>
 
       {/* MODAL */}
