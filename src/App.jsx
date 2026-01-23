@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Camera, Terminal, ArrowRight, ExternalLink, Loader2, X, Activity, 
-  Database, Award, GraduationCap, Code2, Aperture
+  Database, Award, GraduationCap, Code2, Aperture, Download, Filter
 } from 'lucide-react';
 
 export default function App() {
@@ -15,6 +15,8 @@ export default function App() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [time, setTime] = useState(new Date());
   const [isMobile, setIsMobile] = useState(false);
+  const [photoFilter, setPhotoFilter] = useState('all');
+  const [imagesLoaded, setImagesLoaded] = useState({});
 
   useEffect(() => {
     setIsMobile('ontouchstart' in window);
@@ -24,6 +26,14 @@ export default function App() {
     const timer = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('config', 'G-5W1LZ96CQH', {
+        page_path: window.location.hash
+      });
+    }
+  }, [page]);
 
   const getGreeting = () => {
     const hour = time.getHours();
@@ -108,40 +118,149 @@ export default function App() {
     {
       url: "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005836/IMG_0649_jmyszm.jpg",
       title: "Urban_Geometry_001",
-      settings: "ISO 400 · f/5.6 · 1/250s",
+      category: "architecture",
       location: "Toronto, CA"
     },
     {
       url: "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005835/IMG_0645_b679gp.jpg",
       title: "Architectural_Study_002",
-      settings: "ISO 200 · f/8 · 1/125s",
+      category: "architecture",
       location: "Downtown Core"
     },
     {
       url: "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005835/DSC00059_qk2fxf.jpg",
       title: "Light_Pattern_003",
-      settings: "ISO 100 · f/11 · 1/60s",
+      category: "abstract",
       location: "Studio"
     },
     {
+      url: "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005835/DSC00063_zkhohb.jpg",
+      title: "Shadow_Play_004",
+      category: "abstract",
+      location: "Toronto"
+    },
+    {
       url: "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005830/DSC00057_tbjyew.jpg",
-      title: "Street_Frame_004",
-      settings: "ISO 800 · f/4 · 1/500s",
+      title: "Street_Frame_005",
+      category: "street",
       location: "Queen West"
     },
     {
       url: "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005829/DSC00041_ufimhg.jpg",
-      title: "Perspective_005",
-      settings: "ISO 400 · f/5.6 · 1/250s",
+      title: "Perspective_006",
+      category: "architecture",
       location: "Harbourfront"
     },
     {
+      url: "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005829/DSC00046_yxqzyw.jpg",
+      title: "Minimal_007",
+      category: "abstract",
+      location: "Downtown"
+    },
+    {
       url: "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005829/DSC00052_qngaw6.jpg",
-      title: "Minimal_006",
-      settings: "ISO 200 · f/8 · 1/125s",
+      title: "Structural_008",
+      category: "architecture",
       location: "Distillery District"
+    },
+    {
+      url: "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005829/DSC00047_hhe8vi.jpg",
+      title: "Lines_009",
+      category: "abstract",
+      location: "Toronto"
+    },
+    {
+      url: "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005829/DSC00042_ej8fps.jpg",
+      title: "Contrast_010",
+      category: "street",
+      location: "Downtown"
+    },
+    {
+      url: "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005828/DSC00031_j85ugd.jpg",
+      title: "Reflection_011",
+      category: "architecture",
+      location: "Financial District"
+    },
+    {
+      url: "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005828/DSC00037_wh05kb.jpg",
+      title: "Geometry_012",
+      category: "abstract",
+      location: "Toronto"
+    },
+    {
+      url: "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005821/DSC00022_knc5ir.jpg",
+      title: "Motion_013",
+      category: "street",
+      location: "Urban Core"
+    },
+    {
+      url: "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005821/DSC_8617_wpcutg.jpg",
+      title: "Portrait_014",
+      category: "portrait",
+      location: "Studio"
+    },
+    {
+      url: "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005820/DSC_8573_amb5m8.jpg",
+      title: "Portrait_015",
+      category: "portrait",
+      location: "Studio"
+    },
+    {
+      url: "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005821/DSC_8607_kuco1i.jpg",
+      title: "Portrait_016",
+      category: "portrait",
+      location: "Studio"
+    },
+    {
+      url: "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005820/DSC_8571_i6mw8o.jpg",
+      title: "Portrait_017",
+      category: "portrait",
+      location: "Studio"
+    },
+    {
+      url: "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005821/DSC_8614_miqc9h.jpg",
+      title: "Portrait_018",
+      category: "portrait",
+      location: "Studio"
+    },
+    {
+      url: "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005820/DSC_8572_sz6aer.jpg",
+      title: "Portrait_019",
+      category: "portrait",
+      location: "Studio"
+    },
+    {
+      url: "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005820/DSC_8567_hlcana.jpg",
+      title: "Portrait_020",
+      category: "portrait",
+      location: "Studio"
     }
   ];
+
+  const filteredPhotos = photoFilter === 'all' ? photos : photos.filter(p => p.category === photoFilter);
+  const categories = ['all', ...new Set(photos.map(p => p.category))];
+
+  const featuredProjects = [
+    {
+      id: 'portfolio',
+      name: 'ALX.CORE Portfolio',
+      description: 'Brutalist portfolio built with React and Tailwind CSS',
+      language: 'React',
+      stars: 0,
+      liveUrl: 'https://thegreatportfolio.vercel.app'
+    }
+  ];
+
+  const downloadAllPhotos = () => {
+    photos.forEach((photo, i) => {
+      setTimeout(() => {
+        const a = document.createElement('a');
+        a.href = photo.url;
+        a.download = `${photo.title}.jpg`;
+        a.click();
+      }, i * 200);
+    });
+  };
 
   if (!hasEntered) {
     return (
@@ -168,6 +287,15 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#050505] text-white font-mono overflow-x-hidden selection:bg-white selection:text-black" style={isMobile ? {} : { cursor: 'none' }}>
+      <head>
+        <title>Alexander Wondwossen - Student Developer & Photographer</title>
+        <meta name="description" content="Grade 7 student passionate about photography and web development. Based in Toronto, specializing in architectural photography and React development." />
+        <meta property="og:title" content="Alexander Wondwossen - Portfolio" />
+        <meta property="og:description" content="Student Developer & Photographer - Toronto" />
+        <meta property="og:image" content="https://avatars.githubusercontent.com/u/198081098?v=4" />
+        <meta property="og:url" content="https://thegreatportfolio.vercel.app" />
+        <meta name="twitter:card" content="summary_large_image" />
+      </head>
       <BackgroundGrid />
       <style>{`
         .text-outline { -webkit-text-stroke: 1px rgba(255,255,255,0.3); }
@@ -209,7 +337,7 @@ export default function App() {
                 src="https://avatars.githubusercontent.com/u/198081098?v=4" 
                 className="w-full h-full object-cover grayscale brightness-75 transition-all duration-1000 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105" 
                 alt="Alexander Wondwossen - Student Photographer and Developer"
-                loading="lazy"
+                loading="eager"
               />
             </div>
             <div className="space-y-6 relative">
@@ -352,6 +480,32 @@ export default function App() {
               <Label text="SEC_LIB_004" />
               <h2 className="text-7xl font-black italic uppercase tracking-tighter">Library</h2>
             </div>
+
+            <div className="space-y-6">
+              <h3 className="text-2xl font-black italic uppercase tracking-tighter text-white/60">Featured Projects</h3>
+              <div className="grid md:grid-cols-2 gap-6 relative">
+                {featuredProjects.map((project) => (
+                  <div key={project.id} 
+                    className="group relative p-12 border border-white/10 bg-white/[0.02] hover:bg-white hover:text-black transition-all duration-500">
+                    <Corners />
+                    <div className="flex justify-between items-start mb-12">
+                      <span className="text-[9px] font-bold tracking-[0.3em] uppercase opacity-40 group-hover:text-black/40">FEATURED</span>
+                      <Database size={14} className="opacity-20 group-hover:opacity-100" />
+                    </div>
+                    <h3 className="text-3xl font-black uppercase italic tracking-tighter mb-4">{project.name}</h3>
+                    <p className="text-xs opacity-60 group-hover:text-black/60 mb-6">{project.description}</p>
+                    <div className="text-[10px] font-bold uppercase tracking-widest group-hover:text-black/60 mb-6">
+                      {project.language}
+                    </div>
+                    <a href={project.liveUrl} target="_blank" rel="noreferrer" 
+                       className="inline-flex items-center gap-2 border border-white/20 px-6 py-3 text-[10px] font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-all">
+                      View Live <ExternalLink size={12} />
+                    </a>
+                  </div>
+                ))}
+              </div>
+            </div>
+
             {loading ? (
               <div className="flex items-center gap-4 text-white/40">
                 <Loader2 className="animate-spin" /> Loading repositories...
@@ -361,23 +515,26 @@ export default function App() {
                 <p className="text-xs uppercase tracking-widest">Error loading repositories: {error}</p>
               </div>
             ) : (
-              <div className="grid md:grid-cols-2 gap-6 relative">
-                <Label text="REPO_FETCH_JSON" />
-                {repos.map((repo) => (
-                  <button key={repo.id} onClick={() => setSelectedProject(repo)} 
-                    className="group relative p-12 border border-white/10 bg-white/[0.02] hover:bg-white hover:text-black transition-all duration-500 text-left">
-                    <Corners />
-                    <div className="flex justify-between items-start mb-12">
-                      <span className="text-[9px] font-bold tracking-[0.3em] uppercase opacity-40 group-hover:text-black/40">NODE_{repo.id.toString().slice(-4)}</span>
-                      <Database size={14} className="opacity-20 group-hover:opacity-100" />
-                    </div>
-                    <h3 className="text-3xl font-black uppercase italic tracking-tighter mb-4">{repo.name}</h3>
-                    <p className="text-xs opacity-60 group-hover:text-black/60 mb-4 line-clamp-2">{repo.description || 'No description available'}</p>
-                    <div className="text-[10px] font-bold uppercase tracking-widest group-hover:text-black/60">
-                      {repo.language || 'Multiple'} · {repo.stargazers_count} stars
-                    </div>
-                  </button>
-                ))}
+              <div className="space-y-6">
+                <h3 className="text-2xl font-black italic uppercase tracking-tighter text-white/60">All Repositories</h3>
+                <div className="grid md:grid-cols-2 gap-6 relative">
+                  <Label text="REPO_FETCH_JSON" />
+                  {repos.map((repo) => (
+                    <button key={repo.id} onClick={() => setSelectedProject(repo)} 
+                      className="group relative p-12 border border-white/10 bg-white/[0.02] hover:bg-white hover:text-black transition-all duration-500 text-left">
+                      <Corners />
+                      <div className="flex justify-between items-start mb-12">
+                        <span className="text-[9px] font-bold tracking-[0.3em] uppercase opacity-40 group-hover:text-black/40">NODE_{repo.id.toString().slice(-4)}</span>
+                        <Database size={14} className="opacity-20 group-hover:opacity-100" />
+                      </div>
+                      <h3 className="text-3xl font-black uppercase italic tracking-tighter mb-4">{repo.name}</h3>
+                      <p className="text-xs opacity-60 group-hover:text-black/60 mb-4 line-clamp-2">{repo.description || 'No description available'}</p>
+                      <div className="text-[10px] font-bold uppercase tracking-widest group-hover:text-black/60">
+                        {repo.language || 'Multiple'} · {repo.stargazers_count} stars
+                      </div>
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
           </div>
@@ -389,20 +546,47 @@ export default function App() {
               <Label text="SEC_OPT_005" />
               <h2 className="text-7xl font-black italic uppercase tracking-tighter">Optics</h2>
             </div>
+
+            <div className="flex items-center justify-between gap-4 flex-wrap">
+              <div className="flex gap-2 flex-wrap">
+                {categories.map(cat => (
+                  <button key={cat} onClick={() => setPhotoFilter(cat)}
+                    className={`px-4 py-2 text-[10px] font-bold uppercase tracking-widest border transition-all ${
+                      photoFilter === cat 
+                        ? 'bg-white text-black border-white' 
+                        : 'border-white/20 text-white/60 hover:border-white/60'
+                    }`}>
+                    <Filter size={10} className="inline mr-2" />
+                    {cat}
+                  </button>
+                ))}
+              </div>
+              <button onClick={downloadAllPhotos}
+                className="px-6 py-2 text-[10px] font-bold uppercase tracking-widest border border-white/20 hover:bg-white hover:text-black transition-all flex items-center gap-2">
+                <Download size={12} /> Download All
+              </button>
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative">
               <Label text="GRID_RENDER_v1" />
-              {photos.map((photo, i) => (
+              {filteredPhotos.map((photo, i) => (
                 <button key={i} onClick={() => setSelectedPhoto(photo)}
                   className="group relative aspect-[4/5] border border-white/10 bg-black overflow-hidden">
+                  {!imagesLoaded[photo.url] && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <Loader2 className="animate-spin text-white/20" size={32} />
+                    </div>
+                  )}
                   <img src={photo.url} 
                     className="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-1000" 
-                    alt={`${photo.title} - Shot at ${photo.settings} in ${photo.location}`}
+                    alt={`${photo.title} - ${photo.location}`}
                     loading="lazy"
+                    onLoad={() => setImagesLoaded(prev => ({...prev, [photo.url]: true}))}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                     <div className="absolute bottom-0 left-0 right-0 p-6 space-y-2">
                       <div className="flex items-center gap-2 text-[9px] font-bold uppercase tracking-widest text-white/60">
-                        <Aperture size={12} /> {photo.settings}
+                        <Aperture size={12} /> {photo.category}
                       </div>
                       <p className="text-xs font-bold uppercase tracking-widest">{photo.title}</p>
                     </div>
@@ -472,14 +656,14 @@ export default function App() {
               <Corners />
               <img src={selectedPhoto.url} 
                 className="w-full h-auto" 
-                alt={`${selectedPhoto.title} - ${selectedPhoto.settings} - ${selectedPhoto.location}`}
+                alt={`${selectedPhoto.title} - ${selectedPhoto.location}`}
               />
               <div className="mt-6 p-6 border-t border-white/10 space-y-4">
                 <h3 className="text-3xl font-black italic uppercase tracking-tighter">{selectedPhoto.title}</h3>
                 <div className="grid md:grid-cols-2 gap-4 text-xs uppercase tracking-widest font-bold">
                   <div className="flex items-center gap-3">
                     <Aperture size={16} className="text-white/40" />
-                    <span className="text-white/60">{selectedPhoto.settings}</span>
+                    <span className="text-white/60">{selectedPhoto.category}</span>
                   </div>
                   <div className="text-white/60">Location: {selectedPhoto.location}</div>
                 </div>
