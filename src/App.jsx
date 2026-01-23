@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Camera, Code, Terminal, Layers, ArrowRight, 
-  ExternalLink, Loader2, X, Activity, Globe, GitCommit, Clock, Mail, Github, Instagram, AlertTriangle
+  ExternalLink, Loader2, X, Activity, Globe, GitCommit, Clock, BarChart3, Mail, Github, Instagram
 } from 'lucide-react';
 
 export default function App() {
@@ -12,27 +12,13 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [selectedProject, setSelectedProject] = useState(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [randomPhoto, setRandomPhoto] = useState(0);
 
-  const photos = [
-    "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005836/IMG_0649_jmyszm.jpg",
-    "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005835/IMG_0645_b679gp.jpg",
-    "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005835/DSC00059_qk2fxf.jpg",
-    "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005830/DSC00057_tbjyew.jpg",
-    "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005829/DSC00041_ufimhg.jpg",
-    "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005829/DSC00052_qngaw6.jpg"
-  ];
-
-  // SHUFFLE PHOTO LOGIC
-  useEffect(() => {
-    setRandomPhoto(Math.floor(Math.random() * photos.length));
-  }, [page]); // Shuffles every time you switch tabs or refresh
-
+  // ROUTING LOGIC
   useEffect(() => {
     const handleHash = () => {
       const hash = window.location.hash.replace('#/', '') || 'home';
-      const valid = ['home', 'about', 'skills', 'code', 'photography', 'contact'];
-      setPage(valid.includes(hash) ? hash : '404');
+      const validPages = ['home', 'about', 'skills', 'code', 'photography', 'contact'];
+      setPage(validPages.includes(hash) ? hash : 'home');
     };
     window.addEventListener('hashchange', handleHash);
     handleHash();
@@ -41,6 +27,7 @@ export default function App() {
 
   const navigate = (path) => { window.location.hash = `#/${path}`; };
 
+  // GITHUB FEED DATA
   useEffect(() => {
     fetch('https://api.github.com/users/alxgraphy/repos?sort=updated&per_page=10')
       .then(res => res.json())
@@ -55,7 +42,7 @@ export default function App() {
             .map(event => {
               const type = event.type.replace('Event', '').toUpperCase();
               const repo = event.repo.name.split('/')[1];
-              return `${type}: [${repo}]`;
+              return `${type}: [${repo}] - SYSTEM_SYNC`;
             }).slice(0, 8);
           setEvents(processed);
         }
@@ -64,9 +51,9 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    const move = (e) => setMousePos({ x: e.clientX, y: e.clientY });
-    window.addEventListener('mousemove', move);
-    return () => window.removeEventListener('mousemove', move);
+    const handleMouseMove = (e) => setMousePos({ x: e.clientX, y: e.clientY });
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
   const Corners = () => (
@@ -81,12 +68,15 @@ export default function App() {
   if (!hasEntered) {
     return (
       <div className="min-h-screen bg-black text-white font-mono flex items-center justify-center p-6 cursor-none">
-        <div className="max-w-xl w-full space-y-8">
+        <div className="max-w-xl w-full space-y-8 animate-in fade-in zoom-in duration-1000">
           <div className="space-y-2">
-            <p className="text-[10px] tracking-[0.5em] text-white/40 uppercase">System_Entry_v21.0</p>
-            <h1 className="text-6xl font-black italic tracking-tighter uppercase leading-none">ALX.CORE</h1>
+            <p className="text-[10px] tracking-[0.5em] text-white/40 uppercase">Initial_Boot_Sequence_v16.0</p>
+            <h1 className="text-6xl font-black italic tracking-tighter uppercase leading-none">ALX.<br/>CORE</h1>
           </div>
-          <button onClick={() => setHasEntered(true)} className="group w-full border border-white p-6 hover:bg-white hover:text-black transition-all duration-500">
+          <button 
+            onClick={() => { setHasEntered(true); navigate('home'); }}
+            className="group w-full border border-white p-6 hover:bg-white hover:text-black transition-all duration-500"
+          >
             <div className="flex justify-between items-center font-black uppercase tracking-widest text-sm">
               <span>Initialize_System</span>
               <ArrowRight className="group-hover:translate-x-2 transition-transform" />
@@ -105,17 +95,17 @@ export default function App() {
       `}</style>
 
       {/* CURSOR */}
-      <div className="fixed top-0 left-0 w-8 h-8 border border-white rounded-full pointer-events-none z-[9999] mix-blend-difference flex items-center justify-center transition-transform duration-75 ease-out"
+      <div className="fixed top-0 left-0 w-8 h-8 border border-white rounded-full pointer-events-none z-[9999] mix-blend-difference flex items-center justify-center"
         style={{ transform: `translate(${mousePos.x - 16}px, ${mousePos.y - 16}px)` }}>
-        <div className="w-1 h-1 bg-white" />
+        <div className="w-1 h-1 bg-white animate-pulse" />
       </div>
 
-      {/* TICKER */}
+      {/* GITHUB TICKER */}
       <div className="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-2xl h-9 z-[60] bg-black border-x border-b border-white overflow-hidden hidden sm:block">
         <div className="animate-marquee whitespace-nowrap flex gap-12 items-center h-full text-white px-4">
-          {(events.length > 0 ? [...events, ...events] : ["UPLINK_STABLE"]).map((log, i) => (
+          {(events.length > 0 ? [...events, ...events] : ["ESTABLISHING_UPLINK..."]).map((log, i) => (
             <span key={i} className="text-[8px] font-black uppercase tracking-[0.2em] flex items-center gap-3">
-              <div className="w-1 h-1 bg-green-500" /> {log}
+              <div className="w-1 h-1 bg-green-500 animate-pulse" /> {log}
             </span>
           ))}
         </div>
@@ -125,7 +115,7 @@ export default function App() {
         <button onClick={() => navigate('home')} className="text-4xl font-black italic tracking-tighter">ALX.</button>
         <nav className="flex items-center gap-6 text-[10px] font-black uppercase tracking-[0.3em]">
           {['about', 'skills', 'code', 'photography', 'contact'].map(item => (
-            <button key={item} onClick={() => navigate(item)} className={`hover:line-through ${page === item ? 'underline underline-offset-4' : ''}`}>
+            <button key={item} onClick={() => navigate(item)} className={`hover:line-through ${page === item ? 'underline decoration-2 underline-offset-4' : ''}`}>
               {item}
             </button>
           ))}
@@ -134,109 +124,129 @@ export default function App() {
 
       <main className="relative z-10 pt-56 pb-32 px-6 md:px-12 max-w-7xl mx-auto">
         
-        {page === '404' && (
-          <div className="min-h-[50vh] flex flex-col items-center justify-center text-center space-y-8">
-            <AlertTriangle size={64} className="text-red-500" />
-            <h2 className="text-8xl font-black italic uppercase tracking-tighter">404_ERR</h2>
-            <p className="opacity-60 italic text-sm border border-white/20 p-8 relative">
-              <Corners />
-              SYSTEM_FAILURE: You've reached a sector that doesn't exist.
-            </p>
-            <button onClick={() => navigate('home')} className="bg-white text-black px-10 py-4 font-black uppercase text-xs hover:invert transition-all">Reboot_Home</button>
-          </div>
-        )}
-
         {page === 'home' && (
           <div className="space-y-24 animate-in fade-in duration-1000">
             <div className="grid lg:grid-cols-12 gap-12 items-center">
               <div className="lg:col-span-8 space-y-10">
                 <div className="inline-block px-3 py-1 border border-white text-[10px] font-bold uppercase tracking-widest flex items-center gap-2">
-                  <Activity size={12} className="text-green-500" /> SYSTEM_ACTIVE // TORONTO_CA
+                  <Activity size={12} className="animate-pulse text-green-500" /> SYSTEM_ACTIVE // TORONTO_CA
                 </div>
                 <h1 className="text-7xl md:text-[10vw] font-black leading-[0.85] tracking-tighter uppercase italic">
                   ALEXANDER<br/>
                   <span className="text-transparent" style={{ WebkitTextStroke: '1px white' }}>WONDWOSSEN</span>
                 </h1>
+                <p className="text-xl md:text-3xl font-light max-w-2xl opacity-70 italic border-l-4 border-white pl-6">Digital systems built with architectural precision and high-performance optics.</p>
               </div>
               <div className="lg:col-span-4 relative group p-4 border-2 border-white">
                 <Corners />
-                <img src="https://avatars.githubusercontent.com/u/198081098?v=4" className="w-full grayscale contrast-125" alt="Alex" />
+                <img src="https://avatars.githubusercontent.com/u/198081098?v=4" className="w-full grayscale contrast-125 brightness-110" alt="Alex" />
               </div>
+            </div>
+          </div>
+        )}
+
+        {page === 'about' && (
+          <div className="grid lg:grid-cols-12 gap-16 animate-in slide-in-from-left duration-700">
+            <div className="lg:col-span-8 space-y-12">
+              <h2 className="text-8xl font-black italic uppercase tracking-tighter">Profile</h2>
+              <div className="space-y-8 text-2xl md:text-3xl font-light italic leading-snug opacity-80 border-l-[10px] border-white pl-10">
+                <p>I operate at the intersection of Structural Logic and Digital Optics.</p>
+                <p>Based in Toronto, I use React to build interfaces that feel like physical machinery, and a Nikon D3200 to document the architecture that inspires them.</p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {page === 'skills' && (
+          <div className="space-y-12 animate-in fade-in duration-500">
+            <h2 className="text-8xl font-black italic uppercase tracking-tighter">Capability</h2>
+            <div className="grid md:grid-cols-3 gap-0 border-2 border-white">
+              {[
+                { title: 'Code', items: ['React.js', 'Tailwind', 'Vite', 'Node.js'] },
+                { title: 'Optics', items: ['Nikon D3200', '55mm Prime', 'Manual Controls'] },
+                { title: 'Design', items: ['Brutalism', 'Figma', 'Geometry'] }
+              ].map((s, i) => (
+                <div key={i} className="p-16 border-r-2 last:border-r-0 border-white group hover:bg-white transition-all duration-300">
+                  <h3 className="text-3xl font-black uppercase mb-10 italic group-hover:text-black">{s.title}</h3>
+                  <div className="space-y-4">
+                    {s.items.map(item => (
+                      <div key={item} className="text-xs font-black uppercase tracking-widest opacity-40 group-hover:opacity-100 group-hover:text-black">{item}</div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {page === 'code' && (
+          <div className="space-y-12">
+            <h2 className="text-8xl font-black italic uppercase tracking-tighter underline decoration-4">Terminal</h2>
+            <div className="grid md:grid-cols-2 gap-8 animate-in slide-in-from-bottom duration-500">
+              {loading ? <Loader2 className="animate-spin mx-auto text-white" size={48} /> : 
+                repos.map((repo) => (
+                  <button key={repo.id} onClick={() => setSelectedProject(repo)} 
+                    className="group text-left p-12 border-2 border-white hover:bg-white hover:text-black transition-all duration-500 relative">
+                    <Corners />
+                    <h3 className="text-4xl font-black uppercase italic tracking-tighter mb-4">{repo.name}</h3>
+                    <div className="flex justify-between items-center mt-8 text-[10px] font-black uppercase italic">
+                      <span>{repo.language || 'JS'} // STABLE</span>
+                      <span className="opacity-0 group-hover:opacity-100">DECONSTRUCT →</span>
+                    </div>
+                  </button>
+                ))
+              }
             </div>
           </div>
         )}
 
         {page === 'photography' && (
-          <div className="space-y-12 animate-in zoom-in duration-700">
-            <div className="flex justify-between items-end border-b border-white pb-6">
-              <h2 className="text-8xl font-black italic uppercase tracking-tighter">Optics</h2>
-              <div className="text-[10px] font-black uppercase tracking-[0.3em] opacity-40">Lens_Shuffle: RELOADED</div>
-            </div>
-            <div className="relative h-[70vh] w-full border-2 border-white overflow-hidden bg-black group">
-              <Corners />
-              <img 
-                src={photos[randomPhoto]} 
-                className="w-full h-full object-cover grayscale brightness-50 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-1000" 
-                alt="Architecture" 
-              />
-              <div className="absolute bottom-10 left-10 font-mono text-white mix-blend-difference">
-                <p className="text-[10px] font-black uppercase tracking-[0.4em]">Optics_Frame_ID: {randomPhoto + 1}/06</p>
-              </div>
-            </div>
-            <p className="text-xs italic opacity-40 text-right uppercase tracking-widest">Randomized on system refresh</p>
-          </div>
-        )}
-
-        {/* Keeping existing Logic for About, Skills, Code, Contact - Cypher Free */}
-        {page === 'about' && (
           <div className="space-y-12">
-            <h2 className="text-8xl font-black italic uppercase tracking-tighter">Profile</h2>
-            <p className="text-3xl font-light italic border-l-8 border-white pl-8 max-w-3xl opacity-80">I operate at the intersection of Structural Logic and Digital Optics.</p>
-          </div>
-        )}
-
-        {page === 'skills' && (
-          <div className="grid md:grid-cols-3 gap-0 border-2 border-white">
-            {['Code', 'Optics', 'Design'].map((s, i) => (
-              <div key={i} className="p-20 border-r border-white last:border-0 hover:bg-white hover:text-black transition-all">
-                <h3 className="text-4xl font-black uppercase italic mb-4">{s}</h3>
-                <p className="text-[10px] font-bold uppercase tracking-widest">Metadata_Stable</p>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {page === 'code' && (
-          <div className="grid md:grid-cols-2 gap-8">
-            {repos.map((repo) => (
-              <button key={repo.id} onClick={() => setSelectedProject(repo)} className="p-12 border-2 border-white text-left hover:bg-white hover:text-black transition-all relative group">
-                <Corners />
-                <h3 className="text-4xl font-black uppercase italic tracking-tighter">{repo.name}</h3>
-                <p className="text-[10px] mt-4 uppercase font-bold">{repo.language || 'DATA'}</p>
-              </button>
-            ))}
+            <h2 className="text-8xl font-black italic uppercase tracking-tighter">Optics</h2>
+            <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8 pb-10 animate-in zoom-in duration-700">
+              {[
+                "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005836/IMG_0649_jmyszm.jpg",
+                "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005835/IMG_0645_b679gp.jpg",
+                "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005835/DSC00059_qk2fxf.jpg",
+                "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005830/DSC00057_tbjyew.jpg",
+                "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005829/DSC00041_ufimhg.jpg",
+                "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005829/DSC00052_qngaw6.jpg"
+              ].map((url, i) => (
+                <div key={i} className="relative group border-2 border-white overflow-hidden bg-black">
+                  <img src={url} className="w-full grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700" alt="Work" />
+                </div>
+              ))}
+            </div>
           </div>
         )}
 
         {page === 'contact' && (
-          <div className="text-center space-y-10">
-            <h2 className="text-[15vw] font-black italic uppercase tracking-tighter leading-none">Sync</h2>
-            <a href="mailto:alxgraphy@icloud.com" className="text-4xl md:text-5xl font-black italic tracking-tighter hover:line-through decoration-4 underline-offset-8">
-              alxgraphy@icloud.com
-            </a>
+          <div className="max-w-4xl mx-auto space-y-20 py-10 animate-in slide-in-from-bottom duration-500">
+            <h2 className="text-[15vw] font-black italic uppercase tracking-tighter leading-none text-center underline decoration-8">Sync</h2>
+            <div className="grid gap-6">
+              <a href="mailto:alxgraphy@icloud.com" className="p-14 border-2 border-white flex justify-between items-center group hover:bg-white hover:text-black transition-all">
+                <p className="text-4xl md:text-5xl font-black italic tracking-tighter">alxgraphy@icloud.com</p>
+                <ArrowRight size={48} className="group-hover:rotate-45 transition-transform" />
+              </a>
+            </div>
           </div>
         )}
+
       </main>
 
       {/* PROJECT MODAL */}
       {selectedProject && (
-        <div className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-6">
-          <div className="relative w-full max-w-2xl border-2 border-white bg-black p-12">
+        <div className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center p-6">
+          <div className="relative w-full max-w-2xl border-2 border-white bg-black p-8 md:p-12 animate-in zoom-in duration-300">
             <Corners />
-            <button onClick={() => setSelectedProject(null)} className="absolute top-6 right-6"><X size={24}/></button>
-            <h2 className="text-5xl font-black italic uppercase mb-8">{selectedProject.name}</h2>
-            <p className="text-lg opacity-80 mb-8">{selectedProject.description || "System data restricted."}</p>
-            <a href={selectedProject.html_url} target="_blank" rel="noreferrer" className="block text-center bg-white text-black py-4 font-black uppercase text-xs tracking-widest hover:invert transition-all">Access_Repository</a>
+            <button onClick={() => setSelectedProject(null)} className="absolute top-6 right-6 hover:rotate-90 transition-transform"><X size={24}/></button>
+            <div className="space-y-8">
+              <h2 className="text-5xl font-black italic uppercase tracking-tighter">{selectedProject.name}</h2>
+              <p className="text-lg italic opacity-80">{selectedProject.description || "System data restricted."}</p>
+              <a href={selectedProject.html_url} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-4 bg-white text-black px-8 py-4 font-black uppercase text-xs tracking-widest hover:invert transition-all w-full">
+                Access_Repository <ExternalLink size={16}/>
+              </a>
+            </div>
           </div>
         </div>
       )}
