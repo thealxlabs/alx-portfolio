@@ -2,40 +2,32 @@ import React, { useState, useEffect, useRef } from 'react';
 import { 
   Moon, Sun, Camera, Code, Terminal, Layers, ArrowRight, 
   Activity, User, MapPin, Calendar, ExternalLink, Loader2,
-  Cpu, Zap, Shield, Database, Radio
+  Cpu, Zap, Instagram, Github, Mail, Globe
 } from 'lucide-react';
 
-/* --- UTILITY: CYPHER EFFECT HOOK --- */
-const useCypher = (text, active) => {
+/* --- CYPHER EFFECT FOR HEADINGS --- */
+const CypherText = ({ text, className }) => {
   const [output, setOutput] = useState(text);
-  const chars = "!@#$%^&*()_+[]{};<>/?";
+  const [isHovered, setIsHovered] = useState(false);
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
   
   useEffect(() => {
-    if (!active) { setOutput(text); return; }
+    if (!isHovered) { setOutput(text); return; }
     let iteration = 0;
     const interval = setInterval(() => {
-      setOutput(prev => 
-        text.split("").map((letter, index) => {
-          if (index < iteration) return text[index];
-          return chars[Math.floor(Math.random() * chars.length)];
-        }).join("")
-      );
+      setOutput(text.split("").map((letter, index) => {
+        if (index < iteration) return text[index];
+        return chars[Math.floor(Math.random() * chars.length)];
+      }).join(""));
       if (iteration >= text.length) clearInterval(interval);
       iteration += 1 / 3;
     }, 30);
     return () => clearInterval(interval);
-  }, [active, text]);
+  }, [isHovered, text]);
   
-  return output;
-};
-
-/* --- COMPONENT: CYPHER TEXT --- */
-const CypherText = ({ text, className }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const scrambled = useCypher(text, isHovered);
   return (
     <span onMouseEnter={() => setIsHovered(true)} className={className}>
-      {scrambled}
+      {output}
     </span>
   );
 };
@@ -47,9 +39,8 @@ export default function App() {
   const [loadingRepos, setLoadingRepos] = useState(true);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
-  /* --- 1. DATA FETCHING --- */
   useEffect(() => {
-    fetch('https://api.github.com/users/alxgraphy/repos?sort=updated&per_page=6')
+    fetch('https://api.github.com/users/alxgraphy/repos?sort=updated&per_page=12')
       .then(res => res.json())
       .then(data => {
         setRepos(Array.isArray(data) ? data : []);
@@ -57,7 +48,6 @@ export default function App() {
       });
   }, []);
 
-  /* --- 2. INTERACTIVE EFFECTS --- */
   useEffect(() => {
     const handleMouseMove = (e) => setMousePos({ x: e.clientX, y: e.clientY });
     window.addEventListener('mousemove', handleMouseMove);
@@ -65,8 +55,8 @@ export default function App() {
   }, []);
 
   const t = theme === 'dark' 
-    ? { bg: 'bg-black', text: 'text-white', border: 'border-white', panel: 'bg-[#0a0a0a]', sub: 'text-zinc-500' }
-    : { bg: 'bg-white', text: 'text-black', border: 'border-black', panel: 'bg-[#f5f5f5]', sub: 'text-zinc-400' };
+    ? { bg: 'bg-black', text: 'text-white', border: 'border-white', panel: 'bg-[#0a0a0a]' }
+    : { bg: 'bg-white', text: 'text-black', border: 'border-black', panel: 'bg-[#f5f5f5]' };
 
   const Corners = () => (
     <>
@@ -78,120 +68,130 @@ export default function App() {
   );
 
   return (
-    <div className={`min-h-screen ${t.bg} ${t.text} font-mono transition-colors duration-500 overflow-hidden cursor-none`}>
+    <div className={`min-h-screen ${t.bg} ${t.text} font-mono transition-colors duration-500 overflow-x-hidden cursor-none`}>
       
-      {/* CUSTOM SCANNER CURSOR */}
+      {/* SCANNER CURSOR */}
       <div 
-        className="fixed top-0 left-0 w-10 h-10 border-2 border-current rounded-full pointer-events-none z-[9999] mix-blend-difference flex items-center justify-center transition-transform duration-100 ease-out"
-        style={{ transform: `translate(${mousePos.x - 20}px, ${mousePos.y - 20}px)` }}
+        className="fixed top-0 left-0 w-8 h-8 border border-current rounded-full pointer-events-none z-[9999] mix-blend-difference flex items-center justify-center transition-transform duration-75 ease-out"
+        style={{ transform: `translate(${mousePos.x - 16}px, ${mousePos.y - 16}px)` }}
       >
-        <div className="w-1 h-1 bg-current" />
-      </div>
-
-      {/* BACKGROUND DECORATION */}
-      <div className="fixed inset-0 pointer-events-none opacity-10">
-        <div className="absolute top-10 left-10 text-[10px]">ID: 00198081098</div>
-        <div className="absolute bottom-10 right-10 text-[10px] rotate-90 underline">ALX_ARCHIVE_2026</div>
+        <div className="w-1 h-1 bg-current animate-pulse" />
       </div>
 
       <header className={`fixed top-0 w-full z-50 flex justify-between items-center px-6 md:px-12 py-8 backdrop-blur-md border-b ${t.border}`}>
+        {/* CLICKING ALX. GOES HOME */}
         <button onClick={() => setPage('home')} className="text-4xl font-black italic tracking-tighter">
-          <CypherText text="ALX." />
+          ALX.
         </button>
         <nav className="flex items-center gap-6 text-[10px] font-black uppercase tracking-[0.3em]">
           {['about', 'skills', 'code', 'photography', 'contact'].map(item => (
-            <button key={item} onClick={() => setPage(item)} className={`hover:line-through ${page === item ? 'underline' : ''}`}>
+            <button key={item} onClick={() => setPage(item)} className={`hover:line-through transition-all ${page === item ? 'underline decoration-2 underline-offset-4' : ''}`}>
               {item}
             </button>
           ))}
-          <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')} className={`p-2 border-2 ${t.border} hover:invert transition-all`}>
-            {theme === 'light' ? <Moon size={16} /> : <Sun size={16} />}
+          <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')} className={`ml-4 p-2 border ${t.border} hover:invert transition-all`}>
+            {theme === 'light' ? <Moon size={14} /> : <Sun size={14} />}
           </button>
         </nav>
       </header>
 
       <main className="relative z-10 pt-48 pb-20 px-6 md:px-12 max-w-7xl mx-auto">
         
-        {/* --- HOME PAGE DASHBOARD --- */}
+        {/* --- HOME PAGE (DASHBOARD) --- */}
         {page === 'home' && (
-          <div className="grid lg:grid-cols-12 gap-8 animate-in fade-in duration-1000">
-            {/* HERO SECTION */}
-            <div className="lg:col-span-8 space-y-12">
-              <div className="space-y-4">
-                <div className="flex items-center gap-2 text-xs opacity-50"><Radio size={14} className="animate-pulse" /> BROADCASTING_FROM: TORONTO, CA</div>
-                <h1 className="text-7xl md:text-9xl font-black leading-none italic tracking-tighter">
-                  <CypherText text="DEVELOPER" /><br/>
-                  <span className="opacity-20">& CREATOR</span>
+          <div className="space-y-24 animate-in fade-in duration-1000">
+            <div className="grid lg:grid-cols-12 gap-12 items-center">
+              <div className="lg:col-span-8 space-y-8">
+                <div className="inline-block px-3 py-1 border border-current text-[10px] font-bold uppercase tracking-widest">Available for Projects 2026</div>
+                <h1 className="text-7xl md:text-[10vw] font-black leading-[0.85] tracking-tighter uppercase italic">
+                  ALEXANDER<br/>
+                  <span className="text-transparent" style={{ WebkitTextStroke: `1px ${theme === 'dark' ? 'white' : 'black'}` }}>WONDWOSSEN</span>
                 </h1>
+                <p className="text-xl md:text-3xl font-light max-w-2xl opacity-70 italic">
+                  Toronto-based Developer and Photographer. Building high-performance digital tools with a focus on minimalist industrial design.
+                </p>
+                <div className="flex gap-6">
+                  <button onClick={() => setPage('photography')} className="px-8 py-3 bg-current text-current-inverse font-black uppercase text-xs tracking-widest hover:scale-105 transition-transform" style={{ color: theme === 'dark' ? 'black' : 'white', backgroundColor: theme === 'dark' ? 'white' : 'black' }}>View_Gallery</button>
+                  <button onClick={() => setPage('code')} className={`px-8 py-3 border-2 ${t.border} font-black uppercase text-xs tracking-widest hover:bg-current hover:text-current-inverse transition-all`}>Source_Code</button>
+                </div>
               </div>
-              
-              <div className="grid md:grid-cols-2 gap-8">
-                <div className={`p-8 border-2 ${t.border} relative group hover:bg-current hover:text-black transition-all`}>
+              <div className="lg:col-span-4 relative group">
+                <div className={`p-4 border-2 ${t.border} transition-transform duration-500 group-hover:-translate-y-2`}>
                   <Corners />
-                  <h3 className="text-xl font-black mb-4 italic">01 // CODE_BASE</h3>
-                  <p className="text-sm opacity-60 group-hover:opacity-100">Building scalable systems with React and industrial logic. Currently focusing on UI performance.</p>
+                  <img src="https://avatars.githubusercontent.com/u/198081098?v=4" className="w-full grayscale brightness-110 contrast-125" alt="Alex" />
                 </div>
-                <div className={`p-8 border-2 ${t.border} relative group hover:bg-current hover:text-black transition-all`}>
-                  <Corners />
-                  <h3 className="text-xl font-black mb-4 italic">02 // VISUAL_SYNC</h3>
-                  <p className="text-sm opacity-60 group-hover:opacity-100">Capturing the raw architecture of the city through a 35mm lens. 12 years deep in the creative grind.</p>
-                </div>
+                <div className="absolute -bottom-6 -left-6 text-[10px] font-bold opacity-30 rotate-90">REF_ID: 198081098</div>
               </div>
             </div>
 
-            {/* SIDEBAR DASHBOARD */}
-            <div className="lg:col-span-4 space-y-8">
-              <div className={`border-2 ${t.border} p-6 relative`}>
-                <Corners />
-                <h4 className="text-[10px] font-black opacity-30 uppercase tracking-[0.5em] mb-6">System_Status</h4>
-                <div className="space-y-4 text-[11px]">
-                  <div className="flex justify-between border-b border-current/10 pb-2"><span>UPTIME</span><span className="font-bold">99.9%</span></div>
-                  <div className="flex justify-between border-b border-current/10 pb-2"><span>CORES</span><span className="font-bold text-green-500">ACTIVE_04</span></div>
-                  <div className="flex justify-between border-b border-current/10 pb-2"><span>SYNC</span><span className="font-bold">GITHUB_OK</span></div>
-                  <div className="flex justify-between"><span>LATENCY</span><span className="font-bold">24ms</span></div>
-                </div>
+            {/* QUICK STATS */}
+            <div className="grid md:grid-cols-3 gap-8 border-t border-current/10 pt-12">
+              <div className="space-y-2">
+                <p className="text-[10px] font-black opacity-30 uppercase tracking-[0.4em]">Specialization</p>
+                <p className="text-xl font-bold italic">React & Industrial UI</p>
               </div>
-
-              <div className={`p-6 bg-current ${theme === 'dark' ? 'text-black' : 'text-white'} italic font-black text-center`}>
-                <p className="animate-pulse">AVAILABLE FOR HIRE // 2026</p>
+              <div className="space-y-2">
+                <p className="text-[10px] font-black opacity-30 uppercase tracking-[0.4em]">Location</p>
+                <p className="text-xl font-bold italic">Toronto, Ontario</p>
               </div>
-
-              {/* LIVE REPO MINI-LIST */}
-              <div className="space-y-4">
-                <h4 className="text-[10px] font-black opacity-30 uppercase tracking-[0.5em]">Recent_Push</h4>
-                {repos.slice(0, 3).map(repo => (
-                  <div key={repo.id} className="text-[10px] flex items-center gap-3">
-                    <div className="w-1 h-1 bg-current animate-ping" />
-                    <span className="font-bold uppercase truncate">{repo.name}</span>
-                  </div>
-                ))}
+              <div className="space-y-2">
+                <p className="text-[10px] font-black opacity-30 uppercase tracking-[0.4em]">Current Status</p>
+                <p className="text-xl font-bold italic">Active Development</p>
               </div>
             </div>
           </div>
         )}
 
-        {/* --- CODE PAGE (LIVE GITHUB) --- */}
+        {/* --- ABOUT PAGE --- */}
+        {page === 'about' && (
+          <div className="grid lg:grid-cols-12 gap-16 animate-in slide-in-from-left duration-700">
+            <div className="lg:col-span-4">
+              <div className={`p-10 border-2 ${t.border} ${t.panel} relative space-y-8`}>
+                <Corners />
+                <h3 className="text-[10px] font-black uppercase tracking-[0.5em] opacity-40">Profile_Data</h3>
+                <div className="space-y-4 text-sm font-black uppercase">
+                  <div className="flex items-center gap-3"><MapPin size={16}/> Toronto, CA</div>
+                  <div className="flex items-center gap-3"><Camera size={16}/> 35mm Enthusiast</div>
+                  <div className="flex items-center gap-3"><Terminal size={16}/> React / Vite / JS</div>
+                </div>
+              </div>
+            </div>
+            <div className="lg:col-span-8 space-y-12">
+              <h2 className="text-8xl font-black italic uppercase tracking-tighter"><CypherText text="Manifesto" /></h2>
+              <div className="space-y-8 text-3xl font-light italic leading-snug opacity-80 border-l-[10px] border-current pl-10">
+                <p>I am a developer and creator focused on the intersection of technology and urban architecture.</p>
+                <p>Based in <span className="font-black">Toronto</span>, I use my surroundings as inspiration for the digital environments I build.</p>
+                <p>Whether it's writing optimized React components or capturing the city through a lens, my work is defined by high-contrast, structural logic.</p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* --- CODE PAGE --- */}
         {page === 'code' && (
           <div className="space-y-12 animate-in slide-in-from-right duration-500">
-            <h2 className="text-8xl font-black italic tracking-tighter uppercase"><CypherText text="Repositories" /></h2>
+            <div className="flex justify-between items-end border-b-2 border-current pb-8">
+              <h2 className="text-7xl font-black italic uppercase tracking-tighter"><CypherText text="Development" /></h2>
+              <div className="text-[10px] font-black uppercase tracking-widest opacity-40">Live GitHub Feed</div>
+            </div>
             {loadingRepos ? (
-              <Loader2 className="animate-spin mx-auto" size={48} />
+              <div className="flex justify-center py-20"><Loader2 className="animate-spin" size={48} /></div>
             ) : (
               <div className="grid md:grid-cols-2 gap-6">
                 {repos.map((repo) => (
                   <a key={repo.id} href={repo.html_url} target="_blank" rel="noreferrer" 
-                     className={`group p-10 border-2 ${t.border} flex flex-col justify-between hover:bg-white hover:text-black transition-all duration-300 relative`}>
+                     className={`group p-10 border-2 ${t.border} hover:bg-white hover:text-black transition-all duration-300 relative overflow-hidden`}>
                     <Corners />
-                    <div className="space-y-4">
+                    <div className="space-y-4 relative z-10">
                       <div className="flex justify-between items-start">
-                        <h3 className="text-3xl font-black italic tracking-tighter uppercase group-hover:line-through">{repo.name}</h3>
-                        <ExternalLink size={20} />
+                        <h3 className="text-3xl font-black italic tracking-tighter uppercase">{repo.name}</h3>
+                        <ExternalLink size={20} className="group-hover:rotate-45 transition-transform" />
                       </div>
                       <p className="text-sm opacity-50 italic group-hover:opacity-100">{repo.description || 'System data redacted.'}</p>
-                    </div>
-                    <div className="mt-8 flex gap-4 text-[10px] font-black">
-                      <span className="border border-current px-2 py-1">{repo.language || 'DATA'}</span>
-                      <span className="opacity-40 italic">STARS: {repo.stargazers_count}</span>
+                      <div className="flex gap-4 text-[10px] font-black pt-4">
+                        <span className="border border-current px-2 py-0.5">{repo.language || 'JS'}</span>
+                        <span className="opacity-40 italic underline">Updated: {new Date(repo.updated_at).toLocaleDateString()}</span>
+                      </div>
                     </div>
                   </a>
                 ))}
@@ -200,61 +200,95 @@ export default function App() {
           </div>
         )}
 
-        {/* --- PHOTOGRAPHY PAGE (COLOUR HOVER) --- */}
+        {/* --- PHOTOGRAPHY PAGE --- */}
         {page === 'photography' && (
-          <div className="columns-1 md:columns-3 gap-8 space-y-8 animate-in zoom-in duration-700">
-            {[
-              "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005836/IMG_0649_jmyszm.jpg",
-              "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005835/IMG_0645_b679gp.jpg",
-              "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005835/DSC00059_qk2fxf.jpg",
-              "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005830/DSC00057_tbjyew.jpg",
-              "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005829/DSC00041_ufimhg.jpg",
-              "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005829/DSC00052_qngaw6.jpg"
-            ].map((url, i) => (
-              <div key={i} className={`border-2 ${t.border} overflow-hidden group bg-black transition-all duration-500 hover:scale-[1.02]`}>
-                <img 
-                  src={url} 
-                  className="w-full grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700 ease-in-out" 
-                  alt="Gallery" 
-                />
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* --- ABOUT --- */}
-        {page === 'about' && (
-          <div className="grid md:grid-cols-12 gap-12 animate-in slide-in-from-left duration-500">
-            <div className="md:col-span-5 relative">
-              <div className={`p-4 border-2 ${t.border}`}>
-                <img src="https://avatars.githubusercontent.com/u/198081098?v=4" className="w-full grayscale" alt="Profile" />
-                <Corners />
-              </div>
+          <div className="space-y-12 animate-in zoom-in duration-700">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b-2 border-current pb-8">
+              <h2 className="text-8xl font-black italic uppercase tracking-tighter"><CypherText text="Archives" /></h2>
+              <p className="max-w-xs text-[10px] font-black uppercase tracking-widest opacity-50">Experimental street photography and urban exploration. All shots captured on film.</p>
             </div>
-            <div className="md:col-span-7 space-y-12">
-              <h2 className="text-8xl font-black italic tracking-tighter uppercase underline decoration-4 underline-offset-8">Manifesto</h2>
-              <p className="text-4xl font-light leading-tight italic opacity-80">
-                A 12-year-old developer carving industrial logic into the digital sphere. Specializing in <span className="font-black bg-white text-black px-2">React Architecture</span> and urban geometry.
-              </p>
+            <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
+              {[
+                "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005836/IMG_0649_jmyszm.jpg",
+                "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005835/IMG_0645_b679gp.jpg",
+                "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005835/DSC00059_qk2fxf.jpg",
+                "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005830/DSC00057_tbjyew.jpg",
+                "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005829/DSC00041_ufimhg.jpg",
+                "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005829/DSC00052_qngaw6.jpg",
+                "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005829/DSC00046_yxqzyw.jpg"
+              ].map((url, i) => (
+                <div key={i} className="relative group border-2 border-current overflow-hidden bg-black">
+                  <img src={url} className="w-full grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105 transition-all duration-1000 ease-in-out" alt="Work" />
+                  <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                </div>
+              ))}
             </div>
           </div>
         )}
 
+        {/* --- SKILLS PAGE --- */}
+        {page === 'skills' && (
+          <div className="space-y-12 animate-in fade-in duration-500">
+            <h2 className="text-8xl font-black italic uppercase tracking-tighter"><CypherText text="Tech" /></h2>
+            <div className="grid md:grid-cols-3 gap-0 border-2 border-current">
+              {[
+                { title: 'Development', items: ['React.js', 'Tailwind CSS', 'Vite', 'JavaScript ES6+', 'Node.js'], icon: <Terminal /> },
+                { title: 'Photography', items: ['35mm Film', 'Composition', 'Adobe Lightroom', 'Street Arch', 'Manual Controls'], icon: <Camera /> },
+                { title: 'Design', items: ['UI Architecture', 'Aero-Brutalist', 'Figma', 'Prototyping', 'User Flows'], icon: <Layers /> }
+              ].map((s, i) => (
+                <div key={i} className={`p-16 border-r-2 last:border-r-0 ${t.border} group hover:bg-current transition-all duration-300`}>
+                  <div className="mb-10 opacity-30 group-hover:opacity-100 group-hover:text-black transition-all transform group-hover:scale-125 origin-left">{s.icon}</div>
+                  <h3 className="text-3xl font-black uppercase mb-10 italic group-hover:text-black transition-colors">{s.title}</h3>
+                  <div className="space-y-4">
+                    {s.items.map(item => (
+                      <div key={item} className="text-xs font-black uppercase tracking-widest opacity-40 group-hover:opacity-100 group-hover:text-black flex items-center gap-3">
+                        <div className={`w-1.5 h-1.5 ${theme === 'dark' ? 'bg-white' : 'bg-black'} group-hover:bg-black`} /> {item}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* --- CONTACT PAGE --- */}
+        {page === 'contact' && (
+          <div className="max-w-4xl mx-auto space-y-20 py-10 animate-in slide-in-from-bottom duration-500">
+            <h2 className="text-[15vw] font-black italic uppercase tracking-tighter leading-none text-center underline decoration-8">Sync</h2>
+            <div className="grid gap-6">
+              {[
+                { platform: 'GitHub', handle: '@alxgraphy', url: 'https://github.com/alxgraphy', icon: <Github /> },
+                { platform: 'Instagram', handle: '@alexedgraphy', url: 'https://instagram.com/alexedgraphy', icon: <Instagram /> },
+                { platform: 'Email', handle: 'alxgraphy@icloud.com', url: 'mailto:alxgraphy@icloud.com', icon: <Mail /> }
+              ].map((item, i) => (
+                <a key={i} href={item.url} className={`p-14 border-2 ${t.border} flex justify-between items-center group hover:bg-white hover:text-black transition-all`}>
+                  <div className="flex items-center gap-8">
+                    <span className="opacity-30 group-hover:opacity-100 transition-opacity">{item.icon}</span>
+                    <div>
+                      <p className="text-[10px] font-black opacity-30 mb-2 uppercase tracking-widest">{item.platform}</p>
+                      <p className="text-4xl md:text-5xl font-black italic tracking-tighter group-hover:translate-x-6 transition-transform">{item.handle}</p>
+                    </div>
+                  </div>
+                  <ArrowRight size={48} className="group-hover:rotate-45 transition-transform" />
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
       </main>
 
-      {/* SYSTEM SCANLINE EFFECT */}
-      <div className="fixed inset-0 pointer-events-none z-[100] opacity-5 overflow-hidden">
-        <div className="w-full h-[1px] bg-white animate-scan-y absolute top-0" />
-      </div>
-
-      <style dangerouslySetInnerHTML={{ __html: `
-        @keyframes scan-y {
-          0% { top: 0; }
-          100% { top: 100%; }
-        }
-        .animate-scan-y { animation: scan-y 8s linear infinite; }
-        .text-transparent { -webkit-text-fill-color: transparent; }
-      `}} />
+      <footer className="py-24 px-12 border-t-2 border-current flex flex-col md:flex-row justify-between items-center gap-8 opacity-30 text-[10px] font-black uppercase tracking-[0.5em]">
+        <div className="space-y-2">
+          <p>Alexander Wondwossen</p>
+          <p>Toronto / Canada</p>
+        </div>
+        <p className="text-xl italic">2026 Archive</p>
+        <div className="flex gap-8">
+          <a href="https://github.com/alxgraphy" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="https://instagram.com/alexedgraphy" target="_blank" rel="noreferrer">IG</a>
+        </div>
+      </footer>
     </div>
   );
 }
