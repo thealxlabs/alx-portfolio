@@ -17,6 +17,7 @@ export default function App() {
   const [isMobile, setIsMobile] = useState(false);
   const [photoFilter, setPhotoFilter] = useState('all');
   const [imagesLoaded, setImagesLoaded] = useState({});
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     setIsMobile('ontouchstart' in window);
@@ -88,6 +89,14 @@ export default function App() {
     };
     window.addEventListener('keydown', handleEsc);
     return () => window.removeEventListener('keydown', handleEsc);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 100);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const Corners = () => (
@@ -308,7 +317,7 @@ export default function App() {
         </div>
       )}
 
-      <header className="fixed top-0 w-full z-50 flex justify-between items-end px-6 md:px-12 py-12 pointer-events-none">
+      <header className={`fixed top-0 w-full z-50 flex justify-between items-end px-6 md:px-12 py-12 pointer-events-none transition-transform duration-300 ${scrolled ? '-translate-y-full' : 'translate-y-0'}`}>
         <div className="relative pointer-events-auto">
           <Label text="SYS_ID: 001" />
           <button onClick={() => navigate('home')} className="text-4xl font-black italic tracking-tighter hover:opacity-60 transition-opacity">ALX.</button>
@@ -355,7 +364,7 @@ export default function App() {
         )}
 
         {page === 'about' && (
-          <div className="max-w-4xl space-y-24 animate-in slide-in-from-left duration-700">
+          <div className="max-w-4xl mx-auto space-y-24 animate-in slide-in-from-left duration-700">
             <div className="relative inline-block">
               <Label text="SEC_BIO_001" />
               <h2 className="text-7xl font-black italic uppercase tracking-tighter">Profile</h2>
@@ -403,7 +412,7 @@ export default function App() {
         )}
 
         {page === 'education' && (
-          <div className="max-w-4xl space-y-24 animate-in slide-in-from-right duration-700">
+          <div className="max-w-4xl mx-auto space-y-24 animate-in slide-in-from-right duration-700">
             <div className="relative inline-block">
               <Label text="SEC_EDU_002" />
               <h2 className="text-7xl font-black italic uppercase tracking-tighter flex items-center gap-6">
@@ -448,7 +457,7 @@ export default function App() {
         )}
 
         {page === 'skills' && (
-          <div className="space-y-24 animate-in fade-in duration-500">
+          <div className="max-w-6xl mx-auto space-y-24 animate-in fade-in duration-500">
             <div className="relative inline-block">
               <Label text="SEC_SKL_003" />
               <h2 className="text-7xl font-black italic uppercase tracking-tighter">Capability</h2>
