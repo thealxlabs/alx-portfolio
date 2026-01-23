@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Moon, Sun, Camera, Code, Terminal, Layers, ArrowRight, 
-  MapPin, ExternalLink, Loader2, Target, X, Info, Box,
-  Instagram, Github, Mail, User, Activity
+  MapPin, ExternalLink, Loader2, Target, X, Info,
+  Instagram, Github, Mail, User, Activity, Globe, Clock
 } from 'lucide-react';
 
 /* --- CYPHER EFFECT --- */
@@ -35,7 +35,9 @@ export default function App() {
   const [loadingRepos, setLoadingRepos] = useState(true);
   const [selectedProject, setSelectedProject] = useState(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [weather, setWeather] = useState("SYNCING...");
 
+  // FETCH REPOS & WEATHER
   useEffect(() => {
     fetch('https://api.github.com/users/alxgraphy/repos?sort=updated&per_page=12')
       .then(res => res.json())
@@ -43,6 +45,9 @@ export default function App() {
         setRepos(Array.isArray(data) ? data : []);
         setLoadingRepos(false);
       });
+    
+    // Mocking Toronto Weather (Can be replaced with OpenWeather API)
+    setTimeout(() => setWeather("-4°C // OVERCAST"), 2000);
   }, []);
 
   useEffect(() => {
@@ -52,8 +57,8 @@ export default function App() {
   }, []);
 
   const t = theme === 'dark' 
-    ? { bg: 'bg-black', text: 'text-white', border: 'border-white', panel: 'bg-[#0a0a0a]' }
-    : { bg: 'bg-white', text: 'text-black', border: 'border-black', panel: 'bg-[#f5f5f5]' };
+    ? { bg: 'bg-black', text: 'text-white', border: 'border-white', panel: 'bg-[#0a0a0a]', inverse: 'bg-white text-black' }
+    : { bg: 'bg-white', text: 'text-black', border: 'border-black', panel: 'bg-[#f5f5f5]', inverse: 'bg-black text-white' };
 
   const Corners = () => (
     <>
@@ -64,9 +69,31 @@ export default function App() {
     </>
   );
 
+  // LOGS LOGIC
+  const systemLogs = [
+    `SYSTEM_START: TORONTO_NODE_ACTIVE`,
+    `GEO_LOC: 43.6532° N, 79.3832° W`,
+    `WEATHER: ${weather}`,
+    `OPTICS: NIKON_D3200_LINKED`,
+    `LENS: 55MM_PRIME_READY`,
+    ...repos.slice(0, 3).map(r => `RECENT_PUSH: [${r.name.toUpperCase()}]`),
+    `STATUS: ARCHIVE_ACCESSIBLE`
+  ];
+
   return (
     <div className={`min-h-screen ${t.bg} ${t.text} font-mono transition-colors duration-500 overflow-x-hidden cursor-none`}>
       
+      <style>{`
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+          display: flex;
+          animation: marquee 30s linear infinite;
+        }
+      `}</style>
+
       {/* CURSOR */}
       <div className="fixed top-0 left-0 w-8 h-8 border border-current rounded-full pointer-events-none z-[9999] mix-blend-difference flex items-center justify-center transition-transform duration-75 ease-out"
         style={{ transform: `translate(${mousePos.x - 16}px, ${mousePos.y - 16}px)` }}>
@@ -85,39 +112,39 @@ export default function App() {
         </nav>
       </header>
 
-      <main className="relative z-10 pt-48 pb-20 px-6 md:px-12 max-w-7xl mx-auto">
+      {/* SYSTEM LOG MARQUEE */}
+      <div className={`fixed bottom-0 w-full ${t.inverse} py-2 z-50 overflow-hidden border-t-2 ${t.border}`}>
+        <div className="animate-marquee whitespace-nowrap flex gap-16 items-center">
+          {[...systemLogs, ...systemLogs].map((log, i) => (
+            <span key={i} className="text-[9px] font-black uppercase tracking-[0.2em] flex items-center gap-4">
+              <span className="opacity-40">[{new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}]</span>
+              {log}
+              <Activity size={10} className="text-green-500" />
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <main className="relative z-10 pt-48 pb-32 px-6 md:px-12 max-w-7xl mx-auto">
         
-        {/* --- PROJECT INSIGHT OVERLAY (FIXED) --- */}
+        {/* --- PROJECT INSIGHT OVERLAY --- */}
         {selectedProject && (
           <div className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex items-center justify-center p-6 md:p-12 animate-in fade-in zoom-in duration-300">
             <div className={`relative w-full max-w-4xl border-2 border-white bg-black text-white p-8 md:p-16`}>
               <button onClick={() => setSelectedProject(null)} className="absolute top-8 right-8 hover:rotate-90 transition-transform"><X size={32}/></button>
-              
               <div className="space-y-12">
                 <div className="space-y-4">
                   <p className="text-[10px] font-black uppercase tracking-[0.5em] opacity-40">Insight_Mode</p>
                   <h2 className="text-6xl md:text-7xl font-black italic uppercase tracking-tighter leading-none">{selectedProject.name}</h2>
                 </div>
-
                 <div className="space-y-8">
                   <div className="space-y-4">
                     <h4 className="text-[10px] font-black border-b border-white/20 pb-2 uppercase tracking-widest">Project_Brief</h4>
                     <p className="text-xl opacity-70 italic leading-relaxed">{selectedProject.description || "Building digital solutions with a focus on performance and industrial UI design principles."}</p>
                   </div>
-                  
-                  <div className="grid md:grid-cols-2 gap-8 items-end">
-                    <div className="space-y-4">
-                      <h4 className="text-[10px] font-black border-b border-white/20 pb-2 uppercase tracking-widest">Environment</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {['React', 'Tailwind', 'JavaScript', 'GitHub_API'].map(tag => (
-                          <span key={tag} className="px-3 py-1 border border-white text-[10px] font-bold uppercase">{tag}</span>
-                        ))}
-                      </div>
-                    </div>
-                    <a href={selectedProject.html_url} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-4 bg-white text-black px-8 py-4 font-black uppercase text-xs tracking-widest hover:scale-105 transition-transform w-full md:w-auto">
-                      Access_Source <ExternalLink size={16}/>
-                    </a>
-                  </div>
+                  <a href={selectedProject.html_url} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-4 bg-white text-black px-8 py-4 font-black uppercase text-xs tracking-widest hover:scale-105 transition-transform w-full md:w-auto">
+                    Access_Source <ExternalLink size={16}/>
+                  </a>
                 </div>
               </div>
             </div>
@@ -134,10 +161,6 @@ export default function App() {
                   ALEXANDER<br/><span className="text-transparent" style={{ WebkitTextStroke: `1px ${theme === 'dark' ? 'white' : 'black'}` }}>WONDWOSSEN</span>
                 </h1>
                 <p className="text-xl md:text-3xl font-light max-w-2xl opacity-70 italic">Toronto Developer. Photographer. Documenting the city through sharp optics and optimized code.</p>
-                <div className="flex gap-6">
-                  <button onClick={() => setPage('photography')} className="px-8 py-3 bg-current text-current-inverse font-black uppercase text-xs tracking-widest hover:scale-105 transition-transform" style={{ color: theme === 'dark' ? 'black' : 'white', backgroundColor: theme === 'dark' ? 'white' : 'black' }}>View_Archive</button>
-                  <button onClick={() => setPage('contact')} className={`px-8 py-3 border-2 ${t.border} font-black uppercase text-xs tracking-widest hover:bg-current hover:text-current-inverse transition-all`}>Contact_Me</button>
-                </div>
               </div>
               <div className="lg:col-span-4">
                 <div className={`p-4 border-2 ${t.border} transition-transform duration-500 hover:-translate-y-2 relative`}>
@@ -149,7 +172,7 @@ export default function App() {
           </div>
         )}
 
-        {/* --- ABOUT PAGE --- */}
+        {/* --- ABOUT --- */}
         {page === 'about' && (
           <div className="grid lg:grid-cols-12 gap-16 animate-in slide-in-from-left duration-700">
             <div className="lg:col-span-8 space-y-12">
@@ -198,28 +221,7 @@ export default function App() {
           </div>
         )}
 
-        {/* --- PHOTOGRAPHY PAGE --- */}
-        {page === 'photography' && (
-          <div className="space-y-12 animate-in zoom-in duration-700">
-            <h2 className="text-8xl font-black italic uppercase tracking-tighter"><CypherText text="Optics" /></h2>
-            <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8">
-              {[
-                "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005836/IMG_0649_jmyszm.jpg",
-                "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005835/IMG_0645_b679gp.jpg",
-                "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005835/DSC00059_qk2fxf.jpg",
-                "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005830/DSC00057_tbjyew.jpg",
-                "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005829/DSC00041_ufimhg.jpg",
-                "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005829/DSC00052_qngaw6.jpg"
-              ].map((url, i) => (
-                <div key={i} className="relative group border-2 border-current overflow-hidden bg-black">
-                  <img src={url} className="w-full grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-1000 ease-in-out" alt="Work" />
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* --- SKILLS PAGE --- */}
+        {/* --- SKILLS --- */}
         {page === 'skills' && (
           <div className="space-y-12 animate-in fade-in duration-500">
             <h2 className="text-8xl font-black italic uppercase tracking-tighter"><CypherText text="Skillset" /></h2>
@@ -245,7 +247,28 @@ export default function App() {
           </div>
         )}
 
-        {/* --- CONTACT PAGE --- */}
+        {/* --- PHOTOGRAPHY --- */}
+        {page === 'photography' && (
+          <div className="space-y-12 animate-in zoom-in duration-700">
+            <h2 className="text-8xl font-black italic uppercase tracking-tighter"><CypherText text="Optics" /></h2>
+            <div className="columns-1 md:columns-2 lg:columns-3 gap-8 space-y-8 pb-10">
+              {[
+                "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005836/IMG_0649_jmyszm.jpg",
+                "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005835/IMG_0645_b679gp.jpg",
+                "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005835/DSC00059_qk2fxf.jpg",
+                "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005830/DSC00057_tbjyew.jpg",
+                "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005829/DSC00041_ufimhg.jpg",
+                "https://res.cloudinary.com/dyjibiyac/image/upload/v1769005829/DSC00052_qngaw6.jpg"
+              ].map((url, i) => (
+                <div key={i} className="relative group border-2 border-current overflow-hidden bg-black">
+                  <img src={url} className="w-full grayscale brightness-75 group-hover:grayscale-0 transition-all duration-1000 ease-in-out" alt="Work" />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* --- CONTACT --- */}
         {page === 'contact' && (
           <div className="max-w-4xl mx-auto space-y-20 py-10 animate-in slide-in-from-bottom duration-500">
             <h2 className="text-[15vw] font-black italic uppercase tracking-tighter leading-none text-center underline decoration-8">Sync</h2>
@@ -268,14 +291,6 @@ export default function App() {
         )}
 
       </main>
-
-      <footer className="py-24 px-12 border-t-2 border-current flex justify-between items-center opacity-30 text-[10px] font-black uppercase tracking-[0.5em]">
-        <p>Alexander Wondwossen // Toronto</p>
-        <div className="flex gap-8">
-          <a href="https://github.com/alxgraphy" target="_blank" rel="noreferrer">GH</a>
-          <a href="https://instagram.com/alexedgraphy" target="_blank" rel="noreferrer">IG</a>
-        </div>
-      </footer>
     </div>
   );
 }
