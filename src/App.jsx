@@ -31,7 +31,7 @@ const SOCIAL_STUDIES_CONTENT = {
       title: 'The_Marrow_Thieves',
       label: 'BOOK_SS_001',
       date: 'Jan 2025 — Ongoing',
-      coverUrl: "https://lh3.googleusercontent.com/sitesv/APaQ0SSMoXY_oM5EtmN85PG94wt3Wen-4_ypgRiaY9p4Vt675_fREBSW3ybdMod4M_K0i3DvKBok49tA_RosI9KR6oKuABCV_AMdLnT9pOVY-viuoej4povEyMFvE0D9QeY9v8ULUddkQrqiEIQmQria30gBHNgAfRNs9DIUJYvsbsveIVYXL0kcAB3XskJUO1aFQm52hurEVUoPeyu5pWkWCTLpkr3LcKagpC2wN1M=w1280",
+      coverUrl: null, // TODO: upload cover image and paste URL here
       description: null
     },
     {
@@ -39,7 +39,7 @@ const SOCIAL_STUDIES_CONTENT = {
       title: 'One_Thousand_Paper_Cranes',
       label: 'BOOK_SS_002',
       date: null,
-      coverUrl: "https://lh3.googleusercontent.com/sitesv/APaQ0STDOj1JDPStYTs9n_gEyrcn96eVwKdZ4Vnbv1vrKyIhZfpI4pOvAyrDbgQ_pD78yNiosoF2eLTvm_CsqvJWYqmkdP7RFaWMTW5C_HQxOmQJkPcEYW6AXrcGvUR8NXEU75mjnn2MBX8-rlh-sWvKCcOD0BcR7e_HMG296GWNS8Mo9FHq-4J-1IoI4XeajKx2KaKk0sNEttMtnbcb8_XgaYXJomAtl0P_h-hBXtk=w1280",
+      coverUrl: null, // TODO: upload cover image and paste URL here
       description: 'Based on the true story of Sadako Sasaki, a Japanese girl living in Hiroshima who develops leukemia from the 1945 atomic bombing.'
     }
   ]
@@ -52,35 +52,35 @@ const ART_CONTENT = {
       id: 'movement-on-paper',
       title: 'Movement_On_Paper',
       label: 'ART_001',
-      imgUrl: "https://lh3.googleusercontent.com/sitesv/APaQ0STEMF0pQNk8ykTWmBtoD1tPTsan_jx51b2XNOrdqbFNIhe-WD1E1Q5XMKev_csZN4K8-JtY30KzhrI_AIDXMWTDAtuaZtT85JAeeqdzMCpGSgLwAAgx4bc31p_C6bPHk-MKbOMz_fJE9zSYHc-nwUdga3PyhmC1Ev6UgocmDm7PzWbtgZX3sRG6tGTD7ZpW8pIv7h8XjYU1VIuBzGQoLcFaCH4jEhl8AocxEoY=w1280",
+      imgUrl: "https://drive.google.com/uc?export=view&id=1Ds9Ssut63Imj_BxQPST66nFRxeNRBHTV",
       description: null
     },
     {
       id: 'quilt-art',
       title: 'Quilt_Art',
       label: 'ART_002',
-      imgUrl: "https://lh3.googleusercontent.com/sitesv/APaQ0SSSKF1Kw8bRWtMwjYzgMNu9FKKXuIDXvOsrcu4RDWUO89sRfwQjFhXhLzx75yNkuF5Uf2Sa2Vge4CkCqoJdcjsQolwvJ5j25hCrsS5b5XrspCf0x76WQwXzcI0ybTog1UdtlPpm9drIi282K9TuPEMD29vPZto_75ZnmYdnkl9MozFpJ9NMZAql3y9O_XspsLq-6iFFw5kH67xXCG292WxBlTYwFhUNfuskn-Q=w1280",
+      imgUrl: "https://drive.google.com/uc?export=view&id=1H4KTtEhGqNeKMiML4H6gwpb3e6oj-Eqh",
       description: null
     },
     {
       id: 'birthday-cards',
       title: 'Happy_Birthday_Cards',
       label: 'ART_003',
-      imgUrl: "https://lh3.googleusercontent.com/sitesv/APaQ0SQlyFzmQL3QRFyA8B6FMhMozCNFsQP-wh3psWoZr9mDX8LTwWXvtBKBOIPSM-xmvTepuemsUiRpjnd9ohw_YjvPeFnh5edRn1HmvsREly9ynquz3RKcad-7Mmn1i4g4sAYiyQTMTS-gONiXkXHOCPcxUzD_O9QtZay8vJlpoQwpCCdAQJtGA-BrvfgEQezcGLVbCUQZFKAxsT4ajKZTYzBsykK6Vri8wUCB-NE=w1280",
+      imgUrl: "https://drive.google.com/uc?export=view&id=1JHWSHNCz8WNi2AG18G4yp_QLtiqHw87n",
       description: null
     },
     {
       id: 'mandela-art',
       title: 'Mandela_Art',
       label: 'ART_004',
-      imgUrl: "https://lh3.googleusercontent.com/sitesv/APaQ0SQaxtwWEFRKsUvJU0cOKALsEVKrHPhmDBzCgDOmFgMLZM_OclbnXczC8Xpd-jITSzRKxXMNYoscRomW3S1tqpEYopP6nn4aWzcrvAvZdzK65GYeSiXp01eAsfjEdsWBv1y-R2IXYg6hSSBHwCb7Jn60Fn7-R3EfKwMeAWsyE8oSHCWXFmol0mn12cMDhTcSTwQbwHblfk-BxY64HgQ2LeXPp82nSNf_SJJXiZQ=w1280",
+      imgUrl: "https://drive.google.com/uc?export=view&id=1MIVIv8s5-ulPPlNUSqT7jEfPu-XOCpNo",
       description: null
     },
     {
       id: 'student-words',
       title: 'Student_Words',
       label: 'ART_005',
-      imgUrl: "https://lh3.googleusercontent.com/sitesv/APaQ0SQdA6cMxTir93oUoFLNTVlJa6mL2_pHnslO2C5Yu2yPz2UQPfJXJ4GjzFo7ZTbG8gNHzJ6_-QoJe2HnmyjU799T6B8h5h9wXX-SCv6M5NeRKn9_4Sp_MGXxzav3Cizzug0-3f7Fpkv7X14gwJ8ObB8rkZUCEUuUbGDxdeViC3aoFJ7xa6J8-jmXg93Wc5V655mkBkx6iWBbU0mDT-Gk-JdvfMiulg_u9LiL=w1280",
+      imgUrl: "https://drive.google.com/uc?export=view&id=1R1d8-ItBaGQXwA_nnDJQlzlwgLyKjV5Z",
       description: null
     },
     {
@@ -88,16 +88,16 @@ const ART_CONTENT = {
       title: 'Indigenous_Dot_Painting',
       label: 'ART_006',
       subtitle: 'Art & History',
-      imgUrl: "https://lh3.googleusercontent.com/sitesv/APaQ0STuWqiF39OReClckMPd_qn3rnZWeCAv8F1GNz6KvBDteoIFgUADRfmWzvpgtC8rseNN9miE4hWJwAbZz0LZA5qamtSwn_JirwEY8a-qGRthRxv-WJ9H9xyk059jzEbOuRIueOjKYkepqZVdAWm0wsv6qqcAq_keZexKRlAJ-gRCbOiUrfAkc5MBa3yP3ip3zbJCCdXK6U8DNzV7Znp1W6Seh-VE-6xoF1Gw=w1280",
+      imgUrl: "https://drive.google.com/uc?export=view&id=1UmPxshFgUaZTZgQ9dcKEollUDEtwPCT2",
       description: null
     }
   ],
-  // The old site had 4 extra portrait/dot-painting images grouped together
   extraImages: [
-    "https://lh3.googleusercontent.com/sitesv/APaQ0STayWiVAJaOdF5Bq08tPIHtF5lo3E_yV1QKgWrdJ64GlaVOFcsmbqe_6kajGHlogi6zRGXoftvfjrOYZkMZKYQZ0vTHwUae4T9NdjH83ft4MswbBc-32Ng3bbE8xG0ZNVZr7twaL3Xxdie1F_5rM-Yhc9gh2Qcss2TaINgZRzhDYJq1nvgw3YnqShNV2bLWXuvgyqbr9zGtY3mnVkcxj0FouAu3nkPkFQDF=w1280",
-    "https://lh3.googleusercontent.com/sitesv/APaQ0SRrCxX8V1IwKBELiYKbv7iTZc_jEwjMBLvUpd1C22o2BnRvnHIHFHa3v1HihVCTz5Ygaxav1opkRIJU3RozuDLc7GLZvP6cWV2y4QOZVngzcnF4bnd_HWPW9g5IPUyCQ8FFVOPQwd_jIF6HG9K5aZH9N9svK0NqFWN0XsHgIvCsdcuCxkkKq1Qo9Nj5s1Ork44cnRa21SV16-GYkTZOVkFselED3BEk_95t6ok=w1280",
-    "https://lh3.googleusercontent.com/sitesv/APaQ0STvyAgUqASS57Mf_2RiDTQm-9AZS6e6w4mnFTANbDm-mNlxH7QfsODaAQO5BiVHR2gvnYT-C6vTblR5ngHW020finZztGoA5BPQsSj3x8QJJk_pkCqoJdcjsQolwvJ5j25hCrsS5b5XrspCf0x76WQwXzcI0ybTog1UdtlPpm9drIi282K9TuPEMD29vPZto_75ZnmYdnkl9MozFpJ9NMZAql3y9O_XspsLq-6iFFw5kH67xXCG292WxBlTYwFhUNfuskn-Q=w1280",
-    "https://lh3.googleusercontent.com/sitesv/APaQ0SQFF21Lc7ENTCw6uY1P3Q6LHNyg35mMrRh9VHnusoRcSp_r4ycGTnqcRPh17Mt_TyJP6BXwXcfaC7lW729rX3VJDwS74kPssqrczD_-NJYrohftIegwkgOF8jWF8gHw0HOtsQ33Z4AB8ib0KGhsYHKb2jbdsp4RTw_-Qix4mNcduOYv8feF1q2si9BXCEsVlhI=w1280"
+    "https://drive.google.com/uc?export=view&id=1ckyn27DaKGDSFXP8YO2xY_aoHXGXSVOE",
+    "https://drive.google.com/uc?export=view&id=1eSJ6T46Gz6JRDT7pcQZ_iTOUB3Tv8Ir4",
+    "https://drive.google.com/uc?export=view&id=1fqfIxiKtRiYXHIVqj9Vuf1BgRdQCqsbf",
+    "https://drive.google.com/uc?export=view&id=1uJG657Q_b1KTMKZWF4zOpzWVP8ndT0BB",
+    "https://drive.google.com/uc?export=view&id=1BeB_q2t47mOfwtdImQ7NNR76MTICQoY-"
   ]
 };
 
@@ -530,8 +530,14 @@ export default function App() {
                   {SOCIAL_STUDIES_CONTENT.books.map(book => (
                     <div key={book.id} className="border border-white/10 overflow-hidden">
                       <div className="relative">
-                        <span className="absolute top-2 left-2 text-[9px] font-bold tracking-[0.2em] uppercase bg-black/60 px-2 py-1">{book.label}</span>
-                        <img src={book.coverUrl} alt={book.title} className="w-full h-48 object-cover" />
+                        <span className="absolute top-2 left-2 text-[9px] font-bold tracking-[0.2em] uppercase bg-black/60 px-2 py-1 z-10">{book.label}</span>
+                        {book.coverUrl ? (
+                          <img src={book.coverUrl} alt={book.title} className="w-full h-48 object-cover" />
+                        ) : (
+                          <div className="w-full h-48 bg-white/[0.03] border-b border-white/10 flex items-end p-3">
+                            <span className="text-[9px] font-bold tracking-[0.2em] uppercase text-white/20">NO_IMG_AVAILABLE</span>
+                          </div>
+                        )}
                       </div>
                       <div className="p-3">
                         <h5 className="font-bold text-white text-sm">{book.title}</h5>
@@ -567,7 +573,7 @@ export default function App() {
 
                 {/* Extra images (the group of 4 dot-painting extras from the old site) */}
                 <p className="text-xs font-bold uppercase tracking-widest text-white/40 mb-4">Grade 7 Portraits</p>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <div className="grid grid-cols-3 md:grid-cols-5 gap-3">
                   {ART_CONTENT.extraImages.map((url, i) => (
                     <div key={i} className="group relative border border-white/10 overflow-hidden aspect-square cursor-pointer" onClick={() => setSelectedPhoto({ url, title: `Portrait_Extra_${String(i + 1).padStart(2, '0')}`, category: 'art', location: 'Art Class' })}>
                       <img src={url} alt={`Extra ${i + 1}`} className="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-700" loading="lazy" />
