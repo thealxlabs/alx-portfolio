@@ -398,20 +398,27 @@ export default function App() {
                   <Award className="text-white/40" /> Awards
                 </h3>
               </div>
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid md:grid-cols-3 gap-6">
                 <div className="group relative border border-white/10 p-8 bg-white/[0.02] hover:bg-white transition-all duration-500">
                   <Corners />
                   <div className="text-[9px] font-bold tracking-[0.3em] uppercase opacity-40 mb-6 group-hover:text-black/40">CERT_c54126</div>
                   <h4 className="text-2xl font-black uppercase italic mb-4 group-hover:text-black">Canva Essentials</h4>
                   <p className="text-xs uppercase tracking-widest text-white/60 group-hover:text-black/60 mb-3">1 hour training certification</p>
-                  <p className="text-[9px] tracking-widest text-white/40 group-hover:text-black/40">Issued: October 27, 2024</p>
+                  <p className="text-[9px] tracking-widest text-white/40 group-hover:text-black/40">Issued: October 27, 2025</p>
                 </div>
                 <div className="group relative border border-white/10 p-8 bg-white/[0.02] hover:bg-white transition-all duration-500">
                   <Corners />
                   <div className="text-[9px] font-bold tracking-[0.3em] uppercase opacity-40 mb-6 group-hover:text-black/40">CERT_372de8</div>
                   <h4 className="text-2xl font-black uppercase italic mb-4 group-hover:text-black">Human-Centered Design</h4>
                   <p className="text-xs uppercase tracking-widest text-white/60 group-hover:text-black/60 mb-3">Field guide certification</p>
-                  <p className="text-[9px] tracking-widest text-white/40 group-hover:text-black/40">Issued: October 26, 2024</p>
+                  <p className="text-[9px] tracking-widest text-white/40 group-hover:text-black/40">Issued: October 26, 2025</p>
+                </div>
+                <div className="group relative border border-white/10 p-8 bg-white/[0.02] hover:bg-white transition-all duration-500">
+                  <Corners />
+                  <div className="text-[9px] font-bold tracking-[0.3em] uppercase opacity-40 mb-6 group-hover:text-black/40">CERT_448340</div>
+                  <h4 className="text-2xl font-black uppercase italic mb-4 group-hover:text-black">Google AI for K12 Educators</h4>
+                  <p className="text-xs uppercase tracking-widest text-white/60 group-hover:text-black/60 mb-3">Score: 94 · Course completion</p>
+                  <p className="text-[9px] tracking-widest text-white/40 group-hover:text-black/40">Issued: February 1, 2026</p>
                 </div>
               </div>
             </div>
@@ -897,7 +904,7 @@ export default function App() {
           <p className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/40">© 2025 ALX.CORE — All Rights Reserved</p>
           <div className="flex gap-8 text-[9px] font-bold uppercase tracking-widest">
             <a href="https://github.com/alxgraphy" target="_blank" rel="noreferrer" className="text-white/40 hover:text-white transition-colors">GitHub</a>
-            <a href="mailto:alxgraphy@icloud.com" className="text-white/40 hover:text-white transition-colors">Email</a>
+            <a href="mailto:alxgraphy@gmail.com" className="text-white/40 hover:text-white transition-colors">Email</a>
           </div>
         </div>
       </footer>
