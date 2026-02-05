@@ -185,7 +185,7 @@ export default function App() {
   const navigate = (path) => { window.location.hash = '#/' + path; };
 
   useEffect(() => {
-    fetch('https://api.github.com/users/alxgraphy/repos?sort=updated&per_page=10')
+    fetch('https://api.github.com/users/thealxlabs/repos?sort=updated&per_page=10')
       .then(res => { if (!res.ok) throw new Error('Failed'); return res.json(); })
       .then(data => { setRepos(Array.isArray(data) ? data : []); setLoading(false); })
       .catch(err => { setError(err.message); setLoading(false); });
@@ -813,12 +813,12 @@ export default function App() {
                   <div className="space-y-4 text-sm">
                     <div className="flex justify-between pb-3 border-b border-white/5">
                       <span className="uppercase tracking-widest text-white/40">Email</span>
-                      <a href="mailto:alxgraphy@gmail.com" className="hover:text-white/60 transition-colors">alxgraphy@gmail.com</a>
+                      <a href="mailto:thealxlabs@gmail.com" className="hover:text-white/60 transition-colors">thealxlabs@gmail.com</a>
                     </div>
                     <div className="flex justify-between pb-3 border-b border-white/5">
                       <span className="uppercase tracking-widest text-white/40">GitHub</span>
-                      <a href="https://github.com/alxgraphy" target="_blank" rel="noreferrer" className="hover:text-white/60 transition-colors flex items-center gap-1">
-                        @alxgraphy <ExternalLink size={12} />
+                      <a href="https://github.com/thealxlabs" target="_blank" rel="noreferrer" className="hover:text-white/60 transition-colors flex items-center gap-1">
+                        @thealxlabs <ExternalLink size={12} />
                       </a>
                     </div>
                     <div className="flex justify-between">
@@ -909,8 +909,8 @@ export default function App() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/40">© 2025 ALX.CORE — All Rights Reserved</p>
           <div className="flex gap-8 text-[9px] font-bold uppercase tracking-widest">
-            <a href="https://github.com/alxgraphy" target="_blank" rel="noreferrer" className="text-white/40 hover:text-white transition-colors">GitHub</a>
-            <a href="mailto:alxgraphy@gmail.com" className="text-white/40 hover:text-white transition-colors">Email</a>
+            <a href="https://github.com/thealxlabs" target="_blank" rel="noreferrer" className="text-white/40 hover:text-white transition-colors">GitHub</a>
+            <a href="mailto:thealxlabs@gmail.com" className="text-white/40 hover:text-white transition-colors">Email</a>
           </div>
         </div>
       </footer>
