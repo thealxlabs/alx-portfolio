@@ -32,8 +32,8 @@ const system = {
 ## [ 04 // SYNC_PROTOCOLS ]
 Instagram: @alexedgraphy
 
-Email: alxgraphy@icloud.com
+Email: thealxlabs@icloud.com
 
-GitHub: alxgraphy
+GitHub: thealxlabs
 
 © 2026 EDITION // ARCHIVE_DATA_RESTRICTED
